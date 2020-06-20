@@ -259,6 +259,10 @@ fun Creep.endTask(mainContext: MainContext) {
             if (creepCarry == 0 && task.take) mainContext.tasks.deleteTask(this.id)
         }
 
+        TypeOfTask.TakeAndDrop -> {
+            if (creepCarry == 0 && task.take) mainContext.tasks.deleteTask(this.id)
+        }
+
 
         TypeOfTask.EraserAttack -> {
             val hostileCreep: Creep? = Game.getObjectById(task.idObject0)

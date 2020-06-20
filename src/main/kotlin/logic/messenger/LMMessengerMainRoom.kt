@@ -325,7 +325,12 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
         var result = ""
         result += if (mainRoom.have[10] > 0) "B" else " "
 
-        val qtyUpgrader = if  (mainRoom.getLevelOfRoom() == 3) mainRoom.have[19] + mainRoom.have[1019] else mainRoom.have[7]
+        val qtyUpgrader = if  (mainRoom.getLevelOfRoom() == 3) {
+            mainRoom.have[19]
+        }else{
+            mainRoom.have[7]
+        }
+
         result += if (qtyUpgrader > 0) "${qtyUpgrader}U" else "  "
 
         return MainRoomInfoRecord(result,

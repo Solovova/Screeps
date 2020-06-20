@@ -174,6 +174,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskLinkAndTerminalStorageBalance(this)
         if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLabFiller.newTaskLabResources(this)
         if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskNuke(this)
+        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskDropEnergy(this)
     }
 
     if (this.memory.role == 15) {

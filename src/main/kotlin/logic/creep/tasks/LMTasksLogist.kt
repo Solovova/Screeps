@@ -59,13 +59,13 @@ class LMTasksLogist(val mc: MainContext) {
         val needInStorage01: Int = mainRoom.constant.energyMinStorage - mainRoom.getResourceInStorage()
         val haveInTerminal01: Int = mainRoom.getResourceInTerminal()
 
-        carry = min(min(needInStorage01, haveInTerminal01), creep.store.getCapacity() )
+        carry = min(min(needInStorage01, haveInTerminal01), creep.store.getCapacity())
         if (carry > 0) return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry)
 
         // 02 Storage > this.constant.energyMaxStorage -> Terminal < this.constant.energyMaxTerminal
         val needInTerminal02: Int = mainRoom.constant.energyMaxTerminal - mainRoom.getResourceInTerminal()
         val haveInStorage02: Int = mainRoom.getResourceInStorage() - mainRoom.constant.energyMaxStorage
-        carry = min(min(haveInStorage02, needInTerminal02), creep.store.getCapacity() )
+        carry = min(min(haveInStorage02, needInTerminal02), creep.store.getCapacity())
 
         if (carry > 0 && (carry == creep.store.getCapacity() || carry == needInTerminal02))
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry)
@@ -74,7 +74,7 @@ class LMTasksLogist(val mc: MainContext) {
         val needInTerminal03: Int = if (mainRoom.constant.sentEnergyToRoom == "") mainRoom.constant.energyMinTerminal - mainRoom.getResourceInTerminal()
         else mainRoom.constant.energyMaxTerminal - mainRoom.getResourceInTerminal()
         val haveInStorage03: Int = mainRoom.getResourceInStorage() - mainRoom.constant.energyMinStorage
-        carry = min(min(needInTerminal03, haveInStorage03), creep.store.getCapacity() )
+        carry = min(min(needInTerminal03, haveInStorage03), creep.store.getCapacity())
 
         if (carry > 0 && (carry == creep.store.getCapacity() || carry == needInTerminal03))
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, RESOURCE_ENERGY, carry)
@@ -83,7 +83,7 @@ class LMTasksLogist(val mc: MainContext) {
         val haveInTerminal04: Int = if (mainRoom.constant.sentEnergyToRoom == "") mainRoom.getResourceInTerminal() - mainRoom.constant.energyMinTerminal
         else mainRoom.getResourceInTerminal() - mainRoom.constant.energyMaxTerminal
         val needInStorage04: Int = mainRoom.constant.energyMaxStorage - mainRoom.getResourceInStorage()
-        carry = min(min(haveInTerminal04, needInStorage04), creep.store.getCapacity() )
+        carry = min(min(haveInTerminal04, needInStorage04), creep.store.getCapacity())
 
         if (carry > 0)
             return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, storage.id, storage.pos, RESOURCE_ENERGY, carry)
@@ -104,7 +104,7 @@ class LMTasksLogist(val mc: MainContext) {
             val canMineralAllTerminal = mainRoom.constant.mineralAllMaxTerminal - (terminal.store.toMap().map { it.value }.sum()
                     - mainRoom.getResourceInTerminal(RESOURCE_ENERGY))
             if (canMineralAllTerminal <= 0) mc.lm.lmMessenger.log("INFO", mainRoom.name, "Terminal mineral is full", COLOR_RED)
-            carry = min(min(min(needInTerminal, quantityStorage), creep.store.getCapacity() ), canMineralAllTerminal)
+            carry = min(min(min(needInTerminal, quantityStorage), creep.store.getCapacity()), canMineralAllTerminal)
 
             if (carry > 0)
                 return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, terminal.id, terminal.pos, resourceStorage, carry)
@@ -116,25 +116,35 @@ class LMTasksLogist(val mc: MainContext) {
     private fun fullNuker(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom, nuker: StructureNuker): CreepTask? {
         if (!mc.constants.globalConstant.nukerFill) return null
 
-        if (!(mc.constants.globalConstant.nukerFilInRooms.isEmpty()
-                        || mainRoom.name in mc.constants.globalConstant.nukerFilInRooms)) return null
+        if (mc.constants.globalConstant.nukerFilInRooms.isNotEmpty()
+                && mainRoom.name !in mc.constants.globalConstant.nukerFilInRooms) return null
 
-        val globNeedEnergy: Int =  (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
-        if (globNeedEnergy > 0 ) return null
+        val globNeedEnergy: Int = (mc.mineralData[RESOURCE_ENERGY]?.need
+                ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+        if (globNeedEnergy > 0) return null
 
         val needEnergy: Int = nuker.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0
         if (needEnergy != 0 && mainRoom.getResource(RESOURCE_ENERGY) > mainRoom.constant.energyUpgradeLvl8Controller) {
             return CreepTask(TypeOfTask.Transport, storage.id, storage.pos, nuker.id, nuker.pos, RESOURCE_ENERGY,
-                    min(creep.store.getCapacity(),needEnergy))
+                    min(creep.store.getCapacity(), needEnergy))
         }
 
         val needG: Int = nuker.store.getFreeCapacity(RESOURCE_GHODIUM) ?: 0
         if (needG != 0 && mainRoom.getResource(RESOURCE_GHODIUM) > 0) {
             return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, nuker.id, nuker.pos, RESOURCE_GHODIUM,
-                    min(min(creep.store.getCapacity() ,needG),mainRoom.getResource(RESOURCE_GHODIUM)))
+                    min(min(creep.store.getCapacity(), needG), mainRoom.getResource(RESOURCE_GHODIUM)))
         }
 
         return null
+    }
+
+    private fun dropEnergy(creep: Creep, storage: StructureStorage, mainRoom: MainRoom): CreepTask? {
+        val globNeedEnergy: Int = (mc.mineralData[RESOURCE_ENERGY]?.need
+                ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+        if (globNeedEnergy > 0 || mainRoom.getResource() < mainRoom.constant.energyMaxStorage) return null
+
+        return CreepTask(TypeOfTask.TakeAndDrop, idObject0 = storage.id, posObject0 = storage.pos, resource = RESOURCE_ENERGY,
+                quantity = creep.store.getCapacity())
     }
 
     private fun mineralTerminalToStorage(creep: Creep, storage: StructureStorage, terminal: StructureTerminal, mainRoom: MainRoom): CreepTask? {
@@ -176,7 +186,6 @@ class LMTasksLogist(val mc: MainContext) {
     }
 
 
-
     fun newTaskNuke(creep: Creep): Boolean {
         val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
 
@@ -187,6 +196,23 @@ class LMTasksLogist(val mc: MainContext) {
         var creepTask: CreepTask? = null
 
         if (creepTask == null) creepTask = this.fullNuker(creep, storage, terminal, mainRoom, nuker)
+
+        if (creepTask != null) {
+            mc.tasks.add(creep.id, creepTask)
+            return true
+        }
+
+        return false
+    }
+
+    fun newTaskDropEnergy(creep: Creep): Boolean {
+        val mainRoom: MainRoom = mc.mainRoomCollector.rooms[creep.memory.mainRoom] ?: return false
+
+        val storage: StructureStorage = mainRoom.structureStorage[0] ?: return false
+
+        var creepTask: CreepTask? = null
+
+        if (creepTask == null) creepTask = this.dropEnergy(creep, storage, mainRoom)
 
         if (creepTask != null) {
             mc.tasks.add(creep.id, creepTask)

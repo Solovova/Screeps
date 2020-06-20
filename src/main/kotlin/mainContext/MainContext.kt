@@ -63,6 +63,8 @@ class MainContext {
         lm.balanceUpgrader.setNeedUpgrader()
         lm.balanceBuilderWall.setNeedBuilder()
 
+
+
         this.mainRoomCollector.creepsCalculateProfit()
 
         for (room in this.mainRoomCollector.rooms.values) {
@@ -72,6 +74,8 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
+
+
 
 
         this.battleGroupContainer.runInStartOfTick()
@@ -91,6 +95,8 @@ class MainContext {
         }
 
         lm.lmProduction.labBalancing.balancing()
+
+
 
         //End of tick
         //ToDo rewrite

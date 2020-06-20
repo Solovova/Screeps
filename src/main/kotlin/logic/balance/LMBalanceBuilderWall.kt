@@ -44,6 +44,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
         val rooms = mc.mainRoomCollector.rooms.values.filter {
             it.constant.defenceMinHits != 0
                     && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
+                    && it.have[10] == 0
         }.sortedBy { this.getNormalizedHits(it) }
 
         for (room in rooms) {

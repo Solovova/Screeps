@@ -80,13 +80,10 @@ class LMDevelopSafeMove(val mc: MainContext) {
         val roomTo: MainRoom = mc.mainRoomCollector.rooms["E53N35"] ?: return
         val roomFrom: SlaveRoom = roomTo.slaveRooms["E55N35"] ?: return
 
-        println("Test way start!!")
         val posFrom: RoomPosition = roomFrom.structureContainerNearSource[0]?.pos ?: return
         val posTo: RoomPosition = roomTo.structureStorage[0]?.pos ?: return
 
         val safeWay = getSafeWay(posFrom, posTo)
-        println("Test way ${safeWay.incomplete} len: ${safeWay.path.size}")
-        println("Test way ${safeWay.path}")
 
     }
 

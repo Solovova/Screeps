@@ -35,10 +35,9 @@ fun MainRoom.needCorrection3() {
     if (this.getResourceInStorage() == 0) this.need[0][0] = 2
 
     //2 Upgrader
-    if (this.name == "E54N37") println("Test 111")
+
     if (this.getResource() > this.constant.energyUpgradeLvl8Controller
             && this.constant.needUpgrader) {
-        if (this.name == "E54N37") println("Test 222")
         this.need[1][19] = 1
     }
 

@@ -172,6 +172,24 @@ fun Creep.doTask(mainContext: MainContext) {
             this.drop(task.resource)
         }
 
+        TypeOfTask.TakeAndDrop -> {
+            val posGo: RoomPosition = task.posObject0
+            if (!task.come) this.doTaskGoTo(task, posGo, 1)
+            if (task.come) {
+                if (!task.take) {
+                    val structure: StoreOwner? = (Game.getObjectById(task.idObject0) as StoreOwner?)
+                    if (structure != null) {
+                        if (task.quantity == 0) this.withdraw(structure, task.resource)
+                        else this.withdraw(structure, task.resource, task.quantity)
+                    }
+                    task.take = true
+                    task.come = true
+                } else {
+                    this.drop(task.resource)
+                }
+            }
+        }
+
         TypeOfTask.Reserve -> {
             if (!task.come) this.doTaskGoTo(task, task.posObject0, 1)
             if (task.come) {

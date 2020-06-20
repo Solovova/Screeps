@@ -8,6 +8,12 @@ class LMGCL (val mainContext: MainContext){
         val gclArray = mainContext.constants.globalConstant.gclArray
         var str = " "
         gclArray.takeLast(15).reversed().forEach { str += "${it/1000}  " }
+
+        val lastGCLDynamic = gclArray[gclArray.size-1]
+
+        str += " progress: ${Game.gcl.progress.toInt()/1000} / ${Game.gcl.progressTotal.toInt()/1000} / ${(Game.gcl.progressTotal - Game.gcl.progress)/1000}"
+        str += " hours to up: ${(Game.gcl.progressTotal - Game.gcl.progress) / lastGCLDynamic}"
+
         mainContext.lm.lmMessenger.log("INFO","GCL",str)
     }
 

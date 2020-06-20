@@ -3,7 +3,7 @@ package logic.balance
 import mainContext.MainContext
 import screeps.api.Game
 
-class LMBalanceLog(val mainContext: MainContext) {
+class LMBalancePrediction(val mainContext: MainContext) {
     var addedNew: Boolean = false
     fun show() {
         var numShow = 10
@@ -51,6 +51,8 @@ class LMBalanceLog(val mainContext: MainContext) {
             val last1Energy = mainContext.constants.globalConstant.balanceNeedEnergy[mainContext.constants.globalConstant.balanceNeedEnergy.size - 2]
             var strPrediction = "Prediction "
             val energyDynamic = last1Energy - last0Energy
+
+            //mainContext.constants.globalConstant.balanceQtyUpgraderNow = 32
 
             strPrediction += "now: $qtyUpgraderNow "
             strPrediction += "min: $qtyUpgraderMin "
