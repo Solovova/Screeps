@@ -25,7 +25,8 @@ class GlobalConstant(val constants: Constants) {
     var balanceQtyUpgrader: Array<Int> = arrayOf() //cashed
     var balanceNeedEnergy: Array<Int> = arrayOf() //cashed
     var balanceQtyUpgraderNow: Int = -1 //cashed
-    var balanceQtyUpgraderDefault: Int = 15
+    var balanceQtyUpgraderDefault: Int = -1 // if -1 use prediction
+    var balanceQtyBuilderDefault: Int = -1 // if -1 use prediction
     var balanceMaxSize: Int = 100
     var balancePeriod: Int = 1500
 

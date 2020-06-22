@@ -189,13 +189,13 @@ fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boole
         structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
                     && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0
-        }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 10000 }
+        }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 4000 }
 
         if (structure == null) {
             structure = mainRoom.room.find(FIND_STRUCTURES).filter {
                 ((it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
                         && it.pos.x != 49 && it.pos.x != 0 && it.pos.y != 49 && it.pos.y != 0)
-            }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 10000 }
+            }.minBy { it.hits + it.pos.getRangeTo(this.pos) * 4000 }
         }
 
         if (structure != null) {

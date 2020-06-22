@@ -5,7 +5,7 @@ import screeps.api.Game
 import screeps.api.RESOURCE_ENERGY
 
 class LMBalanceUpgrader(val mc: MainContext) {
-    val balancePrediction: LMBalancePrediction = LMBalancePrediction(mc)
+
 
     fun setNeedUpgrader() {
         val counterLvl3 = mc.mainRoomCollector.rooms.values.filter { it.have[19] > 0 }.size
@@ -19,10 +19,10 @@ class LMBalanceUpgrader(val mc: MainContext) {
 
         val qtyUpgraderNeedLvl2 = qtyLvl2 * 4
         val qtyUpgraderMax = qtyUpgraderNeedLvl2 + qtyLvl3
-        val qtyUpgraderNeed = balancePrediction.getUpgrader(qtyUpgraderNeedLvl2, qtyUpgraderMax)
+        val qtyUpgraderNeed = mc.lm.balancePrediction.getUpgrader(qtyUpgraderNeedLvl2, qtyUpgraderMax)
 
-        balancePrediction.saveLog(qtyUpgraderNeed, mineralsNeed)
-        balancePrediction.show()
+        mc.lm.balancePrediction.logSave(qtyUpgraderNeed, mineralsNeed)
+        mc.lm.balancePrediction.logShow()
 
 
         val qtyUpgraderNeedLvl3 = qtyUpgraderNeed - qtyUpgraderNeedLvl2

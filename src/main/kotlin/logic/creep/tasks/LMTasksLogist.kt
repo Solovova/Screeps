@@ -141,7 +141,7 @@ class LMTasksLogist(val mc: MainContext) {
     private fun dropEnergy(creep: Creep, storage: StructureStorage, mainRoom: MainRoom): CreepTask? {
         val globNeedEnergy: Int = (mc.mineralData[RESOURCE_ENERGY]?.need
                 ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
-        if (globNeedEnergy > 0 || mainRoom.getResource() < mainRoom.constant.energyMaxStorage) return null
+        if (globNeedEnergy > 0 || mainRoom.getResource() < (mainRoom.constant.energyMaxStorage+30000)) return null
 
         return CreepTask(TypeOfTask.TakeAndDrop, idObject0 = storage.id, posObject0 = storage.pos, resource = RESOURCE_ENERGY,
                 quantity = creep.store.getCapacity())

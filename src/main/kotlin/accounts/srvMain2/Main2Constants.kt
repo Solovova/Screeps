@@ -30,6 +30,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 
     const.globalConstant.defenceLimitUpgrade = 1000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
+    const.globalConstant.balanceQtyBuilderDefault = 1
 
 
     const.m(0).reactionActiveArr = arrayOf("OH", "LH", "LH2O", "XLH2O", "GH2O", "XGH2O", "")

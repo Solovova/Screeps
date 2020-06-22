@@ -1,6 +1,7 @@
 package logic
 
 import logic.balance.LMBalanceBuilderWall
+import logic.balance.LMBalancePrediction
 import logic.balance.LMBalanceUpgrader
 import logic.building.LMBuilding
 import logic.creep.LMCreep
@@ -34,4 +35,5 @@ class LogicMain(val mc: MainContext) {
 
     val balanceBuilderWall: LMBalanceBuilderWall = LMBalanceBuilderWall(mc)
     val balanceUpgrader: LMBalanceUpgrader = LMBalanceUpgrader(mc)
+    val balancePrediction: LMBalancePrediction = LMBalancePrediction(mc)
 }

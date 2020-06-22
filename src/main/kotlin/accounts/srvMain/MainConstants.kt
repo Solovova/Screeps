@@ -77,9 +77,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.m(16).reactionActive = "UL"
     const.m(16).reactionActiveArr = arrayOf("UL", "XGH2O")
     //const.m(17).reactionActive = "LH"
-    const.m(17).reactionActiveArr = arrayOf("LH", "XGH2O")
+    const.m(17).reactionActiveArr = arrayOf("LH", "XLH2O", "XGH2O")
     //const.m(18).reactionActive = "LH2O"
-    const.m(18).reactionActiveArr = arrayOf("LH2O", "XGH2O")
+    const.m(18).reactionActiveArr = arrayOf("LH2O", "XLH2O", "XGH2O")
     //const.m(19).reactionActive = "OH"
     const.m(19).reactionActiveArr = arrayOf("OH", "XGH2O")
     //const.m(20).reactionActive = "OH"
@@ -102,7 +102,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     const.globalConstant.username = "SoloVova"
     const.globalConstant.nukerFill = true
-    const.globalConstant.balanceQtyUpgraderDefault = 28
+    const.globalConstant.balanceQtyUpgraderDefault = 32
+    const.globalConstant.balanceQtyBuilderDefault = 12
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(

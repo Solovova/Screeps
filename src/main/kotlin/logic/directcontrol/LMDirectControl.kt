@@ -1,5 +1,6 @@
 package logic.directcontrol
 
+import logic.building.LMBuildingAutoRampart
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
@@ -49,6 +50,16 @@ class LMDirectControl (val mc: MainContext) {
                 && it.secondaryColor == COLOR_PURPLE }
         if (flagsRedPurple.isNotEmpty()) {
             for (flag in flagsRedPurple){
+//                var count = 6
+//                for (mrt in mc.mainRoomCollector.rooms.values) {
+//                    if (LMBuildingAutoRampart().buildAllNeed(mrt, false)) count--
+//                    if (count<=0) break
+//                }
+
+//                 for (mrt in mc.mainRoomCollector.rooms.values) {
+//                     mc.lm.lmBuilding.lmBuildingSnapShot.doSnapShot(mrt)
+//                }
+
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRoadsSC(mr)
                 //mc.lm.lmDirectControl.lmDirectFunctions.flagsDelete()
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRamparts(mr)

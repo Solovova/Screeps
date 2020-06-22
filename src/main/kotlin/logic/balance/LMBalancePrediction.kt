@@ -3,52 +3,52 @@ package logic.balance
 import mainContext.MainContext
 import screeps.api.Game
 
-class LMBalancePrediction(val mainContext: MainContext) {
+class LMBalancePrediction(val mc: MainContext) {
     var addedNew: Boolean = false
-    fun show() {
+    fun logShow() {
         var numShow = 10
-        var index = mainContext.constants.globalConstant.balanceNeedEnergy.size - 1
+        var index = mc.constants.globalConstant.balanceNeedEnergy.size - 1
         var result = " "
 
         while (true) {
             if (index < 0 || numShow < 0) break
-            result += "( ${mainContext.constants.globalConstant.balanceQtyUpgrader[index]} ) ${mainContext.constants.globalConstant.balanceNeedEnergy[index]} , "
+            result += "( ${mc.constants.globalConstant.balanceQtyUpgrader[index]} ) ${mc.constants.globalConstant.balanceNeedEnergy[index]} , "
             index--
             numShow--
         }
-        mainContext.lm.lmMessenger.log("INFO", "Glob", result)
+        mc.lm.lmMessenger.log("INFO", "Glob", result)
     }
 
-    fun saveLog(qtyUpgrader: Int, needMineral: Int) {
-        if (Game.time % mainContext.constants.globalConstant.balancePeriod != 0) return
+    fun logSave(qtyUpgrader: Int, needMineral: Int) {
+        if (Game.time % mc.constants.globalConstant.balancePeriod != 0) return
         var addedNew = true
 
-        if (mainContext.constants.globalConstant.balanceNeedEnergy.size >= mainContext.constants.globalConstant.balanceMaxSize) {
-            mainContext.constants.globalConstant.balanceNeedEnergy =
-                    mainContext.constants.globalConstant.balanceNeedEnergy
-                            .drop(mainContext.constants.globalConstant.balanceNeedEnergy.size - mainContext.constants.globalConstant.balanceMaxSize + 1).toTypedArray()
+        if (mc.constants.globalConstant.balanceNeedEnergy.size >= mc.constants.globalConstant.balanceMaxSize) {
+            mc.constants.globalConstant.balanceNeedEnergy =
+                    mc.constants.globalConstant.balanceNeedEnergy
+                            .drop(mc.constants.globalConstant.balanceNeedEnergy.size - mc.constants.globalConstant.balanceMaxSize + 1).toTypedArray()
         }
 
-        if (mainContext.constants.globalConstant.balanceQtyUpgrader.size >= mainContext.constants.globalConstant.balanceMaxSize) {
-            mainContext.constants.globalConstant.balanceQtyUpgrader =
-                    mainContext.constants.globalConstant.balanceQtyUpgrader
-                            .drop(mainContext.constants.globalConstant.balanceQtyUpgrader.size - mainContext.constants.globalConstant.balanceMaxSize + 1).toTypedArray()
+        if (mc.constants.globalConstant.balanceQtyUpgrader.size >= mc.constants.globalConstant.balanceMaxSize) {
+            mc.constants.globalConstant.balanceQtyUpgrader =
+                    mc.constants.globalConstant.balanceQtyUpgrader
+                            .drop(mc.constants.globalConstant.balanceQtyUpgrader.size - mc.constants.globalConstant.balanceMaxSize + 1).toTypedArray()
         }
 
-        val sizeBalanceQtyUpgrader: Int = mainContext.constants.globalConstant.balanceQtyUpgrader.size
-        mainContext.constants.globalConstant.balanceQtyUpgrader[sizeBalanceQtyUpgrader] = qtyUpgrader
+        val sizeBalanceQtyUpgrader: Int = mc.constants.globalConstant.balanceQtyUpgrader.size
+        mc.constants.globalConstant.balanceQtyUpgrader[sizeBalanceQtyUpgrader] = qtyUpgrader
 
-        val sizeBalanceNeedEnergy: Int = mainContext.constants.globalConstant.balanceNeedEnergy.size
-        mainContext.constants.globalConstant.balanceNeedEnergy[sizeBalanceNeedEnergy] = needMineral
+        val sizeBalanceNeedEnergy: Int = mc.constants.globalConstant.balanceNeedEnergy.size
+        mc.constants.globalConstant.balanceNeedEnergy[sizeBalanceNeedEnergy] = needMineral
     }
 
-    fun getUpgrader(qtyUpgraderMin: Int, qtyUpgraderMax: Int): Int {
+    private fun getUpgraderPrediction(qtyUpgraderMin: Int, qtyUpgraderMax: Int): Int {
 
-        if (mainContext.constants.globalConstant.balanceNeedEnergy.size >= 2) {
+        if (mc.constants.globalConstant.balanceNeedEnergy.size >= 2) {
             val oneUpgraderUse = 20500
-            val qtyUpgraderNow = mainContext.constants.globalConstant.balanceQtyUpgraderNow
-            val last0Energy = mainContext.constants.globalConstant.balanceNeedEnergy[mainContext.constants.globalConstant.balanceNeedEnergy.size - 1]
-            val last1Energy = mainContext.constants.globalConstant.balanceNeedEnergy[mainContext.constants.globalConstant.balanceNeedEnergy.size - 2]
+            val qtyUpgraderNow = mc.constants.globalConstant.balanceQtyUpgraderNow
+            val last0Energy = mc.constants.globalConstant.balanceNeedEnergy[mc.constants.globalConstant.balanceNeedEnergy.size - 1]
+            val last1Energy = mc.constants.globalConstant.balanceNeedEnergy[mc.constants.globalConstant.balanceNeedEnergy.size - 2]
             var strPrediction = "Prediction "
             val energyDynamic = last1Energy - last0Energy
 
@@ -87,7 +87,7 @@ class LMBalancePrediction(val mainContext: MainContext) {
 
             strPrediction += "prediction: $qtyPrediction "
 
-            mainContext.lm.lmMessenger.log("INFO", "Glob", strPrediction)
+            mc.lm.lmMessenger.log("INFO", "Glob", strPrediction)
 
             if (addedNew) {
                 addedNew = false
@@ -96,14 +96,38 @@ class LMBalancePrediction(val mainContext: MainContext) {
             }
         }
 
-        var result: Int = mainContext.constants.globalConstant.balanceQtyUpgraderNow
+        var result: Int = mc.constants.globalConstant.balanceQtyUpgraderNow
 
         if (result == -1) {
-            result = mainContext.constants.globalConstant.balanceQtyUpgraderDefault
+            result = mc.constants.globalConstant.balanceQtyUpgraderDefault
 
         }
 
-        mainContext.constants.globalConstant.balanceQtyUpgraderNow = result
+        mc.constants.globalConstant.balanceQtyUpgraderNow = result
         return result
+    }
+
+    fun getUpgrader(qtyUpgraderMin: Int, qtyUpgraderMax: Int): Int {
+        val qtyUpgrader = mc.constants.globalConstant.balanceQtyUpgraderDefault
+        val qtyUpgraderPrediction = getUpgraderPrediction (qtyUpgraderMin, qtyUpgraderMax)
+//        if (qtyUpgrader == -1) {
+//            qtyUpgrader = qtyUpgraderPrediction
+//        }
+        return qtyUpgrader
+
+    }
+
+    private fun getBuilderPrediction(): Int {
+        var qtyBuilderPrediction = mc.getNumRoomWithTerminal() / 4
+        if (qtyBuilderPrediction == 0) qtyBuilderPrediction = 1
+        return qtyBuilderPrediction
+    }
+
+    fun getBuilder() : Int {
+        var qtyBuilder = mc.constants.globalConstant.balanceQtyBuilderDefault
+        if (qtyBuilder == -1) {
+            qtyBuilder = getBuilderPrediction()
+        }
+        return qtyBuilder
     }
 }

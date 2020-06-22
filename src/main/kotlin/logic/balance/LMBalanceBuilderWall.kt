@@ -25,12 +25,11 @@ class LMBalanceBuilderWall(val mc: MainContext) {
 
 
     fun setNeedBuilder() {
-        var quantityNeedBuilder = mc.getNumRoomWithTerminal() / 4
-        if (quantityNeedBuilder == 0) quantityNeedBuilder = 1
+        val qtyBuilder = mc.lm.balancePrediction.getBuilder()
 
         var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 }.size
 
-        mc.lm.lmMessenger.log("INFO", "Glob", "Builder have: $counter Target:$quantityNeedBuilder Deficit: ${quantityNeedBuilder - counter}")
+        mc.lm.lmMessenger.log("INFO", "Glob", "Builder have: $counter Target:$qtyBuilder Deficit: ${qtyBuilder - counter}")
 
         //if (Game.time % 1000 == 0)
 
@@ -49,7 +48,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
 
         for (room in rooms) {
             counter++
-            room.constant.needBuilder = (counter <= quantityNeedBuilder)
+            room.constant.needBuilder = (counter <= qtyBuilder)
         }
     }
 }

@@ -1,6 +1,7 @@
 package logic.messenger
 
 import creep.getDescribeForQueue
+import logic.building.LMBuildingAutoRampart
 import logic.extfunc.toSecDigit
 import mainContext.MainContext
 import mainContext.dataclass.MainRoomInfoRecord
@@ -218,6 +219,10 @@ class LMMessengerMainRoom(val mainContext: MainContext) {
             val percent:Float = defenceStatus.toFloat() / defenceNeed.toFloat() * 100f
 
             result += " ${(percent.asDynamic().toFixed(2)).toString().padStart(6)}"
+
+//            if (LMBuildingAutoRampart().buildAllNeed(mainRoom)) {
+//                result += " R"
+//            }
             return MainRoomInfoRecord(result, defenceStatus<defenceNeed)
         }else{
             result = "l: ${mainRoom.structureController[0]?.level} "

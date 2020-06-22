@@ -90,7 +90,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             marketBuyLack = 30000,
             storeMax = 100000,
             buyToRoom = "E56N53",
-            balancingStart = 20000,
+            balancingStart = 50000,
             balancingStop = 100000
     )
 
