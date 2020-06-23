@@ -4,6 +4,7 @@ import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import mainContext.constants.Constants
 import logic.LogicMain
+import logic.develop.LMDevelopTests
 import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
@@ -40,14 +41,6 @@ class MainContext {
                 this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
-
-        //Tests
-//        val mrTest = mainRoomCollector.rooms["W3N1"]
-//        if (mrTest!=null) {
-//            println("Test lab ${mrTest.upgradeLab?.id}  index: ${mrTest.upgradeLabIndexSorted}")
-//        }
-        //
-
 
         lm.lmGCL.calculate()
 
@@ -96,22 +89,13 @@ class MainContext {
 
         lm.lmProduction.labBalancing.balancing()
 
-
-
-        //End of tick
-        //ToDo rewrite
-//        for (room in mainRoomCollector.rooms.values) {
-//            if (room.constant.autoDefenceArea == 0) {
-//                this.logicDefence.mainRoomDefence.mainRoomDefenceArea.getArea(room)
-//                break
-//            }
-//        }
-
         lm.lmDirectControl.runs()
         this.lm.lmProduction.lmLabMainRoomRun.run()
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
         lm.lmTerminal.transactions()
+
+        this.lm.cash.mr.saveToCash()
         this.tasks.toMemory()
         this.constants.toMemory()
 

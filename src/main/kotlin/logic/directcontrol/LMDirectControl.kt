@@ -5,8 +5,8 @@ import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 
-class LMDirectControl (val mc: MainContext) {
-    val lmDirectFunctions: LMDirectFunctions =LMDirectFunctions(mc)
+class LMDirectControl(val mc: MainContext) {
+    val lmDirectFunctions: LMDirectFunctions = LMDirectFunctions(mc)
     fun dcNN() {
 //        try {
 //            for (creep in Game.creeps.values)
@@ -19,37 +19,47 @@ class LMDirectControl (val mc: MainContext) {
     }
 
     private fun directMainRoom(mr: MainRoom) {
-        val flagsRedGreen = mc.flags.filter { it.pos.roomName == mr.name
-                && it.color == COLOR_RED
-                && it.secondaryColor == COLOR_GREEN }
+        val flagsRedGreen = mc.flags.filter {
+            it.pos.roomName == mr.name
+                    && it.color == COLOR_RED
+                    && it.secondaryColor == COLOR_GREEN
+        }
         if (flagsRedGreen.isNotEmpty()) mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(mr)
         for (flag in flagsRedGreen) flag.remove()
 
-        val flagsRedRed = mc.flags.filter { it.pos.roomName == mr.name
-                && it.color == COLOR_RED
-                && it.secondaryColor == COLOR_RED }
+        val flagsRedRed = mc.flags.filter {
+            it.pos.roomName == mr.name
+                    && it.color == COLOR_RED
+                    && it.secondaryColor == COLOR_RED
+        }
         if (flagsRedRed.isNotEmpty()) mc.lm.lmBuilding.lmBuildingSnapShot.doSnapShot(mr)
         for (flag in flagsRedRed) flag.remove()
 
-        val flagsRedGrey = mc.flags.filter { it.pos.roomName == mr.name
-                && it.color == COLOR_RED
-                && it.secondaryColor == COLOR_GREY }
+        val flagsRedGrey = mc.flags.filter {
+            it.pos.roomName == mr.name
+                    && it.color == COLOR_RED
+                    && it.secondaryColor == COLOR_GREY
+        }
         if (flagsRedGrey.isNotEmpty()) mc.lm.lmDevelop.runMainRoom(mr)
         for (flag in flagsRedGrey) flag.remove()
 
-        val flagsRedBlue = mc.flags.filter { it.pos.roomName == mr.name
-                && it.color == COLOR_RED
-                && it.secondaryColor == COLOR_BLUE }
+        val flagsRedBlue = mc.flags.filter {
+            it.pos.roomName == mr.name
+                    && it.color == COLOR_RED
+                    && it.secondaryColor == COLOR_BLUE
+        }
         if (flagsRedBlue.isNotEmpty()) {
             mc.lm.lmDefence.lmMainRoomDefenceArea.calculate(mr)
         }
         for (flag in flagsRedBlue) flag.remove()
 
-        val flagsRedPurple = mc.flags.filter { it.pos.roomName == mr.name
-                && it.color == COLOR_RED
-                && it.secondaryColor == COLOR_PURPLE }
+        val flagsRedPurple = mc.flags.filter {
+            it.pos.roomName == mr.name
+                    && it.color == COLOR_RED
+                    && it.secondaryColor == COLOR_PURPLE
+        }
         if (flagsRedPurple.isNotEmpty()) {
-            for (flag in flagsRedPurple){
+            for (flag in flagsRedPurple) {
 //                var count = 6
 //                for (mrt in mc.mainRoomCollector.rooms.values) {
 //                    if (LMBuildingAutoRampart().buildAllNeed(mrt, false)) count--
@@ -59,6 +69,11 @@ class LMDirectControl (val mc: MainContext) {
 //                 for (mrt in mc.mainRoomCollector.rooms.values) {
 //                     mc.lm.lmBuilding.lmBuildingSnapShot.doSnapShot(mrt)
 //                }
+
+//                for (mrt in mc.mainRoomCollector.rooms.values) {
+//                    mc.lm.lmDefence.lmMainRoomDefenceArea.calculate(mrt)
+//                }
+
 
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRoadsSC(mr)
                 //mc.lm.lmDirectControl.lmDirectFunctions.flagsDelete()

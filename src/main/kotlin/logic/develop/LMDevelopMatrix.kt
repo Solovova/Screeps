@@ -4,7 +4,7 @@ import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.TERRAIN_MASK_WALL
 
-class LMDevelop(val mainContext: MainContext) {
+class LMDevelopMatrix(val mc: MainContext) {
     private val matrix = Array(50) { Array(50) { 0 } }
 
     fun runMainRoom(mainRoom: MainRoom) {

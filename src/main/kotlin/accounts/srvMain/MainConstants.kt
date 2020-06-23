@@ -101,15 +101,14 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
 
     const.globalConstant.username = "SoloVova"
-    const.globalConstant.nukerFill = true
     const.globalConstant.balanceQtyUpgraderDefault = 32
-    const.globalConstant.balanceQtyBuilderDefault = 12
+    const.globalConstant.balanceQtyBuilderDefault = 8
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(500000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(600000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(100000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )
@@ -118,7 +117,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(500000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(10000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )

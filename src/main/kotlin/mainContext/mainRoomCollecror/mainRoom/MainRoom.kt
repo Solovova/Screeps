@@ -6,6 +6,7 @@ import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
+import logic.develop.LMDevelopTests
 import mainContext.dataclass.BgSpawnResult
 import mainContext.mainRoomCollecror.MainRoomCollector
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.correctionCentral
@@ -46,10 +47,17 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
     //StructureExtension
     private var _structureExtension: Map<String, StructureExtension>? = null
-    private val structureExtension: Map<String, StructureExtension>
+    val structureExtension: Map<String, StructureExtension>
         get() {
-            if (this._structureExtension == null)
-                _structureExtension = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive() }.associate { it.id to it as StructureExtension }
+            if (this._structureExtension == null) {
+                val cashExt = mc.lm.cash.mr.getFromCashExt(this)
+                _structureExtension = if (cashExt != null) {
+                    cashExt
+                } else {
+                    mc.lm.cash.mr.needSave()
+                    this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive() }.associate { it.id to it as StructureExtension }
+                }
+            }
             return _structureExtension ?: throw AssertionError("Error get StructureExtension")
         }
 
@@ -293,10 +301,17 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
 
     //StructureLabs
     private var _structureLab: Map<String, StructureLab>? = null
-    private val structureLab: Map<String, StructureLab>
+    val structureLab: Map<String, StructureLab>
         get() {
-            if (this._structureLab == null)
-                _structureLab = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive() }.associate { it.id to it as StructureLab }
+            if (this._structureLab == null) {
+                val cashLab = mc.lm.cash.mr.getFromCashLab(this)
+                _structureLab = if (cashLab != null) {
+                    cashLab
+                } else {
+                    mc.lm.cash.mr.needSave()
+                    this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive() }.associate { it.id to it as StructureLab }
+                }
+            }
             return _structureLab ?: throw AssertionError("Error get StructureLab")
         }
 
@@ -331,10 +346,11 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private var _upgradeLabIndexSorted: Int? = null
     val upgradeLabIndexSorted: Int
         get() {
-            if (this._upgradeLabIndexSorted == null){
+            if (this._upgradeLabIndexSorted == null) {
                 val locUpgradeLab = upgradeLab
-                if (locUpgradeLab!=null) {
-                    _upgradeLabIndexSorted = structureLabSort.filter { it.value.pos.isEqualTo(locUpgradeLab.pos) }.keys.firstOrNull() ?: -1
+                if (locUpgradeLab != null) {
+                    _upgradeLabIndexSorted = structureLabSort.filter { it.value.pos.isEqualTo(locUpgradeLab.pos) }.keys.firstOrNull()
+                            ?: -1
                 }
             }
             return _upgradeLabIndexSorted ?: -1
@@ -656,18 +672,17 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         // Загружаем Tower если енергия меньше 1000
 
 
-
         if (this.constant.roomHostile) {
             if (this.queue.size < 2) {
                 for (tower in this.structureTower.values)
                     if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
                             ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 0)
-            }else{
+            } else {
                 for (tower in this.structureTower.values)
                     if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
                             ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 3)
             }
-        }else{
+        } else {
             for (tower in this.structureTower.values)
                 if (tower.store.getFreeCapacity(RESOURCE_ENERGY) ?: 0 >= 300) needs[tower] = StructureData(tower.store.getCapacity(RESOURCE_ENERGY)
                         ?: 0 - (tower.store[RESOURCE_ENERGY] ?: 0), 3)

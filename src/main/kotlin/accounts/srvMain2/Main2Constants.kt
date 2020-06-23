@@ -27,18 +27,21 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.s(6,0).autoBuildRoad = true
     const.s(6,1).autoBuildRoad = true
 
+    const.m(6).energyBuilder = 10000
 
-    const.globalConstant.defenceLimitUpgrade = 1000000
+
+    const.globalConstant.defenceLimitUpgrade = 10000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
-    const.globalConstant.balanceQtyBuilderDefault = 1
+    const.globalConstant.balanceQtyBuilderDefault = 7
+    const.globalConstant.nukerFill = true
 
 
     const.m(0).reactionActiveArr = arrayOf("OH", "LH", "LH2O", "XLH2O", "GH2O", "XGH2O", "")
     const.m(1).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O", "")
     const.m(2).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O", "")
-    const.m(3).reactionActiveArr = arrayOf("XGH2O", "")
-    const.m(4).reactionActiveArr = arrayOf("XGH2O", "")
-    const.m(5).reactionActiveArr = arrayOf("XGH2O", "")
+    const.m(3).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O", "")
+    const.m(4).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O", "")
+    const.m(5).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O", "")
 
 
     const.globalConstant.username = "vsolo0"
