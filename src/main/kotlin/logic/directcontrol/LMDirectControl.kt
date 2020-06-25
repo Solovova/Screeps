@@ -1,6 +1,5 @@
 package logic.directcontrol
 
-import logic.building.LMBuildingAutoRampart
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
@@ -24,7 +23,7 @@ class LMDirectControl(val mc: MainContext) {
                     && it.color == COLOR_RED
                     && it.secondaryColor == COLOR_GREEN
         }
-        if (flagsRedGreen.isNotEmpty()) mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(mr)
+        if (flagsRedGreen.isNotEmpty()) mc.lm.building.lmBuildingSnapShot.restoreSnapShot(mr)
         for (flag in flagsRedGreen) flag.remove()
 
         val flagsRedRed = mc.flags.filter {
@@ -32,7 +31,7 @@ class LMDirectControl(val mc: MainContext) {
                     && it.color == COLOR_RED
                     && it.secondaryColor == COLOR_RED
         }
-        if (flagsRedRed.isNotEmpty()) mc.lm.lmBuilding.lmBuildingSnapShot.doSnapShot(mr)
+        if (flagsRedRed.isNotEmpty()) mc.lm.building.lmBuildingSnapShot.doSnapShot(mr)
         for (flag in flagsRedRed) flag.remove()
 
         val flagsRedGrey = mc.flags.filter {
@@ -40,7 +39,7 @@ class LMDirectControl(val mc: MainContext) {
                     && it.color == COLOR_RED
                     && it.secondaryColor == COLOR_GREY
         }
-        if (flagsRedGrey.isNotEmpty()) mc.lm.lmDevelop.runMainRoom(mr)
+        if (flagsRedGrey.isNotEmpty()) mc.lm.develop.runMainRoom(mr)
         for (flag in flagsRedGrey) flag.remove()
 
         val flagsRedBlue = mc.flags.filter {
@@ -49,7 +48,7 @@ class LMDirectControl(val mc: MainContext) {
                     && it.secondaryColor == COLOR_BLUE
         }
         if (flagsRedBlue.isNotEmpty()) {
-            mc.lm.lmDefence.lmMainRoomDefenceArea.calculate(mr)
+            mc.lm.defence.lmMainRoomDefenceArea.calculate(mr)
         }
         for (flag in flagsRedBlue) flag.remove()
 

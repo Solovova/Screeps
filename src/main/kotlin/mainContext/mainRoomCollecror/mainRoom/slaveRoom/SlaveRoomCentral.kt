@@ -35,7 +35,7 @@ fun SlaveRoom.correctionCentral() {
     //5 Defender
     val checkpointRoom: SlaveRoom? = this.mr.slaveRooms[this.constant.checkpointRoom]
     if (this.constant.roomHostile || (checkpointRoom != null && checkpointRoom.constant.roomHostile)) {
-        mc.lm.lmMessenger.log("INFO", this.name, "Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+        mc.lm.messenger.log("INFO", this.name, "Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
         if (this.constant.roomHostileType == 4) {
             this.need[0][4] = 1
             //this.need[1][15] = 2
@@ -76,7 +76,7 @@ fun SlaveRoom.correctionCentral() {
         if (mineral.mineralAmount > 0) {
             if (mr.getResource(mineral.mineralType) < mr.constant.mineralMaxInRoom)
                 this.need[1][26] = 1
-            else mc.lm.lmMessenger.log("INFO", this.name, "Mineral full in parent room", COLOR_RED)
+            else mc.lm.messenger.log("INFO", this.name, "Mineral full in parent room", COLOR_RED)
         }
 
         this.need[1][27] = this.have[26] * 2

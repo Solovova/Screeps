@@ -12,7 +12,7 @@ class LMMainRoomCreepAutoDefence(val mc: MainContext) {
         if (!path.incomplete) {
             creep.moveTo(path.path[0])
         }else{
-            mc.lm.lmMessenger.log("INFO",creep.pos.roomName,"Incomplete ...", color = COLOR_YELLOW)
+            mc.lm.messenger.log("INFO",creep.pos.roomName,"Incomplete ...", color = COLOR_YELLOW)
         }
         return false
     }
@@ -26,9 +26,9 @@ class LMMainRoomCreepAutoDefence(val mc: MainContext) {
         val target: Creep = creep.room.find(FIND_HOSTILE_CREEPS).minBy { it.pos.getRangeTo(creep.pos) } ?: return
 
         if (!moveTo(creep, target.pos, 2)) {
-            mc.lm.lmMessenger.log("INFO",creep.pos.roomName,"Move to ...", color = COLOR_YELLOW)
+            mc.lm.messenger.log("INFO",creep.pos.roomName,"Move to ...", color = COLOR_YELLOW)
         }else{
-            mc.lm.lmMessenger.log("INFO",creep.pos.roomName,"Can attack ...", color = COLOR_YELLOW)
+            mc.lm.messenger.log("INFO",creep.pos.roomName,"Can attack ...", color = COLOR_YELLOW)
             creep.rangedAttack(target)
         }
     }

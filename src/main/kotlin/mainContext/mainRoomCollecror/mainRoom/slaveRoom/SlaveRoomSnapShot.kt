@@ -15,17 +15,17 @@ fun SlaveRoom.doSnapShot() {
     }.toTypedArray()
     for (flag in flagsIgnore) flag.remove()
     if (Memory["snap"] == null) Memory["snap"] = object {}
-    Memory["snap"][this.name] = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotSerialize(structureFiltered)
+    Memory["snap"][this.name] = mc.lm.building.lmBuildingSnapShot.snapshotSerialize(structureFiltered)
 }
 
 fun SlaveRoom.restoreSnapShot(){
     if (this.room == null) return
     if (this.room.find(FIND_CONSTRUCTION_SITES).isNotEmpty()) return
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
-        mc.lm.lmMessenger.log("INFO", this.name, "Slave snapshot not present", COLOR_RED)
+        mc.lm.messenger.log("INFO", this.name, "Slave snapshot not present", COLOR_RED)
         return
     }
-    val d:Array<RecordOfStructurePosition> = mc.lm.lmBuilding.lmBuildingSnapShot.snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
+    val d:Array<RecordOfStructurePosition> = mc.lm.building.lmBuildingSnapShot.snapshotDeserialize(Memory["snap"][this.name] as String,this.name)
     for (record in d)
         this.room.createConstructionSite(record.roomPosition,record.structureConstant)
 }

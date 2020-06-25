@@ -1,6 +1,5 @@
 package logic.balance
 
-import mainContext.dataclass.WALL_HITS_MAX
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
@@ -29,7 +28,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
 
         var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 }.size
 
-        mc.lm.lmMessenger.log("INFO", "Glob", "Builder have: $counter Target:$qtyBuilder Deficit: ${qtyBuilder - counter}")
+        mc.lm.messenger.log("INFO", "Glob", "Builder have: $counter Target:$qtyBuilder Deficit: ${qtyBuilder - counter}")
 
         //if (Game.time % 1000 == 0)
 

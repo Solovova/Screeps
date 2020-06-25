@@ -28,7 +28,7 @@ class LMBalanceUpgrader(val mc: MainContext) {
         val qtyUpgraderNeedLvl3 = qtyUpgraderNeed - qtyUpgraderNeedLvl2
         var counter = counterLvl3
 
-        mc.lm.lmMessenger.log("INFO", "Glob", " Upgrader have: ($counterLvl3,$counterLvl2) ${counterLvl3 + counterLvl2} Target 2:$qtyUpgraderNeedLvl2 3:$qtyUpgraderNeedLvl3 Deficit 2:${qtyUpgraderNeedLvl2 - counterLvl2} 3:${qtyUpgraderNeedLvl3 - counterLvl3}")
+        mc.lm.messenger.log("INFO", "Glob", " Upgrader have: ($counterLvl3,$counterLvl2) ${counterLvl3 + counterLvl2} Target 2:$qtyUpgraderNeedLvl2 3:$qtyUpgraderNeedLvl3 Deficit 2:${qtyUpgraderNeedLvl2 - counterLvl2} 3:${qtyUpgraderNeedLvl3 - counterLvl3}")
 
         if (Game.time % 10 != 0) return
         for (room in mc.mainRoomCollector.rooms.values)

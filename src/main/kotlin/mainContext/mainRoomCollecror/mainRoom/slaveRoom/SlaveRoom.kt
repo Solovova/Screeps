@@ -278,7 +278,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             106 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 } else {
                     result = carrierAuto.needBody
@@ -288,7 +288,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             108 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 } else {
                     result = carrierAuto.needBody
@@ -318,7 +318,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             121 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer0", this.mr, this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists slaveContainer0", COLOR_RED)
                     result = arrayOf()
                 } else {
                     result = carrierAuto.needBody
@@ -328,7 +328,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             123 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer1", this.mr, this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists slaveContainer1", COLOR_RED)
                     result = arrayOf()
                 } else {
                     result = carrierAuto.needBody
@@ -338,7 +338,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             125 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("slaveContainer2", this.mr, this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists slaveContainer2", COLOR_RED)
                     result = arrayOf()
                 } else {
                     result = carrierAuto.needBody
@@ -399,7 +399,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
         this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(mc.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 mc.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        mc.lm.lmMessenger.log("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        mc.lm.messenger.log("TEST", this.name, "Slave room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 

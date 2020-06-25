@@ -87,7 +87,7 @@ fun MainRoom.needCorrection2() {
             && this.structureContainerNearMineral.size == 1
             && this.structureExtractor.size == 1) {
         if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom + 50000)
-                && mc.lm.lmProduction.mineralHarvest.useHarvester(this, this.mineral.mineralType))
+                && mc.lm.production.mineralHarvest.useHarvester(this, this.mineral.mineralType))
             this.need[1][15] = 1
 
     }

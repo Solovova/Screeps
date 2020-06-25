@@ -1,7 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
 import constants.CacheCarrier
-import mainContext.mainRoomCollecror.mainRoom.needCorrection3
 import screeps.api.*
 
 fun SlaveRoom.correctionDangeon() {
@@ -34,7 +33,7 @@ fun SlaveRoom.correctionDangeon() {
 
     //5 Defender
     if (this.constant.roomHostile) {
-        mc.lm.lmMessenger.log("INFO", this.name, "Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+        mc.lm.messenger.log("INFO", this.name, "Attacked type: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
         if (this.constant.roomHostileType == 4) {
             this.need[0][4] = 1
             //this.need[1][15] = 2
@@ -95,7 +94,7 @@ fun SlaveRoom.correctionDangeon() {
         if (mineral.mineralAmount > 0) {
             if (mineral.mineralAmount > 0) {
                 if (mr.getResource(mineral.mineralType) < (mr.constant.mineralMaxInRoom + 50000)
-                        && mc.lm.lmProduction.mineralHarvest.useHarvester(mr, mineral.mineralType))
+                        && mc.lm.production.mineralHarvest.useHarvester(mr, mineral.mineralType))
                     this.need[1][26] = 1
             }
         }

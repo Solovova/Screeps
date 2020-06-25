@@ -29,7 +29,7 @@ class BattleGroupContainer(val parent: MainContext) {
             parent.constants.battleGroupConstantContainer[name] = BattleGroupConstant()
             battleGroupContainer[name] = BattleGroup(this, name, battleGroupData)
         } else
-            parent.lm.lmMessenger.log("INFO", "Battle group container", "Create $name already exist", COLOR_RED)
+            parent.lm.messenger.log("INFO", "Battle group container", "Create $name already exist", COLOR_RED)
     }
 
     fun deleteBattleGroup(name: String) {
@@ -38,7 +38,7 @@ class BattleGroupContainer(val parent: MainContext) {
             parent.constants.battleGroups = parent.constants.battleGroups.filter { it != name }.toTypedArray()
             parent.constants.battleGroupConstantContainer.remove(name)
         } else
-            parent.lm.lmMessenger.log("INFO", "Battle group container", "Delete $name not exist", COLOR_RED)
+            parent.lm.messenger.log("INFO", "Battle group container", "Delete $name not exist", COLOR_RED)
     }
 
     fun getBattleGroup(name: String): BattleGroup? {
@@ -60,7 +60,7 @@ class BattleGroupContainer(val parent: MainContext) {
             try {
                 bg.runInStartOfTick()
             } catch (e: Exception) {
-                parent.lm.lmMessenger.log("ERROR", "Battle group runInStartOfTick", bg.name, COLOR_RED)
+                parent.lm.messenger.log("ERROR", "Battle group runInStartOfTick", bg.name, COLOR_RED)
             }
         }
     }
@@ -70,7 +70,7 @@ class BattleGroupContainer(val parent: MainContext) {
             try {
                 bg.runNotEveryTick()
             } catch (e: Exception) {
-                parent.lm.lmMessenger.log("ERROR", "Battle group runNotEveryTick", bg.name, COLOR_RED)
+                parent.lm.messenger.log("ERROR", "Battle group runNotEveryTick", bg.name, COLOR_RED)
             }
         }
     }
@@ -80,7 +80,7 @@ class BattleGroupContainer(val parent: MainContext) {
             try {
                 bg.runInEndOfTick()
             } catch (e: Exception) {
-                parent.lm.lmMessenger.log("ERROR", "Battle group runInEndOfTick", bg.name, COLOR_RED)
+                parent.lm.messenger.log("ERROR", "Battle group runInEndOfTick", bg.name, COLOR_RED)
             }
         }
     }

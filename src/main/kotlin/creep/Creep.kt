@@ -170,12 +170,12 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     if (this.memory.role == 14 || this.memory.role == 1014) {
         if (this.memory.role == 14 && this.ticksToLive < 44) this.memory.role = this.memory.role + 1000
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskEmptyCreep(this)
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLabFiller.newTaskResourcesForUpgrade(this)
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskLinkAndTerminalStorageBalance(this)
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLabFiller.newTaskLabResources(this)
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskNuke(this)
-        if (!isTask) isTask = mainContext.lm.lmCreep.lmTask.lmTasksLogist.newTaskDropEnergy(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskEmptyCreep(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLabFiller.newTaskResourcesForUpgrade(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskLinkAndTerminalStorageBalance(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLabFiller.newTaskLabResources(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskNuke(this)
+        if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskDropEnergy(this)
     }
 
     if (this.memory.role == 15) {
@@ -214,7 +214,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 30 || this.memory.role == 31) {
-        mainContext.lm.lmDefence.lmMainRoomCreepAutoDefence.task(this)
+        mainContext.lm.defence.lmMainRoomCreepAutoDefence.task(this)
     }
 
     if (this.memory.role == 100) {

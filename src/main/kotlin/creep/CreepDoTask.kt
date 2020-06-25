@@ -26,7 +26,7 @@ fun Creep.doTask(mainContext: MainContext) {
 
     val task: CreepTask = mainContext.tasks.tasks[this.id] ?: return
     if (task.posObject0 == null) {
-        mainContext.lm.lmMessenger.log("ERROR", "", "PosFrom not have", COLOR_RED)
+        mainContext.lm.messenger.log("ERROR", "", "PosFrom not have", COLOR_RED)
         return
     }
 
@@ -141,7 +141,7 @@ fun Creep.doTask(mainContext: MainContext) {
         }
 
         TypeOfTask.GoToRoom -> {
-            mainContext.lm.lmCreep.lmTask.lmTasksSlaveRoomGoToRoom.goToRoom(this, mainRoom)
+            mainContext.lm.creep.lmTask.lmTasksSlaveRoomGoToRoom.goToRoom(this, mainRoom)
         }
 
         TypeOfTask.Claim -> {

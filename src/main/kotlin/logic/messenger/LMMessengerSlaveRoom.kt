@@ -4,7 +4,6 @@ import mainContext.MainContext
 import screeps.api.COLOR_WHITE
 import screeps.api.Game
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
 import kotlin.math.roundToInt
 
 class LMMessengerSlaveRoom (val mainContext: MainContext) {
@@ -33,7 +32,7 @@ class LMMessengerSlaveRoom (val mainContext: MainContext) {
         val sTicks: String = (Game.time - slaveRoom.constant.profitStart).toString().padEnd(8)
         val sSources = slaveRoom.source.size.toString()
 
-        this.mainContext.lm.lmMessenger.log("PROFIT", slaveRoom.describe,
+        this.mainContext.lm.messenger.log("PROFIT", slaveRoom.describe,
                 "Profit ----> ${slaveRoom.name} Road: ${slaveRoom.constant.roadBuild.toString().padEnd(5)} ($sProfitPT per. 1500 ticks) ticks: $sTicks  + $sUp  - $sDown  $sProfit ($sProfitPerTickPrevious sources: $sSources)", COLOR_WHITE)
     }
 }

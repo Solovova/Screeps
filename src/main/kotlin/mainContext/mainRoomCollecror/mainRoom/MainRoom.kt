@@ -6,10 +6,8 @@ import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
-import logic.develop.LMDevelopTests
 import mainContext.dataclass.BgSpawnResult
 import mainContext.mainRoomCollecror.MainRoomCollector
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.correctionCentral
 import screeps.api.*
 import screeps.api.structures.*
 import screeps.utils.toMap
@@ -334,7 +332,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     val structureLabSort: Map<Int, StructureLab>
         get() {
             if (this._structureLabSort == null) {
-                this._structureLabSort = mc.lm.lmProduction.lmLabMainRoomGetLabSorted.getLabSort(structureLab)
+                this._structureLabSort = mc.lm.production.lmLabMainRoomGetLabSorted.getLabSort(structureLab)
             }
             return _structureLabSort ?: throw AssertionError("Error get StructureLabSort")
         }
@@ -386,10 +384,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 if (this.need[0][5] == 0) this.need[0][5] = 1 //filler
                 if (this.need[1][5] == 0) this.need[1][5] = 1 //filler
                 this.need[0][8] = 2
-                mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
+                mc.lm.building.lmBuildingSnapShot.restoreSnapShot(this)
                 return
             } else {
-                mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
+                mc.lm.building.lmBuildingSnapShot.restoreSnapShot(this)
                 this.constant.levelOfRoom = nowLevelOfRoom
             }
         } else this.constant.levelOfRoom = nowLevelOfRoom
@@ -495,7 +493,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             2 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer0", this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists mainContainer0", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -505,7 +503,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             4 -> {
                 val carrierAuto: CacheCarrier? = mc.lm.lmHarvestCacheRecordRoom.gets("mainContainer1", this)
                 if (carrierAuto == null) {
-                    mc.lm.lmMessenger.log("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
+                    mc.lm.messenger.log("ERROR", this.name, "Auto not exists mainContainer1", COLOR_RED)
                     result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
                 } else {
                     result = carrierAuto.needBody
@@ -791,7 +789,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             val slaveRoomConstant: SlaveRoomConstant? = this.constant.slaveRoomConstantContainer[slaveName]
             if (slaveRoomConstant != null)
                 slaveRooms[slaveName] = SlaveRoom(mc, this, slaveName, "${this.describe}S$index", slaveRoomConstant)
-            else mc.lm.lmMessenger.log("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
+            else mc.lm.messenger.log("ERROR", "${this.name} $slaveName", "initialization don't see constant", COLOR_RED)
         }
     }
 
@@ -799,7 +797,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         if (this.constant.roomRunNotEveryTickNextTickRun > Game.time) return false
         this.constant.roomRunNotEveryTickNextTickRun = Game.time + Random.nextInt(mc.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 mc.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        mc.lm.lmMessenger.log("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
+        mc.lm.messenger.log("TEST", this.name, "Main room not every tick run. Next tick: ${this.constant.roomRunNotEveryTickNextTickRun}", COLOR_GREEN)
         return true
     }
 
@@ -848,7 +846,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "Slave room in end", room.name, COLOR_RED)
+                mc.lm.messenger.log("ERROR", "Slave room in end", room.name, COLOR_RED)
             }
         }
 
@@ -859,7 +857,7 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private fun alarmStorage() {
         val storage: StructureStorage = this.structureStorage[0] ?: return
         if (storage.store.values.sum() > 800000) {
-            mc.lm.lmMessenger.log("INFO", this.name, "Storage full", COLOR_RED)
+            mc.lm.messenger.log("INFO", this.name, "Storage full", COLOR_RED)
         }
     }
 
@@ -868,13 +866,13 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
+                mc.lm.messenger.log("ERROR", "Slave not every tick", record.value.name, COLOR_RED)
             }
         }
 
 
         if (!this.setNextTickRun()) return
-        mc.lm.lmBuilding.lmBuildingSnapShot.restoreSnapShot(this)
+        mc.lm.building.lmBuildingSnapShot.restoreSnapShot(this)
         this.building()
         this.needCleanerCalculate()
     }
@@ -1021,18 +1019,6 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                 }
             }
         }
-    }
-
-    fun fillCash() {
-        val store: StructureStorage? = this.structureStorage[0]
-        if (store != null)
-            for (record in store.store.toMap()) this.resStorage[record.key] = (this.resStorage[record.key]
-                    ?: 0) + record.value
-
-        val terminal: StructureTerminal? = this.structureTerminal[0]
-        if (terminal != null)
-            for (record in terminal.store.toMap()) this.resTerminal[record.key] = (this.resTerminal[record.key]
-                    ?: 0) + record.value
     }
 
     fun needCleanWhat(store: Store?, resource: ResourceConstant): ResourceConstant? {

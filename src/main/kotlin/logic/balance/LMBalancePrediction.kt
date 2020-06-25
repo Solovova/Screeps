@@ -16,7 +16,7 @@ class LMBalancePrediction(val mc: MainContext) {
             index--
             numShow--
         }
-        mc.lm.lmMessenger.log("INFO", "Glob", result)
+        mc.lm.messenger.log("INFO", "Glob", result)
     }
 
     fun logSave(qtyUpgrader: Int, needMineral: Int) {
@@ -87,7 +87,7 @@ class LMBalancePrediction(val mc: MainContext) {
 
             strPrediction += "prediction: $qtyPrediction "
 
-            mc.lm.lmMessenger.log("INFO", "Glob", strPrediction)
+            mc.lm.messenger.log("INFO", "Glob", strPrediction)
 
             if (addedNew) {
                 addedNew = false

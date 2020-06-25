@@ -14,9 +14,6 @@ import screeps.utils.toMap
 import screeps.utils.unsafe.delete
 import mainContext.dataclass.slaveRoom
 import mainContext.dataclass.tickDeath
-import mainContext.dataclass.upgrade
-import mainContext.dataclass.upgradeQuantity
-import mainContext.dataclass.upgradeResource
 import kotlin.math.roundToInt
 
 class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
@@ -28,7 +25,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             val mainRoomConstant: MainRoomConstant? = this.mc.constants.mainRoomConstantContainer[name]
             if (mainRoomConstant != null && Game.rooms[name] != null && (Game.rooms[name]?.controller?.my == true))
                 rooms[name] = MainRoom(mc, this, name, "M${index.toString().padStart(2, '0')}", mainRoomConstant)
-            else mc.lm.lmMessenger.log("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
+            else mc.lm.messenger.log("ERROR", name, "initialization don't see mainRoomConstant", COLOR_RED)
         }
     }
 
@@ -55,7 +52,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             //ToDo can be more then one mainContext.dataclass.getUpgrade, not only then spawn
             val mainRoom: MainRoom = this.rooms[creep.memory.mainRoom] ?: continue
 
-            this.mc.lm.lmCreep.lmUpgrade.creepSetLogic(creep,mainRoom)
+            this.mc.lm.creep.lmUpgrade.creepSetLogic(creep,mainRoom)
 
             // Main rooms
             if (creep.memory.role in 0..99) {
@@ -130,7 +127,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
                 if (Game.getObjectById<Creep>(key) == null)
                     delete(Memory["profit"][key])
         } catch (e: Exception) {
-            mc.lm.lmMessenger.log("ERROR", "Clear in creep profit", "", COLOR_RED)
+            mc.lm.messenger.log("ERROR", "Clear in creep profit", "", COLOR_RED)
         }
     }
 
@@ -141,7 +138,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             try {
                 record.value.runNotEveryTick()
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
+                mc.lm.messenger.log("ERROR", "Room not every tick", record.value.room.name, COLOR_RED)
             }
         }
         this.houseKeeping()
@@ -152,7 +149,7 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             try {
                 room.runInEndOfTick()
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "Room in end of tick", room.name, COLOR_RED)
+                mc.lm.messenger.log("ERROR", "Room in end of tick", room.name, COLOR_RED)
             }
         }
 
@@ -161,13 +158,13 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
             try {
                 creep.newTask(this.mc)
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mc.lm.messenger.log("ERROR", "CREEP New task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
 
             try {
                 creep.doTask(this.mc)
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
+                mc.lm.messenger.log("ERROR", "CREEP Do task", "${creep.memory.mainRoom} ${creep.memory.slaveRoom} ${creep.memory.role} ${creep.id}", COLOR_RED)
             }
         }
 

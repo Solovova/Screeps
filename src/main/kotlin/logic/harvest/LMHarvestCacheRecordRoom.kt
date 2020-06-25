@@ -1,7 +1,6 @@
 package logic.harvest
 
 import constants.CacheCarrier
-import logic.develop.LMDevelopSafeMove
 import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
@@ -33,7 +32,7 @@ class LMHarvestCacheRecordRoom(val mc:MainContext) {
         if (recalculate || carrierAuto == null || carrierAuto.default || (carrierAuto.tickRecalculate + 1000) < Game.time){
             val ret = mc.lm.lmHarvestGetWayFromPosToPos.gets(objectFrom.pos, objectTo.pos, inSwampCost = inSwampCost, inPlainCost = inPlainCost)
             //if  (mainContext.dataclass.getSlaveRoom?.name == "E56N34") console.log(objectTo.pos)
-            mc.lm.lmMessenger.log("TEST", mainRoom.name, "Recalculate ways: $type ${!ret.incomplete}", COLOR_YELLOW)
+            mc.lm.messenger.log("TEST", mainRoom.name, "Recalculate ways: $type ${!ret.incomplete}", COLOR_YELLOW)
             if (!ret.incomplete) {
                 carrierAuto = mc.lm.lmHarvestGetCarrierAuto.gets(ret, mainRoom, slaveRoom = slaveRoom, doNotCalculateRoads = doNotCalculateRoads, safeMove = safeMove)
                 mc.constants.globalConstant.dataCacheCarrierAuto[keyRecord] = carrierAuto

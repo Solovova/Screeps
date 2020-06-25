@@ -17,7 +17,7 @@ class LMLabReactionBalance(val mc: MainContext) {
                     if (labBalancingType1.balancingStopForRoom(room)) return
                 }
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 1!")
+                mc.lm.messenger.log("ERROR", room.name, "Error in balancing 1!")
             }
         }
 
@@ -28,7 +28,7 @@ class LMLabReactionBalance(val mc: MainContext) {
                     if (labBalancingType1.balancingStartForRoom(room)) return
                 }
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 2!")
+                mc.lm.messenger.log("ERROR", room.name, "Error in balancing 2!")
             }
         }
 
@@ -40,7 +40,7 @@ class LMLabReactionBalance(val mc: MainContext) {
                     if (labBalancingType2.balancingStartForRoom(room)) return
                 }
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", room.name, "Error in balancing 3!")
+                mc.lm.messenger.log("ERROR", room.name, "Error in balancing 3!")
             }
         }
     }

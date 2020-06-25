@@ -34,7 +34,7 @@ fun SlaveRoom.correctionNormal() {
 
     //5 Defender
     if (this.constant.roomHostile) {
-        mc.lm.lmMessenger.log("INFO", this.name, "Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
+        mc.lm.messenger.log("INFO", this.name, "Attacked tpe: ${this.constant.roomHostileType} num:${this.constant.roomHostileNum}", COLOR_RED)
         if (this.constant.roomHostileType == 4) {
             this.need[1][11] = 2
         } else {

@@ -4,16 +4,13 @@ import mainContext.tasks.Tasks
 import battleGroup.BattleGroupContainer
 import mainContext.constants.Constants
 import logic.LogicMain
-import logic.develop.LMDevelopTests
 import mainContext.dataclass.MineralDataRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
-import screeps.utils.toMap
 import kotlin.random.Random
 
 class MainContext {
     val lm: LogicMain = LogicMain(this)
-    //Data
     var flags:List<Flag> = listOf()
     val messengerMap: MutableMap<String, String> = mutableMapOf()
     val mineralData: MutableMap<ResourceConstant, MineralDataRecord> = mutableMapOf()
@@ -30,25 +27,19 @@ class MainContext {
     }
 
     fun run() {
-        flags = Game.flags.toMap().values.toList()
+        flags = Game.flags.values.toList()
 
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
-        for (room in this.mainRoomCollector.rooms.values) {
-            try {
-                room.fillCash()
-            } catch (e: Exception) {
-                this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
-            }
-        }
+        lm.production.mineralFillCash.fill()
 
-        lm.lmGCL.calculate()
+        lm.gcl.calculate()
 
-        lm.lmNuker.lmNukerNeedMineral.fill()
-        lm.lmProduction.lmMineralFillData.fill()
+        lm.nuker.lmNukerNeedMineral.fill()
+        lm.production.lmMineralFillData.fill()
 
         this.constants.accountInit.initTuning(this)
-        lm.lmProduction.lmMineralFillProduction.fill()
+        lm.production.lmMineralFillProduction.fill()
 
 
 
@@ -64,7 +55,7 @@ class MainContext {
             try {
                 room.runInStartOfTick()
             } catch (e: Exception) {
-                this.lm.lmMessenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
+                this.lm.messenger.log("ERROR", "Room in start of tick", room.name, COLOR_RED)
             }
         }
 
@@ -77,36 +68,36 @@ class MainContext {
         this.mainRoomCollector.runNotEveryTick()
 
         if (Game.time % 10 == 0) {
-            lm.lmProduction.lmMarket.sellBuy()
+            lm.production.lmMarket.sellBuy()
         }
 
         if (this.setNextTickRun()) {
 
             this.tasks.deleteTaskDiedCreep()
             this.battleGroupContainer.runNotEveryTick()
-            lm.lmProduction.lmMarket.deleteEmptyOffers()
+            lm.production.lmMarket.deleteEmptyOffers()
         }
 
-        lm.lmProduction.labBalancing.balancing()
+        lm.production.labBalancing.balancing()
 
         lm.lmDirectControl.runs()
-        this.lm.lmProduction.lmLabMainRoomRun.run()
+        this.lm.production.lmLabMainRoomRun.run()
         this.battleGroupContainer.runInEndOfTick()
         this.mainRoomCollector.runInEndOfTick()
-        lm.lmTerminal.transactions()
+        lm.terminal.transactions()
 
         this.lm.cash.mr.saveToCash()
         this.tasks.toMemory()
         this.constants.toMemory()
 
-        lm.lmMessenger.show()
+        lm.messenger.show()
     }
 
     private fun setNextTickRun(): Boolean {
         if (this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext > Game.time) return false
         this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext = Game.time + Random.nextInt(this.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
                 this.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        this.lm.lmMessenger.log("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
+        this.lm.messenger.log("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
         return true
     }
 

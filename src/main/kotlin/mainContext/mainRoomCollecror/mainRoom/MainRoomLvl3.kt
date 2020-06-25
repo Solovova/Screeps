@@ -12,7 +12,7 @@ fun MainRoom.needCorrection3() {
     if (hostileCreeps.isNotEmpty()) {
         this.need[0][31] = 2
         this.need[0][5] = 2
-        mc.lm.lmMessenger.log("INFO", this.name, "Attacked type player", COLOR_RED)
+        mc.lm.messenger.log("INFO", this.name, "Attacked type player", COLOR_RED)
         return
     }
 
@@ -74,7 +74,7 @@ fun MainRoom.needCorrection3() {
             && this.structureContainerNearMineral.size == 1
             && this.structureExtractor.size == 1) {
         if (getResource(this.mineral.mineralType) < (this.constant.mineralMaxInRoom + 50000)
-                && mc.lm.lmProduction.mineralHarvest.useHarvester(this, this.mineral.mineralType))
+                && mc.lm.production.mineralHarvest.useHarvester(this, this.mineral.mineralType))
             this.need[1][15] = 1
     }
 

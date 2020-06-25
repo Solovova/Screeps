@@ -17,7 +17,7 @@ class LMMessengerRamparts(val mainContext: MainContext) {
         }
 
         val percent = rampartsHeal/rampartsQty*100/mainContext.constants.globalConstant.defenceLimitUpgrade
-        mainContext.lm.lmMessenger.log("INFO","Glob",
+        mainContext.lm.messenger.log("INFO","Glob",
                 "Ramparts Qty: $rampartsQty Heals: $rampartsHeal Mid heal: ${rampartsHeal/rampartsQty} Percent: ${percent.asDynamic().toFixed(2)}")
     }
 }

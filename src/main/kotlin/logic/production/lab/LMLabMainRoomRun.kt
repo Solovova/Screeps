@@ -61,7 +61,7 @@ class LMLabMainRoomRun(private val mc: MainContext) {
             try {
                 this.runMainRoom(mr)
             } catch (e: Exception) {
-                mc.lm.lmMessenger.log("ERROR", "LMLabMainRoomRun", mr.name, COLOR_RED)
+                mc.lm.messenger.log("ERROR", "LMLabMainRoomRun", mr.name, COLOR_RED)
             }
         }
     }

@@ -20,19 +20,19 @@ import logic.terminal.LMTerminal
 import mainContext.MainContext
 
 class LogicMain(val mc: MainContext) {
-    val lmGCL: LMGCL = LMGCL(mc)
-    val lmTerminal: LMTerminal = LMTerminal(mc)
-    val lmProduction: LMProduction = LMProduction(mc)
-    val lmDefence: LMDefence = LMDefence(mc)
-    val lmMessenger: LMMessenger = LMMessenger(mc)
-    val lmCreep: LMCreep = LMCreep(mc)
-    val lmDevelop: LMDevelopMatrix = LMDevelopMatrix(mc)
-    val lmBuilding: LMBuilding = LMBuilding(mc)
+    val gcl: LMGCL = LMGCL(mc)
+    val terminal: LMTerminal = LMTerminal(mc)
+    val production: LMProduction = LMProduction(mc)
+    val defence: LMDefence = LMDefence(mc)
+    val messenger: LMMessenger = LMMessenger(mc)
+    val creep: LMCreep = LMCreep(mc)
+    val develop: LMDevelopMatrix = LMDevelopMatrix(mc)
+    val building: LMBuilding = LMBuilding(mc)
     val lmHarvestCacheRecordRoom: LMHarvestCacheRecordRoom = LMHarvestCacheRecordRoom(mc)
     val lmHarvestGetCarrierAuto: LMHarvestGetCarrierAuto = LMHarvestGetCarrierAuto()
     val lmHarvestGetWayFromPosToPos: LMHarvestGetWayFromPosToPos = LMHarvestGetWayFromPosToPos()
     val lmDirectControl: LMDirectControl = LMDirectControl(mc)
-    val lmNuker:LMNuker = LMNuker(mc)
+    val nuker:LMNuker = LMNuker(mc)
 
     val balanceBuilderWall: LMBalanceBuilderWall = LMBalanceBuilderWall(mc)
     val balanceUpgrader: LMBalanceUpgrader = LMBalanceUpgrader(mc)

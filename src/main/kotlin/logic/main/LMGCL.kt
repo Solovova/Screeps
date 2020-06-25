@@ -14,7 +14,7 @@ class LMGCL (val mainContext: MainContext){
         str += " progress: ${Game.gcl.progress.toInt()/1000} / ${Game.gcl.progressTotal.toInt()/1000} / ${(Game.gcl.progressTotal - Game.gcl.progress)/1000}"
         str += " hours to up: ${(Game.gcl.progressTotal - Game.gcl.progress) / lastGCLDynamic}"
 
-        mainContext.lm.lmMessenger.log("INFO","GCL",str)
+        mainContext.lm.messenger.log("INFO","GCL",str)
     }
 
     fun calculate() {

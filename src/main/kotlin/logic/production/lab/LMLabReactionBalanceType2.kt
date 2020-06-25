@@ -7,7 +7,7 @@ import screeps.api.ResourceConstant
 
 class LMLabReactionBalanceType2(val mc: MainContext) {
     private fun canStart(reaction: ResourceConstant): Boolean {
-        val reactionCompounds = mc.lm.lmProduction.labFunc.getReactionCompounds(reaction)
+        val reactionCompounds = mc.lm.production.labFunc.getReactionCompounds(reaction)
         if (reactionCompounds.size != 2) return true
 
         for (compound in reactionCompounds) {

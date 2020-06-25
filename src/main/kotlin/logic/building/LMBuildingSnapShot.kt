@@ -62,7 +62,7 @@ class LMBuildingSnapShot (val mc:MainContext) {
         if (flags.isNotEmpty()) return
 
         if (Memory["snap"] == null || Memory["snap"][mainRoom.name] == null){
-            mc.lm.lmMessenger.log("INFO", mainRoom.name, "Snapshot not present", COLOR_RED)
+            mc.lm.messenger.log("INFO", mainRoom.name, "Snapshot not present", COLOR_RED)
             return
         }
         val d:Array<RecordOfStructurePosition> = snapshotDeserialize(Memory["snap"][mainRoom.name] as String,mainRoom.name)

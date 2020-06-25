@@ -174,7 +174,7 @@ class BattleGroup {
         if (nearestMainRoom != null) {
             this.constants.assembleRoom = nearestMainRoom.name
             return true
-        } else this.parent.parent.lm.lmMessenger.log("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
+        } else this.parent.parent.lm.messenger.log("ERROR", this.constants.roomName, "Battle group ${this.name} can't set assemble room", COLOR_RED)
         return false
     }
 

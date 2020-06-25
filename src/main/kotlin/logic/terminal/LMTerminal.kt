@@ -42,10 +42,10 @@ class LMTerminal(val mainContext: MainContext) {
             //
             val result = terminalFrom.send(RESOURCE_ENERGY, sentQuantity, mainRoomTo.name)
             if (result == OK) {
-                mainContext.lm.lmMessenger.log("INFO", mainRoomFrom.name,
+                mainContext.lm.messenger.log("INFO", mainRoomFrom.name,
                         "Send energy $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
             } else {
-                mainContext.lm.lmMessenger.log("ERROR", mainRoomFrom.name,
+                mainContext.lm.messenger.log("ERROR", mainRoomFrom.name,
                         "Send energy Error: $result cost: $cost quantity: $sentQuantity from ${mainRoomFrom.name} $sentQuantity -> ${mainRoomTo.name}   $describe", COLOR_GREEN)
             }
 
@@ -97,7 +97,7 @@ class LMTerminal(val mainContext: MainContext) {
                         ?: continue
                 val result = terminalFrom.send(needResource, quantityTransfer, roomTo.name)
                 if (result == OK) {
-                    mainContext.lm.lmMessenger.log("INFO", roomFrom.name,
+                    mainContext.lm.messenger.log("INFO", roomFrom.name,
                             "Send $needResource $quantityTransfer from ${roomFrom.name} -> ${roomTo.name} ", COLOR_YELLOW)
                     return
                 }

@@ -103,7 +103,7 @@ class LMTasksLogist(val mc: MainContext) {
             val needInTerminal = mainRoom.constant.mineralMinTerminal - quantityTerminal
             val canMineralAllTerminal = mainRoom.constant.mineralAllMaxTerminal - (terminal.store.toMap().map { it.value }.sum()
                     - mainRoom.getResourceInTerminal(RESOURCE_ENERGY))
-            if (canMineralAllTerminal <= 0) mc.lm.lmMessenger.log("INFO", mainRoom.name, "Terminal mineral is full", COLOR_RED)
+            if (canMineralAllTerminal <= 0) mc.lm.messenger.log("INFO", mainRoom.name, "Terminal mineral is full", COLOR_RED)
             carry = min(min(min(needInTerminal, quantityStorage), creep.store.getCapacity()), canMineralAllTerminal)
 
             if (carry > 0)

@@ -47,7 +47,7 @@ class GlobalConstant(val constants: Constants) {
     var defenceLimitUpgrade: Int = 17_000_000
 
     init {
-        constants.mainContext.lm.lmProduction.lmMineralSetGlobalConstant.setConstant(this)
+        constants.mainContext.lm.production.lmMineralSetGlobalConstant.setConstant(this)
     }
 
 

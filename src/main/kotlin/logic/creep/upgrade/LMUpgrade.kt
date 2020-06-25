@@ -6,7 +6,6 @@ import mainContext.dataclass.upgrade
 import mainContext.dataclass.upgradeQuantity
 import mainContext.dataclass.upgradeResource
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import screeps.api.BodyPartConstant
 import screeps.api.Creep
 import screeps.api.ResourceConstant
 
@@ -16,7 +15,7 @@ class LMUpgrade(val mc: MainContext) {
     fun creepSetLogic(creep: Creep, mr: MainRoom) {
         if (creep.spawning && creep.memory.upgrade == "") {
             if (mr.constant.creepUpgradeRole[creep.memory.role] == true) {
-                val upgradeParts =  mc.lm.lmCreep.lmUpgrade.needForUpgrade.getUpgradeParts(creep)
+                val upgradeParts =  mc.lm.creep.lmUpgrade.needForUpgrade.getUpgradeParts(creep)
                 if (upgradeParts.isNotEmpty()) {
                     for (upgradePart in upgradeParts) {
                         val quantityParts: Int = creep.body.filter { it.type == upgradePart.key }.size
