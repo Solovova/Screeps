@@ -454,14 +454,23 @@ fun Creep.takeFromTombStone(creepCarry: Int, mainContext: MainContext, range: In
     return result
 }
 
-fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
+fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainContext, slaveRoom: SlaveRoom?, minInStorage: Int = 0): Boolean {
     var result = false
     if (creepCarry == 0 && slaveRoom != null) {
-        var objForFilling: Structure? = null
+        var objForFilling: StoreOwner? = null
         when (type) {
             0, 1, 2 -> objForFilling = slaveRoom.structureContainerNearSource[type]
             4 -> objForFilling = slaveRoom.structureContainer.values.filter { it.store[RESOURCE_ENERGY] ?: 0 > 0 }.minBy { this.pos.getRangeTo(it) }
+            5 -> objForFilling = slaveRoom.structureStorage[0]
         }
+
+        if (type==5
+                && minInStorage != 0
+                && objForFilling != null
+                && (objForFilling.store[RESOURCE_ENERGY] ?: 0) < minInStorage) {
+            objForFilling = null
+        }
+
         if (objForFilling != null) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = objForFilling.id, posObject0 = objForFilling.pos))
             result = true

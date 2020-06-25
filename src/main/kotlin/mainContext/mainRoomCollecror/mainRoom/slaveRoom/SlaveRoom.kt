@@ -168,7 +168,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             else
                 if (this._rescueFlag == null) {
                     val result: MutableMap<Int, Flag> = mutableMapOf()
-                    val tmpFlags: List<Flag> = this.room.find(FIND_FLAGS).filter { it.color == COLOR_WHITE && it.secondaryColor == COLOR_WHITE }
+                    val tmpFlags: List<Flag> = this.room.find(FIND_FLAGS).filter {it.color == COLOR_WHITE && it.secondaryColor == COLOR_WHITE }
                     for (sourceRecord in this.source)
                         for (flag in tmpFlags)
                             if (sourceRecord.value.pos.inRangeTo(flag.pos, 8)) {

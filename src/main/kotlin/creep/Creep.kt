@@ -74,6 +74,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (this.memory.role == 3 || this.memory.role == 1003) {
         if ((this.memory.role == 3) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
 
+        if (this.memory.mainRoom == "E54N53") println("Teeeeeeeest")
         if (!isTask) isTask = this.harvestFromSource(1, creepCarry, mainContext, mainRoom)
         if (!isTask) isTask =
                 if (mainRoom.constant.levelOfRoom < 2)
@@ -226,13 +227,15 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (this.memory.role == 101 && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
-        if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext)
+        //1if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext)
         //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
-        if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
+        //1if (!isTask) isTask = this.slaveTakeFromContainer(4, creepCarry, mainContext, slaveRoom)
+        if (!isTask) isTask = this.slaveTakeFromContainer(5, creepCarry, mainContext, slaveRoom, 20000)
+        //1if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
+        //1if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
+        //1if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4, creepCarry, mainContext, slaveRoom, 20000)
+        //1if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4, creepCarry, mainContext, slaveRoom, 20000)
         if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
     }
 

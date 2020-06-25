@@ -21,6 +21,10 @@ fun MainRoom.needCorrection0() {
         }
     }
 
+    if (this.constant.creepUseUpgraderAndBuilderFromMainRoom) {
+        this.need[0][0] = 0
+    }
+
     if (this.source.containsKey(0) && this.structureContainerNearSource.containsKey(0)) {
         if (this.need[1][1] == 0) this.need[1][1] = 1
     }

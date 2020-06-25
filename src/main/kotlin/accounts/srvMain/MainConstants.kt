@@ -2,15 +2,13 @@ package accounts.srvMain
 
 import mainContext.constants.Constants
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
-import screeps.api.BodyPartConstant
-import screeps.api.ResourceConstant
-import screeps.api.WORK
+import screeps.api.*
 
 fun AccountInitMain.initHeadOut(const: Constants) {
     //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
     const.initMainRoomConstantContainer(arrayOf("E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
             "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35",
-            "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53", "E59N52", "E57N55"))
+            "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53", "E59N52", "E57N55", "E54N53"))
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                       //M0
@@ -42,18 +40,28 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52", "E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
     const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54")) //28
-    const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54")) //29
+    const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54","E54N53")) //29
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf()) //31
+    const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52")) //32
+
 
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
     const.s(21, 1).model = SlaveRoomType.central
     const.s(21, 1).checkpointRoom = "E54N35"
+
+    const.s(32,0).autoBuildRoad = true
+
+    const.m(32).useCash = false
+    const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true
+
+    const.s(29,2).model = SlaveRoomType.colonize
+    const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
+
 //    const.m(31).creepSpawn = false
 //    const.s(28,3).model = 1
-//    const.s(28,3).pathUseGlobalGuideFlag=true
 //    const.s(28,3).pathToRoom= arrayOf("E56N53","E56N54","E56N55","E57N55")
 
     const.m(0).reactionActive = "GH2O"
@@ -102,7 +110,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     const.globalConstant.username = "SoloVova"
     const.globalConstant.balanceQtyUpgraderDefault = 32
-    const.globalConstant.balanceQtyBuilderDefault = 8
+    const.globalConstant.balanceQtyBuilderDefault = 5
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
@@ -131,6 +139,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )
     )
+
 
     const.globalConstant.creepUpgradablePartsRange[10] = mutableMapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to

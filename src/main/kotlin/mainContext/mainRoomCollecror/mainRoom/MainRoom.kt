@@ -50,12 +50,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     val structureExtension: Map<String, StructureExtension>
         get() {
             if (this._structureExtension == null) {
-                val cashExt = mc.lm.cash.mr.getFromCashExt(this)
-                _structureExtension = if (cashExt != null) {
-                    cashExt
-                } else {
+                _structureExtension = mc.lm.cash.mr.getFromCashExt(this)
+                if (_structureExtension == null) {
                     mc.lm.cash.mr.needSave()
-                    this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive() }.associate { it.id to it as StructureExtension }
+                    _structureExtension = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_EXTENSION && it.isActive() }.associate { it.id to it as StructureExtension }
                 }
             }
             return _structureExtension ?: throw AssertionError("Error get StructureExtension")
@@ -107,8 +105,14 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private var _structureContainer: Map<String, StructureContainer>? = null
     val structureContainer: Map<String, StructureContainer>
         get() {
-            if (this._structureContainer == null)
-                _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER && it.isActive() }.associate { it.id to it as StructureContainer }
+            if (_structureContainer == null) {
+                _structureContainer = mc.lm.cash.mr.getFromCashCnt(this)
+                if (_structureContainer == null) {
+                    mc.lm.cash.mr.needSave()
+                    _structureContainer = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_CONTAINER && it.isActive() }.associate { it.id to it as StructureContainer }
+                }
+            }
+
             return _structureContainer ?: throw AssertionError("Error get StructureContainer")
         }
 
@@ -116,13 +120,17 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private var _structureContainerNearSource: Map<Int, StructureContainer>? = null //id source
     val structureContainerNearSource: Map<Int, StructureContainer>
         get() {
-            if (this._structureContainerNearSource == null) {
-                val resultContainer = mutableMapOf<Int, StructureContainer>()
-                for (sourceRec in this.source)
-                    for (container in this.structureContainer.values)
-                        if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 1))
-                            resultContainer[sourceRec.key] = container
-                _structureContainerNearSource = resultContainer
+            if (_structureContainerNearSource == null) {
+                _structureContainerNearSource = mc.lm.cash.mr.getFromCashCntS(this)
+                if (_structureContainerNearSource == null) {
+                    mc.lm.cash.mr.needSave()
+                    val resultContainer = mutableMapOf<Int, StructureContainer>()
+                    for (sourceRec in this.source)
+                        for (container in this.structureContainer.values)
+                            if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 1))
+                                resultContainer[sourceRec.key] = container
+                    _structureContainerNearSource = resultContainer
+                }
             }
             return _structureContainerNearSource
                     ?: throw AssertionError("Error get StructureContainerNearSource")
@@ -132,17 +140,21 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private var _structureContainerNearController: Map<Int, StructureContainer>? = null //id source
     val structureContainerNearController: Map<Int, StructureContainer>
         get() {
-            if (this._structureContainerNearController == null) {
-                val resultContainer = mutableMapOf<Int, StructureContainer>()
-                for (container in this.structureContainer.values) {
-                    val protectStructureController: StructureController? = this.structureController[0]
-                    if (protectStructureController != null
-                            && !this.structureContainerNearSource.containsValue(container)
-                            && !this.structureContainerNearMineral.containsValue(container)
-                            && protectStructureController.pos.inRangeTo(container.pos, 3))
-                        resultContainer[0] = container
+            if (_structureContainerNearController == null) {
+                _structureContainerNearController = mc.lm.cash.mr.getFromCashCntC(this)
+                if (_structureContainerNearController == null) {
+                    mc.lm.cash.mr.needSave()
+                    val resultContainer = mutableMapOf<Int, StructureContainer>()
+                    for (container in this.structureContainer.values) {
+                        val protectStructureController: StructureController? = this.structureController[0]
+                        if (protectStructureController != null
+                                && !this.structureContainerNearSource.containsValue(container)
+                                && !this.structureContainerNearMineral.containsValue(container)
+                                && protectStructureController.pos.inRangeTo(container.pos, 3))
+                            resultContainer[0] = container
+                    }
+                    _structureContainerNearController = resultContainer
                 }
-                _structureContainerNearController = resultContainer
             }
             return _structureContainerNearController
                     ?: throw AssertionError("Error get StructureContainerNearController")
@@ -287,13 +299,17 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     private var _structureContainerNearMineral: Map<Int, StructureContainer>? = null
     val structureContainerNearMineral: Map<Int, StructureContainer>
         get() {
-            if (this._structureContainerNearMineral == null) {
-                val resultContainer = mutableMapOf<Int, StructureContainer>()
-                for (container in this.structureContainer.values) {
-                    if (!this.structureContainerNearSource.containsValue(container) && this.mineral.pos.inRangeTo(container.pos, 1))
-                        resultContainer[0] = container
+            if (_structureContainerNearMineral == null) {
+                _structureContainerNearMineral = mc.lm.cash.mr.getFromCashCntM(this)
+                if (_structureContainerNearMineral==null) {
+                    mc.lm.cash.mr.needSave()
+                    val resultContainer = mutableMapOf<Int, StructureContainer>()
+                    for (container in this.structureContainer.values) {
+                        if (!this.structureContainerNearSource.containsValue(container) && this.mineral.pos.inRangeTo(container.pos, 1))
+                            resultContainer[0] = container
+                    }
+                    _structureContainerNearMineral = resultContainer
                 }
-                _structureContainerNearMineral = resultContainer
             }
             return _structureContainerNearMineral
                     ?: throw AssertionError("Error get StructureContainerNearMineral")
@@ -304,12 +320,10 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
     val structureLab: Map<String, StructureLab>
         get() {
             if (this._structureLab == null) {
-                val cashLab = mc.lm.cash.mr.getFromCashLab(this)
-                _structureLab = if (cashLab != null) {
-                    cashLab
-                } else {
+                _structureLab = mc.lm.cash.mr.getFromCashLab(this)
+                if (_structureLab==null) {
                     mc.lm.cash.mr.needSave()
-                    this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive() }.associate { it.id to it as StructureLab }
+                    _structureLab = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_LAB && it.isActive() }.associate { it.id to it as StructureLab }
                 }
             }
             return _structureLab ?: throw AssertionError("Error get StructureLab")

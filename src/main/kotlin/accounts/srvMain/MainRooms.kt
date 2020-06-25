@@ -31,12 +31,12 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
 
 fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "E55N53" && sr.name == "E54N54") {
-        sr.need[0][15] = 1
+        sr.need[0][15] = 0
     }
 
-    if (sr.mr.name == "E56N53" && sr.name == "E57N55") {
+    if (sr.mr.name == "E55N53" && sr.name == "E54N53") {
         sr.need[0][0] = 0
-        sr.need[0][1] = 7
+        sr.need[0][1] = 4
         sr.need[0][11] = 0
     }
 

@@ -28,6 +28,7 @@ class MainRoomConstant(val parent: Constants) {
 
     //Creep commands
     var creepSpawn: Boolean = true
+    var creepUseUpgraderAndBuilderFromMainRoom: Boolean = false
     var needCleaner: Boolean = false //cashed
     var creepIdOfBigBuilder: String = "" //simple
     var creepUseBigBuilder: Boolean = true
