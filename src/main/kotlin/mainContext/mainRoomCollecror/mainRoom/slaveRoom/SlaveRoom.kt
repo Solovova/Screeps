@@ -79,6 +79,25 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             return _structureContainer ?: throw AssertionError("Error get StructureContainer")
         }
 
+    //StructureContainerNearController
+    private var _structureContainerNearController: Map<Int, StructureContainer>? = null //id source
+    val structureContainerNearController: Map<Int, StructureContainer>
+        get() {
+            if (_structureContainerNearController == null) {
+                val resultContainer = mutableMapOf<Int, StructureContainer>()
+                for (container in this.structureContainer.values) {
+                    val protectStructureController: StructureController? = this.structureController[0]
+                    if (protectStructureController != null
+                            && !this.structureContainerNearSource.containsValue(container)
+                            && protectStructureController.pos.inRangeTo(container.pos, 3))
+                        resultContainer[0] = container
+                }
+                _structureContainerNearController = resultContainer
+            }
+            return _structureContainerNearController
+                    ?: throw AssertionError("Error get StructureContainerNearController")
+        }
+
     //StructureContainerNearSource //ToDo test
     private var _structureContainerNearSource: Map<Int, StructureContainer>? = null //id source
     val structureContainerNearSource: Map<Int, StructureContainer>
@@ -168,7 +187,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             else
                 if (this._rescueFlag == null) {
                     val result: MutableMap<Int, Flag> = mutableMapOf()
-                    val tmpFlags: List<Flag> = this.room.find(FIND_FLAGS).filter {it.color == COLOR_WHITE && it.secondaryColor == COLOR_WHITE }
+                    val tmpFlags: List<Flag> = this.room.find(FIND_FLAGS).filter { it.color == COLOR_WHITE && it.secondaryColor == COLOR_WHITE }
                     for (sourceRecord in this.source)
                         for (flag in tmpFlags)
                             if (sourceRecord.value.pos.inRangeTo(flag.pos, 8)) {
@@ -244,7 +263,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
             103 -> {
                 if (this.mr.room.energyCapacityAvailable < 3900) result = arrayOf(CLAIM, CLAIM, MOVE, MOVE)
-                else result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM)
+                else result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CLAIM, CLAIM, CLAIM, CLAIM, CLAIM, CLAIM)
 
             }
 
@@ -336,7 +355,7 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
             128 -> {
                 if (this.mr.room.energyCapacityAvailable < 3900) result = arrayOf(CLAIM, CLAIM, MOVE, MOVE)
-                else result = arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM,CLAIM)
+                else result = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, CLAIM, CLAIM, CLAIM, CLAIM, CLAIM, CLAIM)
             }
         }
         return result
@@ -361,14 +380,15 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             SlaveRoomType.dangeon -> this.correctionDangeon()
 
             SlaveRoomType.central -> this.correctionCentral()
-            SlaveRoomType.colonize -> {}
+            SlaveRoomType.colonize -> {
+            }
         }
     }
 
     fun runNotEveryTick() {
         if (!this.setNextTickRun()) return
         if (this.constant.model == SlaveRoomType.colonize) this.building()
-        if ((this.constant.model in setOf(SlaveRoomType.central,SlaveRoomType.dangeon,SlaveRoomType.normal)) && this.constant.autoBuildRoad)
+        if ((this.constant.model in setOf(SlaveRoomType.central, SlaveRoomType.dangeon, SlaveRoomType.normal)) && this.constant.autoBuildRoad)
             this.constant.roadBuild = this.buildWaysInRoom()
 
         this.restoreSnapShot()

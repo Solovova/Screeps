@@ -24,6 +24,7 @@ class SlaveRoomConstant {
     var needCleaner: Boolean = false
 
     var creepIdMineralHarvester: String = ""
+    var creepTypeRole101: Int = 1 //1-Universal, 2-Upgrader, 3-Builder
 
     //PathToRoom
     var pathUseGlobalGuideFlag: Boolean = false //if true find flag GREY GREY and all creeps go to it

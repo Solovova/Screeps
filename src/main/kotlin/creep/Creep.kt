@@ -114,7 +114,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 6) {
-        if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom)
+        if (!isTask) isTask = this.takeFromStorage(creepCarry, mainContext, mainRoom, 20000)
         if (!isTask) isTask = this.transferToContainer(2, creepCarry, mainContext, mainRoom)
     }
 
@@ -227,16 +227,30 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (this.memory.role == 101 && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
-        //1if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext)
-        //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
-        //1if (!isTask) isTask = this.slaveTakeFromContainer(4, creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveTakeFromContainer(5, creepCarry, mainContext, slaveRoom, 20000)
-        //1if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
-        //1if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
-        //1if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
-        if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
-        //1if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4, creepCarry, mainContext, slaveRoom, 20000)
-        if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
+        if (slaveRoom != null) {
+            if (slaveRoom.constant.creepTypeRole101 == 1) {
+                if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext)
+                //if (!isTask) isTask = this.takeFromTombStone(creepCarry,mainContext)
+                if (!isTask) isTask = this.slaveTakeFromContainer(4, creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveHarvest(3, creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(0, creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveTransferToFilling(creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveTakeFromContainer(5, creepCarry, mainContext, slaveRoom, 20000)
+                if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveTransferToStorageOrContainer(4, creepCarry, mainContext, slaveRoom, 20000)
+                if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
+            }
+
+            if (slaveRoom.constant.creepTypeRole101 == 2) {
+                if (!isTask) isTask = this.slaveTakeFromContainer(6, creepCarry, mainContext, slaveRoom)
+                if (!isTask) isTask = this.slaveUpgradeNormalOrEmergency(1, creepCarry, mainContext, slaveRoom)
+            }
+
+            if (slaveRoom.constant.creepTypeRole101 == 3) {
+                if (!isTask) isTask = this.slaveTakeFromContainer(5, creepCarry, mainContext, slaveRoom, 20000)
+                if (!isTask) isTask = this.slaveBuild(creepCarry, mainContext, slaveRoom)
+            }
+        }
     }
 
     if (this.memory.role == 102) {
@@ -311,7 +325,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 115 || this.memory.role == 1115) {
-        val ticks: Int = if (mainRoom.getLevelOfRoom()!=3) 300 else 250
+        val ticks: Int = if (mainRoom.getLevelOfRoom() != 3) 300 else 250
         if ((this.memory.role < 1000) && this.ticksToLive < ticks) this.memory.role = this.memory.role + 1000
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         //if (!isTask) isTask = this.slaveEraserType4(mainContext, slaveRoom)
@@ -366,23 +380,23 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     }
 
     if (this.memory.role == 126) {
-        if (this.ticksToLive<100 && creepCarry == 0) {
+        if (this.ticksToLive < 100 && creepCarry == 0) {
             this.suicide()
             return isTask
         }
         if (!isTask) isTask = this.slaveGoToRescueFlag(3, mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveGoToPosOfMineral(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveHarvestFromMineral(creepCarry, mainContext, slaveRoom)
-        if (slaveRoom!=null) {
+        if (slaveRoom != null) {
             val resource = slaveRoom.mineral[0]?.mineralType
             if (resource != null) {
-                if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext, 3,  resource)
+                if (!isTask) isTask = this.takeDroppedResource(creepCarry, mainContext, 3, resource)
             }
         }
     }
 
     if (this.memory.role == 127) {
-        if (this.ticksToLive<100 && creepCarry == 0) {
+        if (this.ticksToLive < 100 && creepCarry == 0) {
             this.suicide()
             return isTask
         }

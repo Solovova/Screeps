@@ -35,8 +35,10 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
     }
 
     if (sr.mr.name == "E55N53" && sr.name == "E54N53") {
+
+        sr.constant.creepTypeRole101 = 2 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
-        sr.need[0][1] = 4
+        sr.need[0][1] = 6
         sr.need[0][11] = 0
     }
 

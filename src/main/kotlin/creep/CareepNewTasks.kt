@@ -13,10 +13,16 @@ import mainContext.dataclass.slaveRoom
 import mainContext.dataclass.upgrade
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
 
-fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
+fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom, minInStorage: Int = 0): Boolean {
     var result = false
     if (creepCarry == 0) {
-        val tStorage: StructureStorage? = mainRoom.structureStorage[0]
+        var tStorage: StructureStorage? = mainRoom.structureStorage[0]
+        if (tStorage != null
+                && minInStorage!=0
+                && mainRoom.getResourceInStorage() < minInStorage){
+            tStorage = null
+        }
+
         if (tStorage != null && mainRoom.getResourceInStorage() > 0) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = tStorage.id, posObject0 = tStorage.pos, resource = RESOURCE_ENERGY))
             result = true
@@ -462,6 +468,7 @@ fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainCo
             0, 1, 2 -> objForFilling = slaveRoom.structureContainerNearSource[type]
             4 -> objForFilling = slaveRoom.structureContainer.values.filter { it.store[RESOURCE_ENERGY] ?: 0 > 0 }.minBy { this.pos.getRangeTo(it) }
             5 -> objForFilling = slaveRoom.structureStorage[0]
+            6 -> objForFilling = slaveRoom.structureContainerNearController[0]
         }
 
         if (type==5
