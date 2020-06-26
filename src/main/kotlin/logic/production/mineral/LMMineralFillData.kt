@@ -26,7 +26,8 @@ class LMMineralFillData (val mc: MainContext) {
                     mc.mainRoomCollector.rooms.values.sumBy { it.needMineral[res] ?: 0 }
             val mineralDataRecord: MineralDataRecord? = mc.mineralData[res]
             if (mineralDataRecord == null) {
-                if (quantity != 0 || need != 0) mc.mineralData[res] = MineralDataRecord(quantity = quantity, need = need)
+                if (quantity != 0 || need != 0)
+                    mc.mineralData[res] = MineralDataRecord(quantity = quantity, need = need)
             } else {
                 mineralDataRecord.quantity = quantity
                 mineralDataRecord.need = need

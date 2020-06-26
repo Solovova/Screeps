@@ -11,7 +11,7 @@ import screeps.api.structures.*
 import screeps.utils.toMap
 import mainContext.dataclass.slaveRoom
 import mainContext.dataclass.upgrade
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.dataclass.SlaveRoomType
 
 fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom, minInStorage: Int = 0): Boolean {
     var result = false
@@ -579,7 +579,7 @@ fun Creep.slaveAttackController(mainContext: MainContext, slaveRoom: SlaveRoom?)
 fun Creep.slaveGoToRescueFlag(type: Int, mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean {
     var result = false
     if (slaveRoom != null) {
-        if (slaveRoom.constant.model != SlaveRoomType.dangeon) return false
+        if (slaveRoom.constant.model != SlaveRoomType.Dangeon) return false
         val keeperLair = slaveRoom.structureKeeperLair[type]
         if (keeperLair != null) {
             val hostileNear = this.room.find(FIND_HOSTILE_CREEPS).firstOrNull { keeperLair.pos.inRangeTo(it.pos, 10) }

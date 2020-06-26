@@ -41,7 +41,6 @@ class LMTasksSlaveRoomGoToRoom(val mainContext: MainContext) {
         if (slaveRoom != null && slaveRoom.constant.pathToRoom.isNotEmpty()) {
             val indexNow: Int = slaveRoom.constant.pathToRoom.indexOf(creep.pos.roomName)
             if (indexNow != -1 && (indexNow+1)<slaveRoom.constant.pathToRoom.size) {
-                console.log("Test Slave path: creep id:" + creep.id + " next room:" + slaveRoom.constant.pathToRoom[indexNow+1])
                 goToRoomName(creep, slaveRoom.constant.pathToRoom[indexNow+1])
                 return
             }

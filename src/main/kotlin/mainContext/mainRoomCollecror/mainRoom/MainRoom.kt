@@ -7,6 +7,7 @@ import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import constants.CacheCarrier
 import mainContext.dataclass.BgSpawnResult
+import mainContext.dataclass.QueueSpawnRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
 import screeps.api.*
 import screeps.api.structures.*

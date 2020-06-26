@@ -31,15 +31,17 @@ class MainContext {
 
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
 
-        lm.production.mineralFillCash.fill()
+
 
         lm.gcl.calculate()
 
+        lm.production.mineralFillCash.fill()
         lm.nuker.lmNukerNeedMineral.fill()
         lm.production.lmMineralFillData.fill()
+        lm.production.lmMineralFillProduction.fill()
 
         this.constants.accountInit.initTuning(this)
-        lm.production.lmMineralFillProduction.fill()
+
 
 
 

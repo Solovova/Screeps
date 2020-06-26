@@ -74,7 +74,6 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (this.memory.role == 3 || this.memory.role == 1003) {
         if ((this.memory.role == 3) && this.ticksToLive < 200) this.memory.role = this.memory.role + 1000
 
-        if (this.memory.mainRoom == "E54N53") println("Teeeeeeeest")
         if (!isTask) isTask = this.harvestFromSource(1, creepCarry, mainContext, mainRoom)
         if (!isTask) isTask =
                 if (mainRoom.constant.levelOfRoom < 2)

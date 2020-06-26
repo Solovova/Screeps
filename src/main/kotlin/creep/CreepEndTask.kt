@@ -44,7 +44,6 @@ fun Creep.endTask(mainContext: MainContext) {
                     val hostileNear = this.room.find(FIND_HOSTILE_CREEPS).firstOrNull { keeperLair.pos.inRangeTo(it.pos, 10) }
                     if (this.pos.inRangeTo(keeperLair.pos, 10)
                             && (keeperLair.ticksToSpawn < 20 || hostileNear != null)) {
-                        console.log("Task deleted")
                         mainContext.tasks.deleteTask(this.id)
                         return
                     }

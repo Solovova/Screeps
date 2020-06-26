@@ -5,8 +5,9 @@ import screeps.api.*
 
 fun SlaveRoom.correctionDangeon() {
     if (this.room != null) {
-        val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER }
-        if (towerInvader != null) {
+        val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER}
+        val coreInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_INVADER_CORE}
+        if (towerInvader != null && coreInvader!=null) {
             this.constant.roomHostileType = 4
             this.constant.roomHostileNum = 5
             this.constant.roomHostile = true
@@ -55,7 +56,7 @@ fun SlaveRoom.correctionDangeon() {
     this.need[1][15] = 1
 
     if (this.constructionSite.size > 10) {
-        this.need[1][9] = 2
+        this.need[1][9] = 5
     }
 
     if (this.source.containsKey(0) && this.rescueFlag.containsKey(0)) this.need[1][20] = 1

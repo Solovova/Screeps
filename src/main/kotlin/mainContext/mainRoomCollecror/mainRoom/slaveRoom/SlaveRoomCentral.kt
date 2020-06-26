@@ -5,7 +5,8 @@ import screeps.api.*
 
 fun SlaveRoom.correctionCentral() {
     if (this.room != null) {
-        val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER }
+        val towerInvader = this.room.find(FIND_HOSTILE_STRUCTURES).firstOrNull { it.structureType == STRUCTURE_TOWER
+                && ((it.unsafeCast<StoreOwner>()).store[RESOURCE_ENERGY] ?: 0) > 0}
 
         if (towerInvader != null) {
             this.constant.roomHostileType = 4

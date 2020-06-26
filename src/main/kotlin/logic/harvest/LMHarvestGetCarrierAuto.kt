@@ -1,10 +1,9 @@
 package logic.harvest
 
 import constants.CacheCarrier
-import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.dataclass.SlaveRoomType
 import screeps.api.*
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -29,7 +28,7 @@ class LMHarvestGetCarrierAuto {
             fBody = arrayOf()
             for (i in 0 until (needCapacity/100)) fBody += arrayOf(CARRY, CARRY, MOVE)
         }else{
-            weight = if (slaveRoom.constant.model == SlaveRoomType.dangeon) (((SOURCE_ENERGY_KEEPER_CAPACITY + 1500)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
+            weight = if (slaveRoom.constant.model == SlaveRoomType.Dangeon) (((SOURCE_ENERGY_KEEPER_CAPACITY + 1500)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
             else (((SOURCE_ENERGY_CAPACITY +500)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
             fMaxCapacity = min((mainRoom.room.energyCapacityAvailable - 200) / 150 * 100 + 50,1550)
             needCarriers  = weight / fMaxCapacity + 1

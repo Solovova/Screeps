@@ -1,7 +1,7 @@
 package logic.messenger
 
 import mainContext.MainContext
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.dataclass.SlaveRoomType
 import screeps.api.*
 
 class LMMessenger(val mainContext: MainContext) {
@@ -82,7 +82,7 @@ class LMMessenger(val mainContext: MainContext) {
     private fun showSlaveRoomInfo() {
         for (room in this.mainContext.mainRoomCollector.rooms.values)
             for (slaveRoom in room.slaveRooms.values) {
-                if (slaveRoom.constant.model != SlaveRoomType.colonize) {
+                if (slaveRoom.constant.model != SlaveRoomType.Colonize) {
                     this.lmMessengerSlaveRoom.showInfo(slaveRoom)
                 }
             }

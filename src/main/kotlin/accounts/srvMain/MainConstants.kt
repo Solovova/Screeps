@@ -1,7 +1,7 @@
 package accounts.srvMain
 
 import mainContext.constants.Constants
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.dataclass.SlaveRoomType
 import screeps.api.*
 
 fun AccountInitMain.initHeadOut(const: Constants) {
@@ -42,14 +42,14 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54")) //28
     const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54","E54N53")) //29
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
-    const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf()) //31
+    const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52")) //32
 
 
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.s(21, 1).model = SlaveRoomType.central
+    const.s(21, 1).model = SlaveRoomType.Central
     const.s(21, 1).checkpointRoom = "E54N35"
 
     const.s(32,0).autoBuildRoad = true
@@ -57,7 +57,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(32).useCash = false
     const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true
 
-    const.s(29,2).model = SlaveRoomType.colonize
+    const.s(29,2).model = SlaveRoomType.Colonize
     const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
 
 //    const.m(31).creepSpawn = false
@@ -110,7 +110,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     const.globalConstant.username = "SoloVova"
     const.globalConstant.balanceQtyUpgraderDefault = 32
-    const.globalConstant.balanceQtyBuilderDefault = 5
+    const.globalConstant.balanceQtyBuilderDefault = 8
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(

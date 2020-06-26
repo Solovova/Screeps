@@ -4,7 +4,8 @@ import constants.CacheCarrier
 import mainContext.MainContext
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
-import mainContext.mainRoomCollecror.mainRoom.QueueSpawnRecord
+import mainContext.dataclass.QueueSpawnRecord
+import mainContext.dataclass.SlaveRoomType
 import screeps.api.*
 import screeps.api.structures.*
 import screeps.utils.toMap
@@ -209,8 +210,8 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
     init {
         mc.constants.accountInit.initSlaveRoom(this)
-        if (this.constant.model == SlaveRoomType.normal && this.room != null) {
-            if (this.source.size == 3) this.constant.model = SlaveRoomType.dangeon
+        if (this.constant.model == SlaveRoomType.Normal && this.room != null) {
+            if (this.source.size == 3) this.constant.model = SlaveRoomType.Dangeon
         }
     }
 
@@ -376,19 +377,19 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
 
     fun needCorrection() {
         when (this.constant.model) {
-            SlaveRoomType.normal -> this.correctionNormal()
-            SlaveRoomType.dangeon -> this.correctionDangeon()
+            SlaveRoomType.Normal -> this.correctionNormal()
+            SlaveRoomType.Dangeon -> this.correctionDangeon()
 
-            SlaveRoomType.central -> this.correctionCentral()
-            SlaveRoomType.colonize -> {
+            SlaveRoomType.Central -> this.correctionCentral()
+            SlaveRoomType.Colonize -> {
             }
         }
     }
 
     fun runNotEveryTick() {
         if (!this.setNextTickRun()) return
-        if (this.constant.model == SlaveRoomType.colonize) this.building()
-        if ((this.constant.model in setOf(SlaveRoomType.central, SlaveRoomType.dangeon, SlaveRoomType.normal)) && this.constant.autoBuildRoad)
+        if (this.constant.model == SlaveRoomType.Colonize) this.building()
+        if ((this.constant.model in setOf(SlaveRoomType.Central, SlaveRoomType.Dangeon, SlaveRoomType.Normal)) && this.constant.autoBuildRoad)
             this.constant.roadBuild = this.buildWaysInRoom()
 
         this.restoreSnapShot()

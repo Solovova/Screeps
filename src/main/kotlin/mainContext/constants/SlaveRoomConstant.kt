@@ -1,9 +1,9 @@
 package mainContext.constants
 
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
+import mainContext.dataclass.SlaveRoomType
 
 class SlaveRoomConstant {
-    var model:SlaveRoomType = SlaveRoomType.normal
+    var model: SlaveRoomType = SlaveRoomType.Normal
     var autoBuildRoad: Boolean = false
     //Fro madel 3
     var checkpointRoom: String = ""

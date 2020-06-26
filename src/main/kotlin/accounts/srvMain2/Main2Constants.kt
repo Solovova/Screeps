@@ -1,7 +1,6 @@
 package accounts.srvMain2
 
 import mainContext.constants.Constants
-import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoomType
 import screeps.api.BodyPartConstant
 import screeps.api.ResourceConstant
 import screeps.api.WORK
