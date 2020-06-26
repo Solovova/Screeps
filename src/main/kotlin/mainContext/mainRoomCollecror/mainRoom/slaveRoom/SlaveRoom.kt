@@ -80,25 +80,6 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
             return _structureContainer ?: throw AssertionError("Error get StructureContainer")
         }
 
-    //StructureContainerNearController
-    private var _structureContainerNearController: Map<Int, StructureContainer>? = null //id source
-    val structureContainerNearController: Map<Int, StructureContainer>
-        get() {
-            if (_structureContainerNearController == null) {
-                val resultContainer = mutableMapOf<Int, StructureContainer>()
-                for (container in this.structureContainer.values) {
-                    val protectStructureController: StructureController? = this.structureController[0]
-                    if (protectStructureController != null
-                            && !this.structureContainerNearSource.containsValue(container)
-                            && protectStructureController.pos.inRangeTo(container.pos, 3))
-                        resultContainer[0] = container
-                }
-                _structureContainerNearController = resultContainer
-            }
-            return _structureContainerNearController
-                    ?: throw AssertionError("Error get StructureContainerNearController")
-        }
-
     //StructureContainerNearSource //ToDo test
     private var _structureContainerNearSource: Map<Int, StructureContainer>? = null //id source
     val structureContainerNearSource: Map<Int, StructureContainer>
@@ -107,23 +88,12 @@ class SlaveRoom(val mc: MainContext, val mr: MainRoom, val name: String, val des
                 val resultContainer = mutableMapOf<Int, StructureContainer>()
                 for (sourceRec in this.source)
                     for (container in this.structureContainer.values)
-                        if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 2))
+                        if (!resultContainer.containsValue(container) && sourceRec.value.pos.inRangeTo(container.pos, 1))
                             resultContainer[sourceRec.key] = container
                 _structureContainerNearSource = resultContainer
             }
             return _structureContainerNearSource
                     ?: throw AssertionError("Error get StructureContainerNearSource")
-        }
-
-    //StructureStorage
-    private var _structureStorage: Map<Int, StructureStorage>? = null
-    val structureStorage: Map<Int, StructureStorage>
-        get() {
-            if (this.room == null)
-                _structureStorage = mapOf()
-            else if (this._structureStorage == null)
-                _structureStorage = this.room.find(FIND_STRUCTURES).filter { it.structureType == STRUCTURE_STORAGE }.withIndex().associate { it.index to it.value as StructureStorage }
-            return _structureStorage ?: throw AssertionError("Error get StructureStorage")
         }
 
     //Mineral

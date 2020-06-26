@@ -464,11 +464,19 @@ fun Creep.slaveTakeFromContainer(type: Int, creepCarry: Int, mainContext: MainCo
     var result = false
     if (creepCarry == 0 && slaveRoom != null) {
         var objForFilling: StoreOwner? = null
+
+
         when (type) {
             0, 1, 2 -> objForFilling = slaveRoom.structureContainerNearSource[type]
             4 -> objForFilling = slaveRoom.structureContainer.values.filter { it.store[RESOURCE_ENERGY] ?: 0 > 0 }.minBy { this.pos.getRangeTo(it) }
-            5 -> objForFilling = slaveRoom.structureStorage[0]
-            6 -> objForFilling = slaveRoom.structureContainerNearController[0]
+            5 -> {
+                val slMainRoom:MainRoom = mainContext.mainRoomCollector.rooms[slaveRoom.name] ?: return false
+                objForFilling = slMainRoom.structureStorage[0]
+            }
+            6 -> {
+                val slMainRoom:MainRoom = mainContext.mainRoomCollector.rooms[slaveRoom.name] ?: return false
+                objForFilling = slMainRoom.structureContainerNearController[0]
+            }
         }
 
         if (type==5
@@ -701,12 +709,14 @@ fun Creep.slaveTransferToStorageOrContainer(type: Int, creepCarry: Int, mainCont
             when (type) {
                 0, 1, 2 -> objForFilling = slaveRoom.structureContainerNearSource[type]
                 3 -> {
-                    objForFilling = slaveRoom.structureStorage[0]
+                    val slMainRoom:MainRoom = mainContext.mainRoomCollector.rooms[slaveRoom.name] ?: return false
+                    objForFilling = slMainRoom.structureStorage[0]
                     if (objForFilling == null) objForFilling = slaveRoom.structureContainer.values.firstOrNull()
                 }
 
                 4-> {
-                    objForFilling = slaveRoom.structureStorage[0]
+                    val slMainRoom:MainRoom = mainContext.mainRoomCollector.rooms[slaveRoom.name] ?: return false
+                    objForFilling = slMainRoom.structureStorage[0]
                     if (objForFilling != null
                             && putIfEnergyLess!=0
                             && objForFilling.store[RESOURCE_ENERGY] ?: 0> putIfEnergyLess){

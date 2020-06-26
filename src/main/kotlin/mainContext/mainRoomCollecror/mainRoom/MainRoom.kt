@@ -658,8 +658,6 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
                     slaveRoom?.profitMinus(this.queue[0].role)
                 }
 
-                //this.parent.parent.messenger("INFO",this.name, "Start spawn creep Name: ${spawn.}", COLOR_YELLOW)
-
                 this.queue.removeAt(0)
             }
         }
