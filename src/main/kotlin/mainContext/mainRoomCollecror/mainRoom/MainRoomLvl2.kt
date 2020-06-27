@@ -30,9 +30,9 @@ fun MainRoom.needCorrection2() {
         this.need[2][7] = 0
 
         if ((this.getResource() > this.constant.energyUpgradeForce)
-                && this.constructionSite.isEmpty()) {
+                ) { //&& this.constructionSite.isEmpty()
             this.need[1][7] = 2
-            this.need[2][7] = 2
+            this.need[2][7] = 3
         } else {
             this.need[1][7] = 2
             this.need[2][7] = 0

@@ -40,7 +40,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E57N51").initSlaveRoomConstantContainer(arrayOf("E57N52", "E58N51")) //M26
     const.getMainRoomConstant("E55N51").initSlaveRoomConstantContainer(arrayOf("E56N51")) //M27
     const.getMainRoomConstant("E56N53").initSlaveRoomConstantContainer(arrayOf("E56N52", "E57N53", "E56N54")) //28
-    const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54","E54N53")) //29
+    const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54")) //29
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52")) //32
@@ -49,13 +49,13 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.s(32,0).autoBuildRoad = true
+    //const.s(32,0).autoBuildRoad = true
 
     const.m(32).useCash = false
-    const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true
+    //const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true
 
-    const.s(29,2).model = SlaveRoomType.Colonize
-    const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
+    //const.s(29,2).model = SlaveRoomType.Colonize
+    //const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
 
 //    const.m(31).creepSpawn = false
 //    const.s(28,3).model = 1
@@ -106,8 +106,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
 
     const.globalConstant.username = "SoloVova"
-    const.globalConstant.balanceQtyUpgraderDefault = 32
-    const.globalConstant.balanceQtyBuilderDefault = 8
+    const.globalConstant.balanceQtyUpgraderDefault = 32+6
+    const.globalConstant.balanceQtyBuilderDefault = 4
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
@@ -131,9 +131,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[101] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(10000, "XGH2O".unsafeCast<ResourceConstant>()),
-                            Pair(10000, "GH2O".unsafeCast<ResourceConstant>()),
-                            Pair(1000, "GH".unsafeCast<ResourceConstant>())
+                            Pair(500, "XLH2O".unsafeCast<ResourceConstant>()),
+                            Pair(10000, "LH2O".unsafeCast<ResourceConstant>()),
+                            Pair(1000, "LH".unsafeCast<ResourceConstant>())
                     )
     )
 

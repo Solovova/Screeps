@@ -169,6 +169,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     if (this.memory.role == 14 || this.memory.role == 1014) {
         if (this.memory.role == 14 && this.ticksToLive < 44) this.memory.role = this.memory.role + 1000
+        //if (!isTask) isTask = this.putToStorage(creepCarry, mainContext, mainRoom)
         if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskEmptyCreep(this)
         if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLabFiller.newTaskResourcesForUpgrade(this)
         if (!isTask) isTask = mainContext.lm.creep.lmTask.lmTasksLogist.newTaskLinkAndTerminalStorageBalance(this)

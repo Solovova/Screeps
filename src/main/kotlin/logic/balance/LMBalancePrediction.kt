@@ -2,6 +2,7 @@ package logic.balance
 
 import mainContext.MainContext
 import screeps.api.Game
+import screeps.api.RESOURCE_ENERGY
 
 class LMBalancePrediction(val mc: MainContext) {
     var addedNew: Boolean = false
@@ -124,10 +125,19 @@ class LMBalancePrediction(val mc: MainContext) {
     }
 
     fun getBuilder() : Int {
+        val mineralsNeed = (mc.mineralData[RESOURCE_ENERGY]?.need
+                ?: 0) - (mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0)
+
         var qtyBuilder = mc.constants.globalConstant.balanceQtyBuilderDefault
-        if (qtyBuilder == -1) {
-            qtyBuilder = getBuilderPrediction()
+
+        if (mineralsNeed<-1500000) {
+            qtyBuilder += 6
         }
+
+
+//        if (qtyBuilder == -1) {
+//            qtyBuilder = getBuilderPrediction()
+//        }
         return qtyBuilder
     }
 }

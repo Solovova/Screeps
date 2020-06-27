@@ -121,6 +121,7 @@ class LMTerminal(val mainContext: MainContext) {
             it.constant.levelOfRoom >= 2
                     && it.getResource() > emergencyMineralQuantity
                     && it.constructionSite.isEmpty()
+                    && it.getResourceInTerminal() > 8000
                     && it.name != mainRoomTo.name
         }.maxBy {
             it.getResource() + if (it.constant.levelOfRoom == 3) {
@@ -149,6 +150,7 @@ class LMTerminal(val mainContext: MainContext) {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
                     && it.getResource() > emergencyMineralQuantity
+                    && it.getResourceInTerminal() > 8000
         }.maxBy {
             it.getResource() + if (it.constant.levelOfRoom == 3) {
                 1000000
@@ -172,6 +174,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom == 3
+                    && it.getResourceInTerminal() > 8000
                     && it.getResource() > (it.constant.energyUpgradeDefence + 20000)
         }.maxBy { it.getResource() }
                 ?: return
@@ -182,6 +185,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyExcessSent() {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.getResourceInTerminal() > 8000
                     && it.getResource() > it.constant.energyExcessSent
         }.maxBy { it.getResource() }
                 ?: return
@@ -201,6 +205,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyStorageFullSent() {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.getResourceInTerminal() > 8000
                     && it.getResource() > 500_000
         }.maxBy { it.getResource() }
                 ?: return
@@ -232,6 +237,7 @@ class LMTerminal(val mainContext: MainContext) {
                     && !((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
                     || (it.constant.needUpgrader && it.getResource() < it.constant.energyUpgradeLvl8Controller))
                     && it.name != mainRoomTo.name
+                    && it.getResourceInTerminal() > 8000
         }.maxBy { it.getResource() }
                 ?: return
 

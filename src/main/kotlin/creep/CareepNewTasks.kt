@@ -12,6 +12,7 @@ import screeps.utils.toMap
 import mainContext.dataclass.slaveRoom
 import mainContext.dataclass.upgrade
 import mainContext.dataclass.SlaveRoomType
+import kotlin.math.min
 
 fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom, minInStorage: Int = 0): Boolean {
     var result = false
@@ -25,6 +26,19 @@ fun Creep.takeFromStorage(creepCarry: Int, mainContext: MainContext, mainRoom: M
 
         if (tStorage != null && mainRoom.getResourceInStorage() > 0) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = tStorage.id, posObject0 = tStorage.pos, resource = RESOURCE_ENERGY))
+            result = true
+        }
+    }
+    return result
+}
+
+fun Creep.putToStorage(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
+    var result = false
+    if (creepCarry != 0) {
+        val tStorage: StructureStorage? = mainRoom.structureStorage[0]
+        val res = this.store.toMap().filter { it.value > 0 }.toList().firstOrNull()
+        if (tStorage != null && res != null) {
+            mainContext.tasks.add(this.id, CreepTask(TypeOfTask.Take, idObject0 = tStorage.id, posObject0 = tStorage.pos, resource = res.first))
             result = true
         }
     }
