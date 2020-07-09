@@ -72,7 +72,7 @@ fun MainRoom.needCorrection2() {
     }
 
     if (this.constant.needBuilder
-            && (this.getResource() > this.constant.energyUpgradeDefence)) {
+            && (this.getResource() > (this.constant.energyUpgradeDefence-50000))) {
         this.need[1][10] = 1
     }
     this.need[1][11] = this.have[10]

@@ -55,7 +55,7 @@ fun SlaveRoom.correctionDangeon() {
     this.need[0][4] = 1
     this.need[1][15] = 1
 
-    if (this.constructionSite.size > 10) {
+    if (this.constructionSite.size > 10 && this.structureContainer.size>=2) {
         this.need[1][9] = 5
     }
 

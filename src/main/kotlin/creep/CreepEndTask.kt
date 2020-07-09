@@ -179,8 +179,11 @@ fun Creep.endTask(mainContext: MainContext) {
 
         TypeOfTask.UpgradeStructure -> {
             val building: Structure? = (Game.getObjectById(task.idObject0) as Structure?)
+            val mainRoom: MainRoom? = mainContext.mainRoomCollector.rooms[this.memory.mainRoom]
             if (building == null) mainContext.tasks.deleteTask(this.id)
             if (building != null && building.hits > task.quantity) mainContext.tasks.deleteTask(this.id)
+            if (building != null && mainRoom!=null && creepCarry == 0 && mainRoom.have[11]==0)
+                mainContext.tasks.deleteTask(this.id)
         }
 
         TypeOfTask.Repair -> {

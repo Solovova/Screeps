@@ -131,7 +131,7 @@ class LMBalancePrediction(val mc: MainContext) {
         var qtyBuilder = mc.constants.globalConstant.balanceQtyBuilderDefault
 
         if (mineralsNeed<-1500000) {
-            qtyBuilder += 6
+            qtyBuilder += 16
         }
 
 

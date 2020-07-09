@@ -6,7 +6,7 @@ import screeps.api.*
 
 class GlobalConstant(val constants: Constants) {
     var username: String = ""
-    var nukerFill: Boolean = false
+    var nukerFill: Boolean = true
     var nukerFilInRooms: Array<String> = arrayOf()
 
     val dataCacheCarrierAuto: MutableMap<String, CacheCarrier> = mutableMapOf() //cashed
@@ -27,8 +27,10 @@ class GlobalConstant(val constants: Constants) {
     var balanceQtyUpgraderNow: Int = -1 //cashed
     var balanceQtyUpgraderDefault: Int = -1 // if -1 use prediction
     var balanceQtyBuilderDefault: Int = -1 // if -1 use prediction
+
     var balanceMaxSize: Int = 100
     var balancePeriod: Int = 1500
+
 
 
 

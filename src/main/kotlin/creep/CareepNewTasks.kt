@@ -183,8 +183,11 @@ fun Creep.buildStructure(creepCarry: Int, mainContext: MainContext, mainRoom: Ma
     return result
 }
 
-fun Creep.buildBigStructure(mainContext: MainContext, mainRoom: MainRoom): Boolean {
+fun Creep.buildBigStructure(creepCarry: Int, mainContext: MainContext, mainRoom: MainRoom): Boolean {
     var result = false
+
+    if (creepCarry==0 && mainRoom.have[11]==0) return result
+
     //first upgrage ramparts if less 5000 to 10000
     var structure: Structure? = mainRoom.room.find(FIND_STRUCTURES).filter {
         (it.structureType == STRUCTURE_RAMPART)

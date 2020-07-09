@@ -150,7 +150,11 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
 
     if (this.memory.role == 10) {
         if (!isTask) isTask = this.upgradeCreep(mainContext, mainRoom)
-        if (!isTask) isTask = this.buildBigStructure(mainContext, mainRoom)
+
+        if (!isTask && mainRoom.have[11] == 0)
+            isTask = this.takeFromStorage(creepCarry,mainContext, mainRoom, mainRoom.constant.energyBuilder )
+
+        if (!isTask) isTask = this.buildBigStructure(creepCarry, mainContext, mainRoom)
     }
 
     if (this.memory.role == 11) {

@@ -43,7 +43,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E55N53").initSlaveRoomConstantContainer(arrayOf("E55N52", "E55N54")) //29
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
-    const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52")) //32
+    const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54")) //32
 
 
 }
@@ -51,7 +51,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(32,0).autoBuildRoad = true
 
-    const.m(32).useCash = false
+    //const.m(32).useCash = false
     //const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true
 
     //const.s(29,2).model = SlaveRoomType.Colonize
@@ -100,9 +100,11 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(26).reactionActive = "UL"
     const.m(27).reactionActive = "G"
     const.m(28).reactionActive = "GH"
-    const.m(29).reactionActive = "XGH2O"
+    //const.m(29).reactionActive = "XGH2O"
+    const.m(29).reactionActiveArr = arrayOf("ZK", "UL", "XGH2O")
     const.m(30).reactionActive = "XGH2O"
     const.m(31).reactionActive = "XGH2O"
+    const.m(32).reactionActive = "XGH2O"
 
 
     const.globalConstant.username = "SoloVova"
@@ -113,8 +115,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(600000, "XGH2O".unsafeCast<ResourceConstant>()),
-                            Pair(100000, "GH2O".unsafeCast<ResourceConstant>()),
+                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(50000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )
     )
@@ -122,8 +124,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
-                            Pair(10000, "GH2O".unsafeCast<ResourceConstant>()),
+                            Pair(50000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(20000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "GH".unsafeCast<ResourceConstant>())
                     )
     )
@@ -131,7 +133,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[101] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(500, "XLH2O".unsafeCast<ResourceConstant>()),
+                            Pair(10000, "XLH2O".unsafeCast<ResourceConstant>()),
                             Pair(10000, "LH2O".unsafeCast<ResourceConstant>()),
                             Pair(1000, "LH".unsafeCast<ResourceConstant>())
                     )
@@ -141,9 +143,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[10] = mutableMapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(2000, "XLH2O".unsafeCast<ResourceConstant>()),
-                            Pair(2000, "LH2O".unsafeCast<ResourceConstant>()),
-                            Pair(1000, "LH".unsafeCast<ResourceConstant>())
+                            Pair(20000, "XLH2O".unsafeCast<ResourceConstant>()),
+                            Pair(20000, "LH2O".unsafeCast<ResourceConstant>()),
+                            Pair(10000, "LH".unsafeCast<ResourceConstant>())
                     )
     )
 

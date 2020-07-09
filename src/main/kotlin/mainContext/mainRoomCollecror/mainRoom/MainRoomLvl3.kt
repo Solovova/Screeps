@@ -49,7 +49,7 @@ fun MainRoom.needCorrection3() {
 
     //8 Builder
     if (this.constant.creepUseBigBuilder) {
-        if ((this.constant.needBuilder && this.getResource() > this.constant.energyUpgradeDefence)
+        if ((this.constant.needBuilder && this.getResource() > (this.constant.energyUpgradeDefence-50000))
                 || (this.constructionSite.isNotEmpty() && this.getResource() > this.constant.energyBuilder)
         //|| ((mc.mineralData[RESOURCE_ENERGY]?.quantity ?: 0) > (mc.mineralData[RESOURCE_ENERGY]?.need ?: 0)
         //        && this.getResourceInStorage() > this.constant.energyUpgradeDefence)
