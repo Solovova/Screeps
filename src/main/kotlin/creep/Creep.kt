@@ -1,6 +1,7 @@
 package creep
 
 import mainContext.MainContext
+import mainContext.dataclass.TypeOfTask
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.dataclass.mainRoom
@@ -8,6 +9,8 @@ import mainContext.dataclass.role
 import screeps.api.*
 import screeps.utils.toMap
 import mainContext.dataclass.slaveRoom
+import mainContext.tasks.CreepTask
+import screeps.api.structures.StructureController
 
 fun Creep.getDescribeForQueue(mainContext: MainContext): String {
     val mainRoom: MainRoom = mainContext.mainRoomCollector.rooms[this.memory.mainRoom] ?: return ""
@@ -224,7 +227,6 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
     if (this.memory.role == 100) {
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveClaim(mainContext, slaveRoom)
-
     }
 
     if (this.memory.role == 101 || this.memory.role == 1101) {

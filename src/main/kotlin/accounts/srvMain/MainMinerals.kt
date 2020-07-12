@@ -78,7 +78,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             priceMax = 1.200,
             priceMin = 0.005,
             marketSellExcess = 400000,
-            marketBuyLack = 30000,
+            marketBuyLack = 50000,
             storeMax = 500000,
             sellFromRoom = "E52N36",
             buyToRoom = "E57N39"
@@ -116,7 +116,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             priceMax = 1.200,
             priceMin = 0.900,
             storeMax = 450000,
-            marketSellExcess = 0,
+            marketSellExcess = 200000,
             sellFromRoom = "E54N39",
             balancingStart = 300000,
             balancingStop = 400000
