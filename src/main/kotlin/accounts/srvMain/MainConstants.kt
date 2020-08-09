@@ -28,7 +28,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E53N39").initSlaveRoomConstantContainer(arrayOf("E52N39"))                                //M14
     const.getMainRoomConstant("E49N39").initSlaveRoomConstantContainer(arrayOf("E49N38"))                                //M15
     const.getMainRoomConstant("E47N39").initSlaveRoomConstantContainer(arrayOf("E46N39", "E47N38"))                       //M16
-    const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42", "E52N41", "E54N43"))                       //M17
+    const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42", "E52N41"))                       //M17
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                        //M20
@@ -44,7 +44,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54")) //32
-    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43")) //33
+    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44")) //33
 
 
 }
@@ -58,11 +58,10 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(29,2).model = SlaveRoomType.Colonize
     //const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
 
-    const.m(33).creepUseUpgraderAndBuilderFromMainRoom = true
-    const.m(33).useCash = false
-    const.s(33,0).autoBuildRoad = true
-    const.s(17,2).model = SlaveRoomType.Colonize
-    const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
+    //const.m(33).creepUseUpgraderAndBuilderFromMainRoom = true
+    //const.m(33).useCash = false
+    //const.s(17,2).model = SlaveRoomType.Colonize
+    //const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
