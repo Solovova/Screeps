@@ -107,6 +107,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(30).reactionActive = "XGH2O"
     const.m(31).reactionActive = "XGH2O"
     const.m(32).reactionActive = "XGH2O"
+    const.m(33).reactionActive = "XGH2O"
 
 
     const.globalConstant.username = "SoloVova"

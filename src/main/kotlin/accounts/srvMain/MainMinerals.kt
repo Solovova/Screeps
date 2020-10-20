@@ -8,13 +8,13 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
     mc.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
             priceMax = 0.200,
             priceMin = 0.020,
-            marketSellExcess = mc.getNumRoomWithTerminal() * 250000,
+            marketSellExcess = mc.getNumRoomWithTerminal() * 450000,
             marketBuyLack = mc.getNumRoomWithTerminal() * 100000,
             sellFromRoom = "E54N37"
     )
 
     mc.mineralData["O".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.300,
+            priceMax = 0.600,
             priceMin = 0.005,
             marketSellExcess = 300000,
             marketBuyLack = 30000,
@@ -24,7 +24,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
     )
 
     mc.mineralData["H".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.300,
+            priceMax = 0.600,
             priceMin = 0.005,
             marketSellExcess = 400000,
             marketBuyLack = 60000,
