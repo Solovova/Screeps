@@ -95,7 +95,7 @@ fun Creep.harvestFromMineral(creepCarry: Int, mainContext: MainContext, mainRoom
         if (extractor != null
                 && container != null
                 && extractor.cooldown == 0
-                && container.store.toMap().map { it.value }.sum() < ((container.store.getCapacity()) - 30)) {
+                && container.store.toMap().map { it.value }.sum() < ((container.store.getCapacity() ?: 0) - 30)) {
             mainContext.tasks.add(this.id, CreepTask(TypeOfTask.HarvestMineral, idObject0 = mainRoom.mineral.id, posObject0 = mainRoom.mineral.pos))
             result = true
         }
@@ -897,7 +897,7 @@ fun Creep.slaveEraser(mainContext: MainContext, slaveRoom: SlaveRoom?): Boolean 
         }
 
         if (!result) {
-            val keeperLair: StructureKeeperLair? = slaveRoom.structureKeeperLair.minBy { it.value.ticksToSpawn }?.value
+            val keeperLair: StructureKeeperLair? = slaveRoom.structureKeeperLair.minBy { (it.value.ticksToSpawn ?: 0) }?.value
             if (keeperLair != null) {
                 mainContext.tasks.add(this.id, CreepTask(TypeOfTask.EraserGoToKL, idObject0 = keeperLair.id, posObject0 = keeperLair.pos))
                 result = true
