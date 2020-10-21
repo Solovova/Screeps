@@ -67,7 +67,8 @@ class MainRoomConstant(val parent: Constants) {
     var manualDefenceTargetCreep: Creep? = null
 
     //Balancing upgrade
-    var defenceMinHits: Int = 0 //cashed
+    var defenceLimitUpgrade: Int = 0
+    var defenceMinHits: Int = 0 //cashed auto calculating
     var needUpgrader:Boolean = false //cashed
     var needBuilder:Boolean = false //cashed
 

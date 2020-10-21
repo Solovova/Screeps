@@ -22,6 +22,13 @@ class LMBalanceBuilderWall(val mc: MainContext) {
             room.constant.defenceMinHits = getMinHits(room)
     }
 
+    fun getDefenceLimitUpgrade(mainRoom: MainRoom): Int {
+        return if (mainRoom.constant.defenceLimitUpgrade == 0) {
+            mc.constants.globalConstant.defenceLimitUpgrade
+        }else{
+            mainRoom.constant.defenceLimitUpgrade
+        }
+    }
 
     fun setNeedBuilder() {
         val qtyBuilder = mc.lm.balancePrediction.getBuilder()
@@ -29,9 +36,6 @@ class LMBalanceBuilderWall(val mc: MainContext) {
         var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 || it.have[8] > 0}.size
 
         mc.lm.messenger.log("INFO", "Glob", "Builder have: $counter Target:$qtyBuilder Deficit: ${qtyBuilder - counter}")
-
-        //if (Game.time % 1000 == 0)
-
 
         if (Game.time % 11 != 0) return
         for (room in mc.mainRoomCollector.rooms.values) room.constant.needBuilder = false
@@ -41,7 +45,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
 
         val rooms = mc.mainRoomCollector.rooms.values.filter {
             it.constant.defenceMinHits != 0
-                    && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
+                    && it.constant.defenceMinHits < getDefenceLimitUpgrade(it)
                     && it.have[10] == 0
                     && it.have[8] == 0
         }.sortedBy { this.getNormalizedHits(it) }
