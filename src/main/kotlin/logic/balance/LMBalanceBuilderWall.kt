@@ -26,7 +26,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
     fun setNeedBuilder() {
         val qtyBuilder = mc.lm.balancePrediction.getBuilder()
 
-        var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 }.size
+        var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 || it.have[8] > 0}.size
 
         mc.lm.messenger.log("INFO", "Glob", "Builder have: $counter Target:$qtyBuilder Deficit: ${qtyBuilder - counter}")
 
@@ -43,6 +43,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
             it.constant.defenceMinHits != 0
                     && it.constant.defenceMinHits < mc.constants.globalConstant.defenceLimitUpgrade
                     && it.have[10] == 0
+                    && it.have[8] == 0
         }.sortedBy { this.getNormalizedHits(it) }
 
         for (room in rooms) {

@@ -32,6 +32,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(6).useCash = false
     const.globalConstant.terminalPriorityRoom = "W5N3"
 
+    const.m(5).defenceMinHits = 100_000
     const.s(5,1).autoBuildRoad = true
 
     const.m(2).creepUseUpgraderAndBuilderFromMainRoom = true
@@ -44,7 +45,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 
     const.globalConstant.defenceLimitUpgrade = 10000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
-    const.globalConstant.balanceQtyBuilderDefault = 7
+    const.globalConstant.balanceQtyBuilderDefault = 0
     const.globalConstant.nukerFill = true
 
     const.globalConstant.username = "vsolo0"

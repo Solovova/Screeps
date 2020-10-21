@@ -51,7 +51,7 @@ fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "W4N3" && sr.name == "W3N5") {
         sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0 //colonizer
-        sr.need[0][1] = 3 //universal
+        sr.need[0][1] = 1 //universal
         sr.need[0][11] = 0 //mile defender
         sr.need[0][28] = 0 //controller attacker
     }

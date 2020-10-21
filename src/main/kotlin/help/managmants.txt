@@ -20,6 +20,9 @@
 //4) Progress room
 //terminalPriorityRoom = name of room
 
+//5) Defence room
+
+
 
 //    if (sr.mr.name == "W5N3" && sr.name == "W4N3") {
 //        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder

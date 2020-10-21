@@ -143,6 +143,7 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         //if (!isTask) isTask = this.takeFromContainer(3,creepCarry,mainContext,mainContext.dataclass.getMainRoom) //ToDo костиль
         //if (!isTask) isTask = this.transferToFilling(creepCarry, mainContext, mainContext.dataclass.getMainRoom) //ToDo костиль
         if (!isTask) isTask = this.buildStructure(creepCarry, mainContext, mainRoom)
+        if (!isTask) isTask = this.buildBigStructure(creepCarry, mainContext, mainRoom)
         //if (!isTask) isTask = this.transferToStorage(creepCarry,mainContext,mainContext.dataclass.getMainRoom) //ToDo костиль
     }
 
