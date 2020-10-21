@@ -112,6 +112,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Build to
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() < it.constant.energyBuilder
                     && it.constructionSite.isNotEmpty()
         }.minBy { it.getResource() }
@@ -120,6 +121,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Take max room resource, but priority lvl3
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() > (emergencyMineralQuantity + 20000)
                     && it.constructionSite.isEmpty()
                     && it.getResourceInTerminal() > 8000
@@ -141,6 +143,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Emergency to
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() < emergencyMineralQuantity
         }.minBy { it.getResource() }
                 ?: return
@@ -148,6 +151,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Take max room resource, but priority lvl3
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() > emergencyMineralQuantity
                     && it.getResourceInTerminal() > 8000
         }.maxBy {
@@ -165,6 +169,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyFrom3To2() {
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.constant.levelOfRoom == 2
                     && it.getResource() < (it.constant.energyUpgradeForce + 10000)
         }.minBy { it.getResource() }
@@ -172,6 +177,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom == 3
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResourceInTerminal() > 8000
                     && it.getResource() > (it.constant.energyUpgradeDefence + 20000)
         }.maxBy { it.getResource() }
@@ -187,17 +193,19 @@ class LMTerminal(val mainContext: MainContext) {
 
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.constant.levelOfRoom == 2
                     && it.name == mainContext.constants.globalConstant.terminalPriorityRoom
-                    && it.getResource() < (it.constant.energyUpgradeForce + 10000)
+                    && it.getResource() < (it.constant.energyUpgradeForce + 30000)
         }.minBy { it.getResource() }
                 ?: return
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
                     && it.getResourceInTerminal() > 8000
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.name != mainRoomTo.name
-                    && it.getResource() > (it.constant.energyBuilder + 20000)
+                    && it.getResource() > (it.constant.energyBuilder + 10000)
         }.maxBy { it.getResource() }
                 ?: return
 
@@ -207,6 +215,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyExcessSent() {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResourceInTerminal() > 8000
                     && it.getResource() > it.constant.energyExcessSent
         }.maxBy { it.getResource() }
@@ -215,6 +224,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Upgrade and less when energyUpgradeDefence
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && ((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
                     || it.getResource() < it.constant.energyUpgradeLvl8Controller)
                     && it.name != mainRoomFrom.name
@@ -227,6 +237,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyStorageFullSent() {
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResourceInTerminal() > 8000
                     && it.getResource() > 500_000
         }.maxBy { it.getResource() }
@@ -235,6 +246,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Upgrade and less when energyUpgradeDefence
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() < 450_000
                     && it.name != mainRoomFrom.name
         }.minBy { it.getResource() }
@@ -246,6 +258,7 @@ class LMTerminal(val mainContext: MainContext) {
     private fun terminalSentEnergyForWallUpgrader() {
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && ((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
                     || (it.constant.needUpgrader && it.getResource() < it.constant.energyUpgradeLvl8Controller))
                     && it.getLevelOfRoom() == 3
@@ -254,6 +267,7 @@ class LMTerminal(val mainContext: MainContext) {
 
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
+                    && it.structureTerminal[0]?.cooldown == 0
                     && it.getResource() > it.constant.energyExcessSent
                     && it.getLevelOfRoom() == 3
                     && !((it.constant.needBuilder && it.getResource() < it.constant.energyUpgradeDefence)
