@@ -8,30 +8,30 @@ import screeps.api.WORK
 
 fun AccountInitMain2.initHeadOut(const: Constants) {
     //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
-    const.initMainRoomConstantContainer(arrayOf("W5N3", "W4N3"))
+    const.initMainRoomConstantContainer(arrayOf("W5N3","W4N3","W6N3","W7N3","W7N4"))
 
-    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2"))                       //M0
+    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2","W7N5"))                       //M0
+    const.getMainRoomConstant("W4N3").initSlaveRoomConstantContainer(arrayOf("W4N2","W3N5"))                       //M0
 
 
 
 }
 
 fun AccountInitMain2.initBodyOut(const: Constants) {
-    //1) If not ready 8 room
-    //const.m(0).useCash = false
-    //red red - snapshot
-    //red blue - defence borders
-
-    //2) Slave room start
-    //const.s(0,0).autoBuildRoad = true
-
-    //3) Colonize room
-    //const.s(29,2).model = SlaveRoomType.Colonize
-    //const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53")
-    //const.m(33).creepUseUpgraderAndBuilderFromMainRoom = true
-
     const.m(0).useCash = false
     const.m(1).useCash = false
+    const.m(2).useCash = false
+    const.m(3).useCash = false
+    const.m(4).useCash = false
+
+
+    const.s(0,1).model = SlaveRoomType.Colonize
+    const.s(1,1).model = SlaveRoomType.Colonize
+
+    const.s(0,1).pathToRoom = arrayOf("W5N3","W6N3","W7N3","W7N4","W8N4","W8N5","W7N5")
+    const.s(1,1).pathToRoom = arrayOf("W4N3","W4N2","W5N2","W5N1","W4N1","W3N1","W3N2","W3N3","W2N3","W2N4","W2N5","W3N5")
+
+
 
     const.globalConstant.defenceLimitUpgrade = 10000000
     const.globalConstant.balanceQtyUpgraderDefault = 12

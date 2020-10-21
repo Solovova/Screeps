@@ -328,6 +328,8 @@ fun Creep.newTask(mainContext: MainContext): Boolean {
         if (!isTask) isTask = this.slaveGoToRoom(mainContext)
         if (!isTask) isTask = this.slaveAttack(mainContext, slaveRoom)
         if (!isTask) isTask = this.slaveAttackStructure(mainContext, slaveRoom)
+        //need find clear pos or set range
+        //if (!isTask) isTask = this.goToPoint(mainContext, RoomPosition(25,25,slaveRoom?.name ?: ""))
     }
 
     if (this.memory.role == 115 || this.memory.role == 1115) {

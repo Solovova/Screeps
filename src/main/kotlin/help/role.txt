@@ -1,0 +1,58 @@
+//Main
+// 0 - universal +
+// 1 - harvester source 0
+// 2 - transport source 0
+// 3 - harvester source 1
+// 4 - transport source 1
+// 5 - filler
+
+
+// 6 - transport upgrader
+// 7 - upgrader
+// 8 - builder
+// 9 - small filler
+//10 - big builder
+//11 - carrier to big builder
+//13 - small upgrader
+//14 - logist
+//15 - mineral extractor
+//16 - mineral carrier
+//17 - cleaner
+//18 - lab filler
+//19 - upgrader lvl 8
+
+//20 - manual defender mile
+//21 - manual defender range
+//22 - manual defender healer
+
+//30 - auto defender mile
+//31 - auto defender range
+
+
+
+
+//Slave
+// 0 - colonizer +
+// 1 - universal +
+// 2 - far carrier
+// 3 - reserve
+// 4 - explorer
+// 5 - harvester source 0
+// 6 - carrier source 0 -
+// 7 - harvester source 1
+// 8 - carrier source 1 -
+// 9 - builder
+//10 - defender ranged
+//11 - defender mile
+//17 - cleaner -
+model 2
+//15 - eraser
+//20 - harvester 0
+//21 - carrier harvester 0
+//22 - harvester 1
+//23 - carrier harvester 1
+//24 - harvester 2
+//25 - carrier harvester 2
+//26 - harvester mineral -
+//27 - carrier mineral -
+//28 - controller attacker
