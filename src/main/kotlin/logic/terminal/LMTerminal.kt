@@ -181,6 +181,10 @@ class LMTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentEnergyPriorityRoom() {
+        if (mainContext.constants.globalConstant.terminalPriorityRoom == "") {
+            return
+        }
+
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
                     && it.constant.levelOfRoom == 2

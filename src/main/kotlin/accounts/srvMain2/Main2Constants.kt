@@ -12,6 +12,11 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
 
     const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2"))                       //M0
     const.getMainRoomConstant("W4N3").initSlaveRoomConstantContainer(arrayOf("W4N2"))                       //M1
+    const.getMainRoomConstant("W6N3").initSlaveRoomConstantContainer(arrayOf())                       //M2
+    const.getMainRoomConstant("W7N3").initSlaveRoomConstantContainer(arrayOf("W8N3"))                       //M3
+    const.getMainRoomConstant("W7N4").initSlaveRoomConstantContainer(arrayOf())                       //M4
+    const.getMainRoomConstant("W7N5").initSlaveRoomConstantContainer(arrayOf())                       //M5
+    const.getMainRoomConstant("W3N5").initSlaveRoomConstantContainer(arrayOf())                       //M6
 
 
 
@@ -26,7 +31,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(5).useCash = false
     const.m(6).useCash = false
 
-
+    const.s(3,0).autoBuildRoad = true
 
 
 
