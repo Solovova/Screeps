@@ -2,6 +2,7 @@ package logic.messenger
 
 import mainContext.MainContext
 import mainContext.dataclass.SlaveRoomType
+import mainContext.mainRoomCollecror.mainRoom.slaveRoom.getSnapShot
 import screeps.api.*
 
 class LMMessenger(val mainContext: MainContext) {
@@ -88,6 +89,32 @@ class LMMessenger(val mainContext: MainContext) {
             }
     }
 
+    private fun showRoomSnapshotInfo() {
+        for (room in this.mainContext.mainRoomCollector.rooms.values){
+            if (Memory["snap"] == null || Memory["snap"][room.name] == null){
+                mainContext.lm.messenger.log("INFO", room.name, "Snapshot not present", COLOR_RED)
+            }else{
+                val snapShortNow: String = mainContext.lm.building.lmBuildingSnapShot.getSnapShot(room)
+                val snapShortWas: String = Memory["snap"][room.name] as String
+                if (snapShortNow != snapShortWas) {
+                    mainContext.lm.messenger.log("INFO", room.name, "Snapshot different", COLOR_YELLOW)
+                }
+            }
+
+            for (slaveRoom in room.slaveRooms.values) {
+                if (Memory["snap"] == null || Memory["snap"][slaveRoom.name] == null){
+                    mainContext.lm.messenger.log("INFO", room.name, "  " + slaveRoom.name + ": snapshot not present", COLOR_RED)
+                }else{
+                    val snapShortNow: String = slaveRoom.getSnapShot()
+                    val snapShortWas: String = Memory["snap"][slaveRoom.name] as String
+                    if (snapShortNow != snapShortWas) {
+                        mainContext.lm.messenger.log("INFO", room.name, "  " + slaveRoom.name + ": snapshot different", COLOR_YELLOW)
+                    }
+                }
+            }
+        }
+    }
+
     private fun showMineralInfo() {
         lmMessengerMineral.showInfo()
     }
@@ -104,5 +131,11 @@ class LMMessenger(val mainContext: MainContext) {
         this.showMessengerInfo()
         this.showMineralInfo()
         this.showMainRoomInfo()
+
+        if (mainContext.flags.firstOrNull{it.color == COLOR_RED && it.secondaryColor == COLOR_ORANGE} != null) {
+            mainContext.lm.messenger.log("INFO", "", "Start info snapshot _________________________________________", COLOR_YELLOW)
+            showRoomSnapshotInfo()
+            mainContext.lm.messenger.log("INFO", "", "End info snapshot _________________________________________", COLOR_YELLOW)
+        }
     }
 }

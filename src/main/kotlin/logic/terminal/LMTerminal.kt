@@ -9,11 +9,12 @@ import kotlin.math.max
 import kotlin.math.min
 
 class LMTerminal(val mainContext: MainContext) {
-    private val emergencyMineralQuantity = 50000
+    private val emergencyMineralQuantity = 30000
     private val sentQuantity = 5000
 
     fun transactions() {
         this.terminalSentEnergyEmergency()
+        this.terminalSentEnergyPriorityRoom()
         this.terminalSentEnergyForBuild()
         this.terminalSentMineral()
 
@@ -119,7 +120,7 @@ class LMTerminal(val mainContext: MainContext) {
         //Take max room resource, but priority lvl3
         val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.constant.levelOfRoom >= 2
-                    && it.getResource() > emergencyMineralQuantity
+                    && it.getResource() > (emergencyMineralQuantity + 20000)
                     && it.constructionSite.isEmpty()
                     && it.getResourceInTerminal() > 8000
                     && it.name != mainRoomTo.name
@@ -137,8 +138,6 @@ class LMTerminal(val mainContext: MainContext) {
     }
 
     private fun terminalSentEnergyEmergency() {
-        val emergencyMineralQuantity = 30000
-
         //Emergency to
         val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
             it.structureTerminal[0] != null
@@ -160,7 +159,6 @@ class LMTerminal(val mainContext: MainContext) {
         }
                 ?: return
 
-
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "Emergency")
     }
 
@@ -180,6 +178,26 @@ class LMTerminal(val mainContext: MainContext) {
                 ?: return
 
         this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "From3To2")
+    }
+
+    private fun terminalSentEnergyPriorityRoom() {
+        val mainRoomTo: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.structureTerminal[0] != null
+                    && it.constant.levelOfRoom == 2
+                    && it.name == mainContext.constants.globalConstant.terminalPriorityRoom
+                    && it.getResource() < (it.constant.energyUpgradeForce + 10000)
+        }.minBy { it.getResource() }
+                ?: return
+
+        val mainRoomFrom: MainRoom = mainContext.mainRoomCollector.rooms.values.filter {
+            it.constant.levelOfRoom >= 2
+                    && it.getResourceInTerminal() > 8000
+                    && it.name != mainRoomTo.name
+                    && it.getResource() > (it.constant.energyBuilder + 20000)
+        }.maxBy { it.getResource() }
+                ?: return
+
+        this.terminalSentFromTo(mainRoomFrom, mainRoomTo, "PriorityRoom")
     }
 
     private fun terminalSentEnergyExcessSent() {
