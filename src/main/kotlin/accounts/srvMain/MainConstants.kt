@@ -12,7 +12,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                       //M0
-    const.getMainRoomConstant("E59N36").initSlaveRoomConstantContainer(arrayOf("E58N36"))                                //M1
+    const.getMainRoomConstant("E59N36").initSlaveRoomConstantContainer(arrayOf("E58N36","E57N35"))                                //M1
     const.getMainRoomConstant("E52N38").initSlaveRoomConstantContainer(arrayOf())                                        //M2
     const.getMainRoomConstant("E52N37").initSlaveRoomConstantContainer(arrayOf())                                        //M3
     const.getMainRoomConstant("E54N39").initSlaveRoomConstantContainer(arrayOf("E54N38"))                                //M4
@@ -32,7 +32,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                        //M20
-    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                        //M21
+    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35","E53N34"))                                        //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43", "E59N43"))   //M22
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     const.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
@@ -60,8 +60,12 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     //const.m(33).creepUseUpgraderAndBuilderFromMainRoom = true
     //const.m(33).useCash = false
-    //const.s(17,2).model = SlaveRoomType.Colonize
+    //const.s(21,1).model = SlaveRoomType.Colonize
     //const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
+
+    const.s(1,1).model = SlaveRoomType.Colonize
+
+    const.s(21,1).model = SlaveRoomType.Colonize
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"

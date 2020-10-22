@@ -30,11 +30,20 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
 }
 
 fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
-    if (sr.mr.name == "E51N41" && sr.name == "E54N43") {
+    if (sr.mr.name == "E53N35" && sr.name == "E53N34") {
 
-        sr.constant.creepTypeRole101 = 3 //1-Universal, 2-Upgrader, 3-Builder
+        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
-        sr.need[0][1] = 2
+        sr.need[0][1] = 5
+        sr.need[0][11] = 0
+        sr.need[0][28] = 0
+    }
+
+    if (sr.mr.name == "E59N36" && sr.name == "E57N35") {
+
+        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
+        sr.need[0][0] = 0
+        sr.need[0][1] = 4
         sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
