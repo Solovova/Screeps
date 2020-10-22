@@ -43,8 +43,8 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 
     const.globalConstant.username = "vsolo0"
 
-    const.m(0).reactionActiveArr = arrayOf("ZK", "UL", "G")
-
+    const.m(0).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
+    const.m(1).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
