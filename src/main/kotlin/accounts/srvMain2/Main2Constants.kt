@@ -37,7 +37,6 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.s(6,0).autoBuildRoad = true
     const.s(6,1).autoBuildRoad = true
 
-    const.m(2).creepUseUpgraderAndBuilderFromMainRoom = true
     const.s(0,1).model = SlaveRoomType.Colonize
 
     const.globalConstant.defenceLimitUpgrade = 10000000
@@ -46,6 +45,9 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.nukerFill = true
 
     const.globalConstant.username = "vsolo0"
+
+    const.m(0).reactionActiveArr = arrayOf("ZK", "UL", "G")
+
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to

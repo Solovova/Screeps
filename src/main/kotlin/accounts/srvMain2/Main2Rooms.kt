@@ -36,6 +36,7 @@ fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
 //        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
 //        sr.need[0][0] = 0 //colonizer
 //        sr.need[0][1] = 4 //universal
+//        sr.need[0][2] = 4 //far carrier
 //        sr.need[0][11] = 0 //mile defender
 //        sr.need[0][28] = 0 //controller atacker
 //    }
@@ -43,7 +44,8 @@ fun AccountInitMain2.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "W5N3" && sr.name == "W6N3") {
         sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0 //colonizer
-        sr.need[0][1] = 4 //universal
+        sr.need[0][1] = 0 //universal
+        sr.need[0][2] = 2 //universal
         sr.need[0][11] = 0 //mile defender
         sr.need[0][28] = 0 //controller attacker
     }
