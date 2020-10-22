@@ -205,7 +205,7 @@ class LMTerminal(val mainContext: MainContext) {
                     && it.getResourceInTerminal() > 8000
                     && it.structureTerminal[0]?.cooldown == 0
                     && it.name != mainRoomTo.name
-                    && it.getResource() > (it.constant.energyBuilder + 10000)
+                    && it.getResource() > (it.constant.energyBuilder + 20000)
         }.maxBy { it.getResource() }
                 ?: return
 

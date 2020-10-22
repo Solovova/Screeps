@@ -30,12 +30,9 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W4N3"
+    const.globalConstant.terminalPriorityRoom = "W7N5"
 
     const.m(5).defenceLimitUpgrade = 1000000
-
-    const.s(6,0).autoBuildRoad = true
-    const.s(6,1).autoBuildRoad = true
 
     const.s(0,1).model = SlaveRoomType.Colonize
 

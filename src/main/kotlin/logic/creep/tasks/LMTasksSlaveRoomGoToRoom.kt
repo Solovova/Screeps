@@ -15,8 +15,6 @@ class LMTasksSlaveRoomGoToRoom(val mainContext: MainContext) {
     }
 
     fun goToRoom(creep: Creep, mainRoom: MainRoom) {
-        console.log("GoToRoom:" + creep.id)
-
         if (creep.pos.roomName == creep.memory.slaveRoom) return
 
         //Use flag in current room
