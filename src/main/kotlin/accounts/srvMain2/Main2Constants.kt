@@ -30,7 +30,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W5N3"
+    const.globalConstant.terminalPriorityRoom = "W4N3"
 
     const.m(5).defenceLimitUpgrade = 1000000
 
@@ -42,7 +42,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.defenceLimitUpgrade = 10000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
     const.globalConstant.balanceQtyBuilderDefault = 1
-    const.globalConstant.nukerFill = true
+    const.globalConstant.nukerFill = false
 
     const.globalConstant.username = "vsolo0"
 
