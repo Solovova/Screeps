@@ -10,7 +10,7 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
                                                //M0     M1     M2     M3     M4     M5     M6
     const.initMainRoomConstantContainer(arrayOf("W5N3","W4N3","W6N3","W7N3","W7N4","W7N5","W3N5"))
 
-    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2","W6N3"))          //M0
+    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2"))          //M0
     const.getMainRoomConstant("W4N3").initSlaveRoomConstantContainer(arrayOf("W4N2"))                 //M1
     const.getMainRoomConstant("W6N3").initSlaveRoomConstantContainer(arrayOf())                       //M2
     const.getMainRoomConstant("W7N3").initSlaveRoomConstantContainer(arrayOf("W8N3"))                 //M3
@@ -33,8 +33,6 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.terminalPriorityRoom = "W7N5"
 
     const.m(5).defenceLimitUpgrade = 1000000
-
-    const.s(0,1).model = SlaveRoomType.Colonize
 
     const.globalConstant.defenceLimitUpgrade = 10000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
