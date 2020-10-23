@@ -5,14 +5,16 @@ import mainContext.dataclass.SlaveRoomType
 import screeps.api.*
 
 fun AccountInitMain.initHeadOut(const: Constants) {
-    //M0       M1       M2       M3       M4       M5       M6       M7       M8       M9
-    const.initMainRoomConstantContainer(arrayOf("E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
+           //M0        M1        M2        M3        M4        M5        M6        M7        M8        M9
+    const.initMainRoomConstantContainer(arrayOf(
+            "E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
             "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35",
-            "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53", "E59N52", "E57N55", "E54N53", "E54N43"))
+            "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53",
+            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34"))
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                       //M0
-    const.getMainRoomConstant("E59N36").initSlaveRoomConstantContainer(arrayOf("E58N36","E57N35"))                                //M1
+    const.getMainRoomConstant("E59N36").initSlaveRoomConstantContainer(arrayOf("E58N36","E57N35","E57N34"))                                //M1
     const.getMainRoomConstant("E52N38").initSlaveRoomConstantContainer(arrayOf())                                        //M2
     const.getMainRoomConstant("E52N37").initSlaveRoomConstantContainer(arrayOf())                                        //M3
     const.getMainRoomConstant("E54N39").initSlaveRoomConstantContainer(arrayOf("E54N38"))                                //M4
@@ -63,7 +65,10 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(21,1).model = SlaveRoomType.Colonize
     //const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
 
+    const.m(34).useCash = false
     const.s(1,1).model = SlaveRoomType.Colonize
+
+    const.s(1,2).model = SlaveRoomType.Colonize
 
     const.s(21,1).model = SlaveRoomType.Colonize
 
