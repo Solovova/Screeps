@@ -30,7 +30,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W7N5"
+    const.globalConstant.terminalPriorityRoom = "W5N3"
 
     const.m(5).defenceLimitUpgrade = 1000000
 
@@ -43,6 +43,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 
     const.m(0).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
     const.m(1).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
+    const.m(5).reactionActiveArr = arrayOf("LH", "LH2O", "GH2O", "XGH2O")
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
@@ -56,7 +57,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(2000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH".unsafeCast<ResourceConstant>())
                     )
