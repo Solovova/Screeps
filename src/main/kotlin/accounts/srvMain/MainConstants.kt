@@ -74,7 +74,10 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.s(1,2).model = SlaveRoomType.Colonize
 
     const.s(21,1).model = SlaveRoomType.Colonize
+    const.m(34).creepUseUpgraderAndBuilderFromMainRoom = true
+
     const.s(33,2).model = SlaveRoomType.Colonize
+
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
