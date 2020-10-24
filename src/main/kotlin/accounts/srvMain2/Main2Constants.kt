@@ -30,7 +30,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W6N3"
+    const.globalConstant.terminalPriorityRoom = ""
 
     const.s(0,2).model = SlaveRoomType.Colonize
 
