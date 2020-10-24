@@ -10,7 +10,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
             "E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
             "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35",
             "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53",
-            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34"))
+            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34", "E57N35"))
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                       //M0
@@ -46,9 +46,9 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf()) //30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54")) //32
-    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44")) //33
-
-
+    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44","E55N43")) //33
+    const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf("E52N34")) //34
+    const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf()) //35
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
@@ -66,11 +66,15 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
 
     const.m(34).useCash = false
+    const.s(34,0).autoBuildRoad = true
+    const.m(35).useCash = false
+
     const.s(1,1).model = SlaveRoomType.Colonize
 
     const.s(1,2).model = SlaveRoomType.Colonize
 
     const.s(21,1).model = SlaveRoomType.Colonize
+    const.s(33,2).model = SlaveRoomType.Colonize
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
