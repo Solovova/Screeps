@@ -57,7 +57,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(2000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH".unsafeCast<ResourceConstant>())
                     )
