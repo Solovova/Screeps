@@ -10,7 +10,7 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
                                                //M0     M1     M2     M3     M4     M5     M6
     const.initMainRoomConstantContainer(arrayOf("W5N3","W4N3","W6N3","W7N3","W7N4","W7N5","W3N5"))
 
-    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2"))          //M0
+    const.getMainRoomConstant("W5N3").initSlaveRoomConstantContainer(arrayOf("W5N2","W5N4","W6N4"))          //M0
     const.getMainRoomConstant("W4N3").initSlaveRoomConstantContainer(arrayOf("W4N2"))                 //M1
     const.getMainRoomConstant("W6N3").initSlaveRoomConstantContainer(arrayOf())                       //M2
     const.getMainRoomConstant("W7N3").initSlaveRoomConstantContainer(arrayOf("W8N3"))                 //M3
@@ -30,7 +30,9 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W5N3"
+    const.globalConstant.terminalPriorityRoom = "W6N3"
+
+    const.s(0,2).model = SlaveRoomType.Colonize
 
     const.m(5).defenceLimitUpgrade = 1000000
 
@@ -43,7 +45,11 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 
     const.m(0).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
     const.m(1).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
-    const.m(5).reactionActiveArr = arrayOf("LH", "LH2O", "GH2O", "XGH2O")
+    const.m(2).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
+    const.m(3).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
+    const.m(4).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
+    const.m(5).reactionActiveArr = arrayOf("LH", "LH2O", "XLH2O", "GH2O", "XGH2O")
+    const.m(6).reactionActiveArr = arrayOf("ZK", "UL", "G", "GH", "OH", "GH2O", "XGH2O")
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
