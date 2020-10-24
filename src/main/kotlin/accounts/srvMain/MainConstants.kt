@@ -47,7 +47,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55")) //31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54")) //32
     const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44","E55N43")) //33
-    const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf("E52N34")) //34
+    const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf()) //34
     const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf()) //35
 }
 
@@ -66,7 +66,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.s(17,2).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
 
     const.m(34).useCash = false
-    const.s(34,0).autoBuildRoad = true
+    //const.s(34,0).autoBuildRoad = true
     const.m(35).useCash = false
 
     const.s(1,1).model = SlaveRoomType.Colonize
