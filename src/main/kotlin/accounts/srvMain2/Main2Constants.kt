@@ -23,20 +23,20 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain2.initBodyOut(const: Constants) {
-    const.m(0).useCash = false
-    const.m(1).useCash = false
-    const.m(2).useCash = false
+//    const.m(0).useCash = false
+//    const.m(1).useCash = false
+//    const.m(2).useCash = false
     const.m(3).useCash = false
     const.m(4).useCash = false
-    const.m(5).useCash = false
-    const.m(6).useCash = false
+//    const.m(5).useCash = false
+//    const.m(6).useCash = false
     const.globalConstant.terminalPriorityRoom = ""
 
     const.s(0,2).model = SlaveRoomType.Colonize
 
-    const.globalConstant.defenceLimitUpgrade = 17000000
-    const.globalConstant.balanceQtyUpgraderDefault = 12
-    const.globalConstant.balanceQtyBuilderDefault = 1
+    const.globalConstant.defenceLimitUpgrade = 1000000
+    const.globalConstant.balanceQtyUpgraderDefault = 7 //lvl3Room + lvl2Room*5 - max
+    const.globalConstant.balanceQtyBuilderDefault = 2   //(lvl3Room + lvl2Room) / 3 - min
     const.globalConstant.nukerFill = false
 
     const.globalConstant.username = "vsolo0"

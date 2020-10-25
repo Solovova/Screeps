@@ -39,7 +39,7 @@ fun SlaveRoom.correctionDangeon() {
             this.need[0][4] = 1
             //this.need[1][15] = 2
         } else {
-            if (this.constant.roomHostileNum > 1) {
+            if (this.constant.roomHostileNum >= 1) {
                 if (this.room == null) this.need[0][4] = 1
             }
         }

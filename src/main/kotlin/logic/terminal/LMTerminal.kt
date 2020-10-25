@@ -171,7 +171,7 @@ class LMTerminal(val mainContext: MainContext) {
             it.structureTerminal[0] != null
                     && it.structureTerminal[0]?.cooldown == 0
                     && it.constant.levelOfRoom == 2
-                    && it.getResource() < (it.constant.energyUpgradeForce + 10000)
+                    && it.getResource() < (it.constant.energyUpgradeForce + 30000)
         }.minBy { it.getResource() }
                 ?: return
 
