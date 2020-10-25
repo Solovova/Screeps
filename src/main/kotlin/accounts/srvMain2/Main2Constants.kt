@@ -15,8 +15,8 @@ fun AccountInitMain2.initHeadOut(const: Constants) {
     const.getMainRoomConstant("W6N3").initSlaveRoomConstantContainer(arrayOf("W6N4"))                 //M2
     const.getMainRoomConstant("W7N3").initSlaveRoomConstantContainer(arrayOf("W8N3"))                 //M3
     const.getMainRoomConstant("W7N4").initSlaveRoomConstantContainer(arrayOf("W8N4"))                 //M4
-    const.getMainRoomConstant("W7N5").initSlaveRoomConstantContainer(arrayOf("W8N5","W7N6"))          //M5
-    const.getMainRoomConstant("W3N5").initSlaveRoomConstantContainer(arrayOf("W2N5","W3N6"))          //M6
+    const.getMainRoomConstant("W7N5").initSlaveRoomConstantContainer(arrayOf("W8N5","W7N6","W6N5"))   //M5
+    const.getMainRoomConstant("W3N5").initSlaveRoomConstantContainer(arrayOf("W2N5","W3N6","W4N5"))   //M6
 
 
 
@@ -30,11 +30,9 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.m(4).useCash = false
     const.m(5).useCash = false
     const.m(6).useCash = false
-    const.globalConstant.terminalPriorityRoom = "W3N5"
+    const.globalConstant.terminalPriorityRoom = ""
 
     const.s(0,2).model = SlaveRoomType.Colonize
-
-    const.m(5).defenceLimitUpgrade = 1000000
 
     const.globalConstant.defenceLimitUpgrade = 17000000
     const.globalConstant.balanceQtyUpgraderDefault = 12
@@ -63,7 +61,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(10000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(2000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH".unsafeCast<ResourceConstant>())
                     )
