@@ -1,5 +1,6 @@
 package logic.defence
 
+import mainContext.MainContext
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.StructureStorage
@@ -149,6 +150,21 @@ class LMMainRoomDefenceArea() {
 
         cpuStartMCStart = Game.cpu.getUsed() - cpuStartMCStart
         console.log("Defence area: $result  cpu: $cpuStartMCStart")
+    }
+
+    fun clearAllDefArea(mc: MainContext) {
+        for (room in mc.mainRoomCollector.rooms.values) {
+            room.constant.autoDefenceAreaMatrix = Array(1) { Array(1) { 0 } }
+            room.constant.autoDefenceArea = -1
+        }
+    }
+
+    fun calculateAllDefArea(mc: MainContext) {
+        for (room in mc.mainRoomCollector.rooms.values) {
+            if (room.constant.autoDefenceArea == -1) {
+                mc.lm.defence.lmMainRoomDefenceArea.calculate(room)
+            }
+        }
     }
 
     private fun codeMatrix(matrixArea : Array<Array<Int>>):String {

@@ -88,6 +88,9 @@ class MainContext {
         this.mainRoomCollector.runInEndOfTick()
         lm.terminal.transactions()
 
+        //this.lm.defence.lmMainRoomDefenceArea.clearAllDefArea(this)
+        //this.lm.defence.lmMainRoomDefenceArea.calculateAllDefArea(this)
+
         this.lm.cash.mr.saveToCash()
         this.tasks.toMemory()
         this.constants.toMemory()
