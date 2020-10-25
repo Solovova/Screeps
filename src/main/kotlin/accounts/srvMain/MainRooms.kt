@@ -46,7 +46,7 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
         sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
         sr.need[0][1] = 0
-        sr.need[0][2] = 1 //far carrier
+        sr.need[0][2] = 2 //far carrier
         sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
@@ -64,9 +64,9 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
 
         sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
-        sr.need[0][1] = 4
-        sr.need[0][2] = 0 //far carrier
-        sr.need[0][11] = 1
+        sr.need[0][1] = 0
+        sr.need[0][2] = 2 //far carrier
+        sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
 
