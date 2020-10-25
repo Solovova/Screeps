@@ -24,7 +24,7 @@
 // 4 COLOR_CYAN      - restore snapshot of room only Wall and Ramparts
 // 5 COLOR_GREEN     - restore snapshot of room all
 // 6 COLOR_YELLOW    - do not restore snapshot for this room
-// 7 COLOR_ORANGE    - Test snapshots ToDo
+// 7 COLOR_ORANGE    - Test snapshots
 // 8 COLOR_BROWN
 // 9 COLOR_GREY      - logic develop for mainContext.dataclass.getMainRoom
 //10 COLOR_WHITE     - ignore this position
