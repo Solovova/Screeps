@@ -76,8 +76,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(35).creepUseUpgraderAndBuilderFromMainRoom = true //"E57N35"
 
     const.s(1,2).model = SlaveRoomType.Colonize
-    const.m(37).creepSpawn = false
-    //const.m(37).creepUseUpgraderAndBuilderFromMainRoom = true //"E57N34"
+    //const.m(37).creepSpawn = false
+    const.m(37).creepUseUpgraderAndBuilderFromMainRoom = true //"E57N34"
 
     const.s(33,2).model = SlaveRoomType.Colonize
     const.m(36).creepUseUpgraderAndBuilderFromMainRoom = true //"E55N43"
@@ -133,7 +133,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
 
     const.globalConstant.username = "SoloVova"
-    const.globalConstant.balanceQtyUpgraderDefault = 32+6
+    const.globalConstant.balanceQtyUpgraderDefault = 36
     const.globalConstant.balanceQtyBuilderDefault = 4
 
 

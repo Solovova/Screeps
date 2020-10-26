@@ -60,7 +60,7 @@ class LMDirectControl(val mc: MainContext) {
         }
         if (flagsRedPurple.isNotEmpty()) {
             for (flag in flagsRedPurple) {
-                var count = 6
+//                var count = 6
 //                for (mrt in mc.mainRoomCollector.rooms.values) {
 //                    if (LMBuildingAutoRampart().buildAllNeed(mrt, false)) count--
 //                    if (count<=0) break
@@ -80,6 +80,7 @@ class LMDirectControl(val mc: MainContext) {
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRoads(mr)
                 //mc.lm.lmDirectControl.lmDirectFunctions.flagsDelete()
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRamparts(mr)
+                LMBuildingAutoRampart().buildAllNeed(mr, false)
             }
 
 
