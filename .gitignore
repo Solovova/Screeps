@@ -5,3 +5,4 @@ build/
 gradle.properties
 /gradle/wrapper/
 /.idea/
+/src/main/~$screeps.xlsx

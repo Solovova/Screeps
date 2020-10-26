@@ -31,6 +31,11 @@ class MainRoomCollector(private val mc: MainContext, names: Array<String>) {
 
     fun creepsCalculate() {
         for (creep in Game.creeps.values) {
+//            if (creep.memory.slaveRoom == "W6N3" && creep.memory.role == 111) {
+//                creep.suicide()
+//                continue
+//            }
+
             if (creep.memory.tickDeath != 0
                     && creep.ticksToLive < creep.memory.tickDeath
                     && creep.store.toMap().map { it.value }.sum() == 0

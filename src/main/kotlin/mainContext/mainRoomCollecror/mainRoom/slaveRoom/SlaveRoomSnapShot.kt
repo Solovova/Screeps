@@ -3,19 +3,24 @@ package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 import mainContext.dataclass.RecordOfStructurePosition
 import screeps.api.*
 
-fun SlaveRoom.doSnapShot() {
-    if (this.room == null) return
+fun SlaveRoom.getSnapShot(): String {
+    if (this.room == null) return ""
     val structures = this.room.find(FIND_STRUCTURES)
     val flagsIgnore = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_WHITE }
     val structureFiltered = structures.filter {
         for (flag in flagsIgnore)
             if (it.pos.roomName == flag.pos.roomName && it.pos.x == flag.pos.x && it.pos.y == flag.pos.y)
-            return@filter false
+                return@filter false
         return@filter true
     }.toTypedArray()
     for (flag in flagsIgnore) flag.remove()
+    return mc.lm.building.lmBuildingSnapShot.snapshotSerialize(structureFiltered)
+}
+
+fun SlaveRoom.doSnapShot() {
+    if (this.room == null) return
     if (Memory["snap"] == null) Memory["snap"] = object {}
-    Memory["snap"][this.name] = mc.lm.building.lmBuildingSnapShot.snapshotSerialize(structureFiltered)
+    Memory["snap"][this.name] = getSnapShot()
 }
 
 fun SlaveRoom.restoreSnapShot(){

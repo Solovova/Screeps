@@ -1,0 +1,33 @@
+//1) If not ready 8 room
+//const.m(0).useCash = false
+//red red - snapshot
+//red blue - defence borders
+
+//2) Slave room start
+//const.s(0,0).autoBuildRoad = true
+
+//3) Colonize room
+//const.s(29,2).model = SlaveRoomType.Colonize
+//const.s(29,2).pathToRoom= arrayOf("E55N53","E55N52","E54N52","E54N53") if empty use default way, 0 - mainRoom, last - slaveRoom
+//const.m(33).creepUseUpgraderAndBuilderFromMainRoom = true
+
+//const.s(0,1).pathUseGlobalGuideFlag = true Grey Grey
+//3.1) Clear invader
+//use
+//        sr.need[0][11] = 0 //mile defender
+//        sr.need[0][28] = 0 //controller atacker
+
+//4) Progress room
+//terminalPriorityRoom = name of room
+
+//5) Defence room
+
+
+
+//    if (sr.mr.name == "W5N3" && sr.name == "W4N3") {
+//        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
+//        sr.need[0][0] = 0 //colonizer
+//        sr.need[0][1] = 4 //universal
+//        sr.need[0][11] = 0 //mile defender
+//        sr.need[0][28] = 0 //controller atacker
+//    }

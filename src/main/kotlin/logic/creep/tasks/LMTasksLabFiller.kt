@@ -79,10 +79,10 @@ class LMTasksLabFiller(val mc: MainContext) {
 
     private fun resourceForReactionsToLab(creep: Creep, terminal: StructureTerminal,lab: StructureLab,resLab: Pair<ResourceConstant, Int>):CreepTask? {
         var quantityTransfer: Int = lab.store.getFreeCapacity(resLab.first) ?: 0
-        if (quantityTransfer < creep.store.getCapacity()) return null
-        quantityTransfer = min(quantityTransfer,creep.store.getCapacity())
+        if (quantityTransfer < (creep.store.getCapacity() ?: 0)) return null
+        quantityTransfer = min(quantityTransfer,(creep.store.getCapacity() ?: 0))
         return CreepTask(TypeOfTask.Transport, terminal.id, terminal.pos, lab.id, lab.pos,
-                resource = resLab.first, quantity = min(quantityTransfer,creep.store.getCapacity()))
+                resource = resLab.first, quantity = min(quantityTransfer,(creep.store.getCapacity() ?: 0)))
     }
 
 

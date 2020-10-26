@@ -52,7 +52,7 @@ class LMDirectFunctions(val mc: MainContext) {
 
     }
 
-    fun deleteRoadsSC(mainRoom: MainRoom) {
+    fun deleteRoadsConstructionSites(mainRoom: MainRoom) {
         val cs:Array<ConstructionSite>? = Game.rooms[mainRoom.name]?.find(FIND_CONSTRUCTION_SITES)
 
 

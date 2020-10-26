@@ -57,6 +57,11 @@ fun MainRoom.needCorrection1() {
         this.need[1][8] = 2
     }
 
+    if (this.constant.needBuilder
+            && (this.getResource() > this.constant.energyBuilder)) {
+        this.need[1][8] = 1
+    }
+
     if (this.constant.creepUseUpgraderAndBuilderFromMainRoom) {
         this.need[1][7] = 0
         this.need[2][7] = 0

@@ -130,7 +130,9 @@ class LMBalancePrediction(val mc: MainContext) {
 
         var qtyBuilder = mc.constants.globalConstant.balanceQtyBuilderDefault
 
-        if (mineralsNeed<-1500000) {
+        val qtyLvl8Room = mc.mainRoomCollector.rooms.values.filter { it.constant.levelOfRoom == 3 }.size
+
+        if (mineralsNeed<-40000*qtyLvl8Room) {
             qtyBuilder += 16
         }
 

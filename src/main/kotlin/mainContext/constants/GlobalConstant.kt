@@ -48,6 +48,9 @@ class GlobalConstant(val constants: Constants) {
 
     var defenceLimitUpgrade: Int = 17_000_000
 
+    //Terminal
+    var terminalPriorityRoom: String = "" //If level of room not 8 sent mineral to this room
+
     init {
         constants.mainContext.lm.production.lmMineralSetGlobalConstant.setConstant(this)
     }

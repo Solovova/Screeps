@@ -50,10 +50,14 @@ class LMBuildingSnapShot (val mc:MainContext) {
         return result
     }
 
-    fun doSnapShot(mainRoom: MainRoom) {
+    fun getSnapShot(mainRoom: MainRoom): String {
         val structures = mainRoom.room.find(FIND_STRUCTURES)
+        return snapshotSerialize(structures)
+    }
+
+    fun doSnapShot(mainRoom: MainRoom) {
         if (Memory["snap"] == null) Memory["snap"] = object {}
-        Memory["snap"][mainRoom.name] = snapshotSerialize(structures)
+        Memory["snap"][mainRoom.name] = getSnapShot(mainRoom)
     }
 
     fun restoreSnapShot(mainRoom: MainRoom){
