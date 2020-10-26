@@ -26,15 +26,15 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
 //    const.m(0).useCash = false
 //    const.m(1).useCash = false
 //    const.m(2).useCash = false
-    const.m(3).useCash = false
-    const.m(4).useCash = false
+//    const.m(3).useCash = false
+//    const.m(4).useCash = false
 //    const.m(5).useCash = false
 //    const.m(6).useCash = false
     const.globalConstant.terminalPriorityRoom = ""
 
-    const.s(0,2).model = SlaveRoomType.Colonize
+    //const.s(0,2).model = SlaveRoomType.Colonize
 
-    const.globalConstant.defenceLimitUpgrade = 1000000
+    const.globalConstant.defenceLimitUpgrade = 17000000
     const.globalConstant.balanceQtyUpgraderDefault = 7 //lvl3Room + lvl2Room*5 - max
     const.globalConstant.balanceQtyBuilderDefault = 2   //(lvl3Room + lvl2Room) / 3 - min
     const.globalConstant.nukerFill = false
@@ -61,7 +61,7 @@ fun AccountInitMain2.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[7] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(2000, "XGH2O".unsafeCast<ResourceConstant>()),
+                            Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH2O".unsafeCast<ResourceConstant>()),
                             Pair(300000, "GH".unsafeCast<ResourceConstant>())
                     )
