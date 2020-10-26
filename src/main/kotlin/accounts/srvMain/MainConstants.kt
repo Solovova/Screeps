@@ -10,7 +10,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
             "E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
             "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35",
             "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53",
-            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34", "E57N35", "E55N43"))
+            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34", "E57N35", "E55N43", "E57N34"))
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                       //M0
@@ -34,7 +34,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                        //M20
-    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35","E53N34"))                                        //M21
+    const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                        //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43", "E59N43"))   //M22
     const.getMainRoomConstant("E58N44").initSlaveRoomConstantContainer(arrayOf("E57N44"))                                        //M23
     const.getMainRoomConstant("E58N45").initSlaveRoomConstantContainer(arrayOf("E59N45"))                                        //M24
@@ -49,6 +49,8 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44","E55N43")) //33
     const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf()) //34
     const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf()) //35
+    const.getMainRoomConstant("E55N43").initSlaveRoomConstantContainer(arrayOf()) //36
+    const.getMainRoomConstant("E57N34").initSlaveRoomConstantContainer(arrayOf()) //37
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
@@ -68,15 +70,19 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(34).useCash = false
     const.m(35).useCash = false
     const.m(36).useCash = false
+    const.m(37).useCash = false
 
     const.s(1,1).model = SlaveRoomType.Colonize
+    const.m(35).creepUseUpgraderAndBuilderFromMainRoom = true //"E57N35"
 
     const.s(1,2).model = SlaveRoomType.Colonize
-
-    const.s(21,1).model = SlaveRoomType.Colonize
-    const.m(34).creepUseUpgraderAndBuilderFromMainRoom = true
+    const.m(37).creepSpawn = false
+    //const.m(37).creepUseUpgraderAndBuilderFromMainRoom = true //"E57N34"
 
     const.s(33,2).model = SlaveRoomType.Colonize
+    const.m(36).creepUseUpgraderAndBuilderFromMainRoom = true //"E55N43"
+
+
 
 
     const.m(0).reactionActive = "GH2O"
