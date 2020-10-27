@@ -35,8 +35,7 @@ class GlobalConstant(val constants: Constants) {
 
 
     //Market
-    val marketMinCreditForOpenBuyOrder: Double = 100000.0
-    val marketBuyPriceEnergy = 0.052 //ToDo auto calculate
+    val marketMinCreditForOpenBuyOrder: Double = 10000000.0
 
     //INFO
     val showProfitWhenLessWhen: Int = 6000

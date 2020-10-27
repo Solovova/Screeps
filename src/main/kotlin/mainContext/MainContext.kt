@@ -37,7 +37,10 @@ class MainContext {
 
         lm.production.mineralFillCash.fill()
         lm.nuker.lmNukerNeedMineral.fill()
+
         lm.production.lmMineralFillData.fill()
+        lm.production.lmMineralFillData.fillPrices()
+
         lm.production.lmMineralFillProduction.fill()
 
         this.constants.accountInit.initTuning(this)

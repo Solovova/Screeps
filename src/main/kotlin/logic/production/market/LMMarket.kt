@@ -10,7 +10,45 @@ import screeps.utils.toMap
 import kotlin.math.max
 import kotlin.math.min
 
-class LMMarket (val mc:MainContext) {
+class LMMarket(val mc: MainContext) {
+    fun getEnergyPrice(): Double {
+        val result = mc.mineralData[RESOURCE_ENERGY]?.avgBuyPrice ?: 0.0
+        return if (result == 0.0) 0.100 else result
+    }
+
+    fun getAverageBuyPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY): Double {
+        if (mc.constants.mainRooms.isEmpty()) return 0.0
+        val marketSell = getSellOrdersSorted(resourceConstant, mc.constants.mainRooms[0])
+        val averageQuantityMax = 30000
+        var averageQuantity = 0
+        var averageSum = 0.0
+        for (record in marketSell) {
+            averageQuantity += record.order.amount
+            averageSum += record.realPrice * record.order.amount
+            if (averageQuantity > averageQuantityMax) {
+                break
+            }
+        }
+        return if (averageQuantity == 0) 0.0 else averageSum / averageQuantity
+    }
+
+    fun getAverageSellPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY): Double {
+        if (mc.constants.mainRooms.isEmpty()) return 0.0
+        val marketSell = getBuyOrdersSorted(resourceConstant, mc.constants.mainRooms[0])
+        val averageQuantityMax = 30000
+        var averageQuantity = 0
+        var averageSum = 0.0
+        for (record in marketSell) {
+            averageQuantity += record.order.amount
+            averageSum += record.realPrice * record.order.amount
+            if (averageQuantity > averageQuantityMax) {
+                break
+            }
+        }
+        return if (averageQuantity == 0) 0.0 else averageSum / averageQuantity
+    }
+
+
     fun showSellOrdersRealPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY) {
         if (mc.constants.mainRooms.isEmpty()) return
         val marketSell = getSellOrdersSorted(resourceConstant, mc.constants.mainRooms[0])
@@ -28,7 +66,7 @@ class LMMarket (val mc:MainContext) {
 
         console.log("Buy orders $resourceConstant}")
         for ((count, record) in marketSell.withIndex()) {
-            if (count>showRows) break
+            if (count > showRows) break
             val strPrice = record.order.price.asDynamic().toFixed(3).toString().padEnd(6)
             val strRealPrice = record.realPrice.asDynamic().toFixed(3).toString().padEnd(6)
             console.log("id: ${record.order.id} price: $strPrice real price: $strRealPrice  quantity:${record.order.remainingAmount}")
@@ -36,8 +74,7 @@ class LMMarket (val mc:MainContext) {
     }
 
     private fun getSellOrdersSorted(sellMineral: ResourceConstant, roomName: String): List<OrderRecord> {
-
-        val buyPriceEnergy = mc.constants.globalConstant.marketBuyPriceEnergy
+        val buyPriceEnergy = getEnergyPrice()
         val result: MutableList<OrderRecord> = mutableListOf()
 
         val orders = Game.market.getAllOrders().filter {
@@ -56,7 +93,7 @@ class LMMarket (val mc:MainContext) {
 
     private fun getBuyOrdersSorted(sellMineral: ResourceConstant, roomName: String): List<OrderRecord> {
 
-        val buyPriceEnergy = mc.constants.globalConstant.marketBuyPriceEnergy
+        val buyPriceEnergy = getEnergyPrice()
         val result: MutableList<OrderRecord> = mutableListOf()
 
         val orders = Game.market.getAllOrders().filter {
@@ -103,10 +140,10 @@ class LMMarket (val mc:MainContext) {
             if (sumQuantity > quantitySkip) break
         }
 
-        val myOrderPrice:Double = if (sellOrder == null) {
+        val myOrderPrice: Double = if (sellOrder == null) {
             mineralDataRecord.priceMax
-        }else{
-            max(mineralDataRecord.priceMin, sellOrder.price )//-0.001
+        } else {
+            max(mineralDataRecord.priceMin, sellOrder.price)//-0.001
         }
 
 
@@ -146,14 +183,15 @@ class LMMarket (val mc:MainContext) {
             if (sumQuantity > quantitySkip) break
         }
 
-        return  if (buyOrder == null) {
+        return if (buyOrder == null) {
             mineralDataRecord.priceMin
-        }else{
+        } else {
             min(mineralDataRecord.priceMax, buyOrder.price + 0.001)
         }
     }
 
     private fun buyOrderCreate(resource: ResourceConstant, mineralDataRecord: MineralDataRecord): Double? {
+        if (Game.market.credits < mc.constants.globalConstant.marketMinCreditForOpenBuyOrder) return null
         if (mineralDataRecord.quantity > mineralDataRecord.marketBuyLack) return null
         val myOrderPrice: Double = getBuyPrice(resource, mineralDataRecord)
         val quantityOrderAmount = 10000
@@ -187,7 +225,7 @@ class LMMarket (val mc:MainContext) {
         if (order.realPrice > minPrice) Game.market.deal(order.order.id, min(order.order.amount, 5000), mainRoomForSale.name)
     }
 
-    private fun buyDirect(resource: ResourceConstant, mineralDataRecord: MineralDataRecord):Boolean {
+    private fun buyDirect(resource: ResourceConstant, mineralDataRecord: MineralDataRecord): Boolean {
         if (mineralDataRecord.quantity > mineralDataRecord.marketSellExcess) return false
         if (mineralDataRecord.quantity > mineralDataRecord.storeMax) return false
         val mainRoomForBuyName: String = mineralDataRecord.buyToRoom
@@ -212,12 +250,13 @@ class LMMarket (val mc:MainContext) {
                 //if (minPrice != null) this.mineralSellDirect(resource, mineralDataRecord, minPrice)
             }
 
+            if (Game.market.credits > mc.constants.globalConstant.marketMinCreditForOpenBuyOrder) {
+                if (mineralDataRecord.quantity < (mineralDataRecord.marketBuyLack - 10000)) {
+                    buyDirect(resource, mineralDataRecord)
+                }
 
-            if (mineralDataRecord.quantity < mineralDataRecord.marketBuyLack
-                    && Game.market.credits > 200000.0) {
-
-                if (!buyDirect(resource,mineralDataRecord)) {
-                    buyOrderCreate(resource,mineralDataRecord)
+                if (mineralDataRecord.quantity < mineralDataRecord.marketBuyLack) {
+                    buyOrderCreate(resource, mineralDataRecord) //ToDo Create if buyDirect price > orderPrice
                 }
             }
         }

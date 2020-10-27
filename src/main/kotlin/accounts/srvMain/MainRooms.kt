@@ -33,33 +33,22 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
     if (sr.mr.name == "E59N36" && sr.name == "E57N34") {
         sr.constant.creepTypeRole101 = 2 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
-        sr.need[0][1] = 3
+        sr.need[0][1] = 2
         sr.need[0][2] = 3 //far carrier
         sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
 
     if (sr.mr.name == "E59N36" && sr.name == "E57N35") {
-
         sr.constant.creepTypeRole101 = 2 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
         sr.need[0][1] = 3
-        sr.need[0][2] = 3 //far carrier
-        sr.need[0][11] = 0
-        sr.need[0][28] = 0
-    }
-
-    if (sr.mr.name == "E59N36" && sr.name == "E57N34") {
-
-        sr.constant.creepTypeRole101 = 1 //1-Universal, 2-Upgrader, 3-Builder
-        sr.need[0][0] = 0
-        sr.need[0][1] = 2
+        sr.need[0][2] = 4 //far carrier
         sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
 
     if (sr.mr.name == "E54N43" && sr.name == "E55N43") { //33,2
-
         sr.constant.creepTypeRole101 = 2 //1-Universal, 2-Upgrader, 3-Builder
         sr.need[0][0] = 0
         sr.need[0][1] = 3
@@ -67,15 +56,4 @@ fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
         sr.need[0][11] = 0
         sr.need[0][28] = 0
     }
-
-//
-//    if (sr.mr.name == "E56N53" && sr.name == "E55N53") {
-//        sr.need[0][0] = 0
-//        sr.need[0][1] = 5
-//    }
-//
-//
-//    if (sr.mr.name == "E57N51" && sr.name == "E58N51") {
-//        sr.need[0][11] = 1
-//    }
 }

@@ -16,7 +16,11 @@ class MineralDataRecord(var quantity: Int = 0,
                         //Production and harvesting
                         var storeMax: Int = 0,  //production control if stored>storeMax stop produce and harvest
                         var balancingStart: Int = 50000, //Use in reactionActiveArr
-                        var balancingStop: Int = 100000
+                        var balancingStop: Int = 100000,
+
+                        var avgBuyPrice: Double = 0.0,
+                        var avgSellPrice: Double = 0.0
+
 )
 
 //Sell algorithm

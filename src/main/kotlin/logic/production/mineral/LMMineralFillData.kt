@@ -4,6 +4,7 @@ import mainContext.MainContext
 import mainContext.dataclass.MineralDataRecord
 import mainContext.dataclass.RESOURCES_ALL
 import screeps.api.RESOURCE_ENERGY
+import screeps.api.ResourceConstant
 
 class LMMineralFillData (val mc: MainContext) {
     private fun getNeedEnergy():Int {
@@ -34,6 +35,19 @@ class LMMineralFillData (val mc: MainContext) {
                 mineralDataRecord.quantityDown = 0
                 mineralDataRecord.quantityUp = 0
             }
+        }
+    }
+
+    fun fillPrices() {
+        mc.mineralData[RESOURCE_ENERGY]?.avgBuyPrice = mc.lm.production.lmMarket.getAverageBuyPrice(RESOURCE_ENERGY)
+        console.log("Test 1: ${mc.lm.production.lmMarket.getEnergyPrice()}")
+        for (res in mc.mineralData.keys) {
+            if (res == RESOURCE_ENERGY) {
+                continue
+            }
+            mc.mineralData[res]?.avgBuyPrice = mc.lm.production.lmMarket.getAverageBuyPrice(res)
+            mc.mineralData[res]?.avgSellPrice = mc.lm.production.lmMarket.getAverageSellPrice(res)
+            //console.log("Test 1: $res Buy: ${mc.mineralData[res]?.avgBuyPrice}   Sell: ${mc.mineralData[res]?.avgSellPrice}")
         }
     }
 }
