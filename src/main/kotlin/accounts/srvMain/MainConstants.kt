@@ -32,7 +32,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E47N39").initSlaveRoomConstantContainer(arrayOf("E46N39", "E47N38"))                      //M16
     const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42", "E52N41"))                      //M17
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                        //M18
-    const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                        //M19
+    const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf("E47N34"))                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                //M20
     const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43", "E59N43"))                      //M22
@@ -71,9 +71,14 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(35).useCash = false
     const.m(36).useCash = false
     const.m(37).useCash = false
+    const.m(38).useCash = false
 
     const.s(1,1).model = SlaveRoomType.Colonize //"E57N34"
     const.m(37).creepUseUpgraderAndBuilderFromMainRoom = true
+
+    const.s(19,0).model = SlaveRoomType.Colonize //"E47N34"
+    const.s(19,0).pathToRoom = arrayOf("E51N35","E50N35","E50N34","E49N34","E48N34","E47N34")
+
 
 
 
