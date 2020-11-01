@@ -26,6 +26,9 @@ fun SlaveRoom.doSnapShot() {
 fun SlaveRoom.restoreSnapShot(){
     if (this.room == null) return
     if (this.room.find(FIND_CONSTRUCTION_SITES).isNotEmpty()) return
+    val flags = this.room.find(FIND_FLAGS).filter { it.color == COLOR_RED && it.secondaryColor == COLOR_YELLOW }
+    if (flags.isNotEmpty()) return
+
     if (Memory["snap"] == null || Memory["snap"][this.name] == null){
         mc.lm.messenger.log("INFO", this.name, "Slave snapshot not present", COLOR_RED)
         return

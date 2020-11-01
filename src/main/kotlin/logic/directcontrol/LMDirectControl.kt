@@ -80,7 +80,7 @@ class LMDirectControl(val mc: MainContext) {
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRoads(mr)
                 //mc.lm.lmDirectControl.lmDirectFunctions.flagsDelete()
                 //mc.lm.lmDirectControl.lmDirectFunctions.deleteRamparts(mr)
-                LMBuildingAutoRampart().buildAllNeed(mr, false)
+                //LMBuildingAutoRampart().buildAllNeed(mr, false)
             }
 
 
