@@ -119,16 +119,16 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
 
     const.globalConstant.username = "SoloVova"
-    const.globalConstant.balanceQtyUpgraderDefault = 36
-    const.globalConstant.balanceQtyBuilderDefault = 4
+    const.globalConstant.balanceQtyUpgraderDefault = 38
+    const.globalConstant.balanceQtyBuilderDefault = 5
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
                             Pair(100000, "XGH2O".unsafeCast<ResourceConstant>()),
-                            Pair(20000, "GH2O".unsafeCast<ResourceConstant>()),
-                            Pair(1000, "GH".unsafeCast<ResourceConstant>())
+                            Pair(120000, "GH2O".unsafeCast<ResourceConstant>()),
+                            Pair(120000, "GH".unsafeCast<ResourceConstant>())
                     )
     )
 
