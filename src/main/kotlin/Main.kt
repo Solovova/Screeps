@@ -28,7 +28,7 @@ fun loop() {
     protectedMainContext.run()
     cpuStart = Game.cpu.getUsed() - cpuStart
 
-    console.log("Construction sites: ${Game.constructionSites.size}")
+    console.log("Construction sites2: ${Game.constructionSites.size}")
 
     console.log("CPU: ${(cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]}")
 }

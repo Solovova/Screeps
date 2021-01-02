@@ -27,7 +27,7 @@ val screepsToken: String? by project
 val screepsHost: String? by project
 val screepsHostLocal: String? by project
 val screepsBranch: String? by project
-val branch = screepsBranch ?: "kotlin-start"
+val branch = screepsBranch ?: "default"
 val host = screepsHost ?: "https://screeps.com"
 val hostLocal = screepsHostLocal ?: "https://screeps.com"
 
@@ -79,7 +79,7 @@ tasks {
             val jsFiles = minifiedCodeLocation.listFiles { _, name -> name.endsWith(".js") }
             modules.putAll(jsFiles.associate { it.nameWithoutExtension to it.readText() })
 
-            println("uploading ${jsFiles.count()} files to branch $branch on server $host")
+            println("uploading ${jsFiles.count()} files to branch $branch on server $host uri $uri")
         }
 
     }
