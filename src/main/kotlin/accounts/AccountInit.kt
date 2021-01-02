@@ -2,11 +2,10 @@ package accounts
 
 import mainContext.MainContext
 import mainContext.constants.Constants
-import mainContext.constants.GlobalConstant
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 
-open class AccountInit() {
+open class AccountInit {
     open fun initHead(constants: Constants) {
 
     }

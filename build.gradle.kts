@@ -19,22 +19,15 @@ dependencies {
     testImplementation(kotlin("test-js"))
 }
 
-val screepsUser: String? by project
-val screepsPassword: String? by project
-val screepsUser2: String? by project
-val screepsPassword2: String? by project
 val screepsToken: String? by project
 val screepsHost: String? by project
-val screepsHostLocal: String? by project
 val screepsBranch: String? by project
 val branch = screepsBranch ?: "default"
 val host = screepsHost ?: "https://screeps.com"
-val hostLocal = screepsHostLocal ?: "https://screeps.com"
 
-val screepsTokenMain2: String? by project
-val screepsUser_Main2: String? by project
-val screepsPassword_Main2: String? by project
-val screepsHostLocal_Main2: String? by project
+val screepsUser_Local: String? by project
+val screepsPassword_Local: String? by project
+val screepsHostLocal_Local: String? by project
 
 
 
@@ -69,7 +62,7 @@ tasks {
         requestBody = mapOf("branch" to branch, "modules" to modules)
 
         doFirst {
-            if (screepsUser == null && screepsPassword == null && screepsToken == null) {
+            if (screepsToken == null) {
                 throw InvalidUserDataException("you need to supply either screepsUser and screepsPassword or screepsToken before you can upload code")
             }
             if (!minifiedCodeLocation.isDirectory) {
@@ -84,15 +77,15 @@ tasks {
 
     }
 
-    register<RestTask>("main2") {
+    register<RestTask>("local") {
         group = "screeps"
         dependsOn("build")
         val modules = mutableMapOf<String, String>()
         val minifiedCodeLocation = File("$buildDir/kotlin-js-min/main")
 
         httpMethod = "post"
-        uri = "$screepsHostLocal_Main2/api/user/code"
-        requestHeaders = mapOf("Authorization" to "Basic " + "$screepsUser_Main2:$screepsPassword_Main2".encodeBase64())
+        uri = "$screepsHostLocal_Local/api/user/code"
+        requestHeaders = mapOf("Authorization" to "Basic " + "$screepsUser_Local:$screepsPassword_Local".encodeBase64())
         contentType = groovyx.net.http.ContentType.JSON
         requestBody = mapOf("branch" to branch, "modules" to modules)
 
@@ -102,7 +95,7 @@ tasks {
             println(requestHeaders)
             println(requestBody)
 
-            if (screepsUser_Main2 == null && screepsPassword_Main2 == null) {
+            if (screepsUser_Local == null && screepsPassword_Local == null) {
                 throw InvalidUserDataException("you need to supply either screepsUser and screepsPassword or screepsToken before you can upload code")
             }
             if (!minifiedCodeLocation.isDirectory) {
@@ -112,39 +105,10 @@ tasks {
             val jsFiles = minifiedCodeLocation.listFiles { _, name -> name.endsWith(".js") }
             modules.putAll(jsFiles.associate { it.nameWithoutExtension to it.readText() })
 
-            println("uploading ${jsFiles.count()} files to branch $branch on server $screepsHostLocal_Main2")
+            println("uploading ${jsFiles.count()} files to branch $branch on server $screepsHostLocal_Local uri $uri")
         }
 
     }
-
-    register<RestTask>("local") {
-        group = "screeps"
-        dependsOn("build")
-        val modules = mutableMapOf<String, String>()
-        val minifiedCodeLocation = File("$buildDir/kotlin-js-min/main")
-
-        httpMethod = "post"
-        uri = "$hostLocal/api/user/code"
-        requestHeaders = mapOf("Authorization" to "Basic " + "$screepsUser:$screepsPassword".encodeBase64())
-        contentType = groovyx.net.http.ContentType.JSON
-        requestBody = mapOf("branch" to branch, "modules" to modules)
-
-        doFirst {
-            if (screepsUser == null && screepsPassword == null && screepsToken == null) {
-                throw InvalidUserDataException("you need to supply either screepsUser and screepsPassword or screepsToken before you can upload code")
-            }
-            if (!minifiedCodeLocation.isDirectory) {
-                throw InvalidUserDataException("found no code to upload at ${minifiedCodeLocation.path}")
-            }
-
-            val jsFiles = minifiedCodeLocation.listFiles { _, name -> name.endsWith(".js") }
-            modules.putAll(jsFiles.associate { it.nameWithoutExtension to it.readText() })
-
-            println("uploading ${jsFiles.count()} files to branch $branch on server $hostLocal")
-        }
-
-    }
-
 
 }
 
