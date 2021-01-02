@@ -100,7 +100,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.m(22).reactionActive = "GH"
     const.m(22).reactionActiveArr = arrayOf("OH", "GH", "XGH2O")
     //const.m(23).reactionActive = "GH2O"
-    const.m(23).reactionActiveArr = arrayOf("GH2O", "XGH2O")
+    const.m(23).reactionActive = "GH2O"
     const.m(24).reactionActive = "GH2O"
     const.m(25).reactionActive = "ZK"
     const.m(26).reactionActive = "UL"
@@ -112,6 +112,10 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(31).reactionActive = "XGH2O"
     const.m(32).reactionActive = "XGH2O"
     const.m(33).reactionActive = "XGH2O"
+    const.m(34).reactionActive = "XGH2O"
+    const.m(35).reactionActive = "XGH2O"
+    const.m(36).reactionActive = "XGH2O"
+    const.m(37).reactionActive = "XGH2O"
 
 
     const.globalConstant.username = "SoloVova"
