@@ -1,6 +1,6 @@
 package logic.develop
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import mainContext.MainContext
 import screeps.api.*
 

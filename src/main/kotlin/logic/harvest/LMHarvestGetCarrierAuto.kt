@@ -1,6 +1,6 @@
 package logic.harvest
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
 import mainContext.dataclass.SlaveRoomType

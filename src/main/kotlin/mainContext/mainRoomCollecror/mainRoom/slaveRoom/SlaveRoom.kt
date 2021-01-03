@@ -1,6 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import mainContext.MainContext
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.MainRoom

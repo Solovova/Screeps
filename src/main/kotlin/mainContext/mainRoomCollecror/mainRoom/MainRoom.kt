@@ -5,7 +5,7 @@ import mainContext.MainContext
 import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import mainContext.dataclass.BgSpawnResult
 import mainContext.dataclass.QueueSpawnRecord
 import mainContext.mainRoomCollecror.MainRoomCollector

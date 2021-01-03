@@ -33,5 +33,5 @@ fun loop() {
     console.log("CPU: ${(cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]}")
 
     //Tests
-    protectedMainContext.lm.lmDevelopTests.lmDevelopTestsCacheCarrier.runTest()
+    //protectedMainContext.lm.lmDevelopTests.lmDevelopTestsCacheCarrier.runTest()
 }

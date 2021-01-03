@@ -1,4 +1,4 @@
-package constants
+package mainContext.constants.path
 
 import screeps.api.BodyPartConstant
 import screeps.api.CARRY
@@ -30,12 +30,6 @@ class CacheCarrier(
     ),
     var mPath: Array<RoomPosition> = arrayOf()
 ) {
-
-
-    private fun pathToDynamic(path: Array<RoomPosition>): dynamic {
-        return path
-    }
-
 
     fun pathToStringShort(path: Array<RoomPosition>): String {
         fun twoRoomPositionToDiff(prevRoomPosition: RoomPosition?, actualRoomPosition: RoomPosition): String {
@@ -75,10 +69,6 @@ class CacheCarrier(
         return result.toString()
     }
 
-    private fun bodyToDynamic(body: Array<BodyPartConstant>): dynamic {
-        return body
-    }
-
     fun bodyToStringShort(body: Array<BodyPartConstant>): String {
         val result = StringBuilder()
         for (part in body) {
@@ -87,15 +77,23 @@ class CacheCarrier(
         return result.toString()
     }
 
-    fun toDynamic(): dynamic {
+    private fun toDynamic(): dynamic {
         val d: dynamic = object {}
         d["1"] = this.default
         d["2"] = this.needCarriers
         d["3"] = this.timeForDeath
         d["4"] = this.tickRecalculate
-        d["5"] = this.bodyToDynamic(this.needBody)
-        if (this.mPath.isNotEmpty()) d["6"] = pathToDynamic(this.mPath)
+        d["5"] = this.bodyToStringShort(this.needBody)
+        if (this.mPath.isNotEmpty()) d["6"] = pathToStringShort(this.mPath)
         return d
+    }
+
+    fun saveToCache(key: String) {
+        if (Memory["globCacheCarrier"] == null) {
+            Memory["globCacheCarrier"] = object {}
+        }
+        Memory["globCacheCarrier"][key] = this.toDynamic()
+
     }
 
     companion object {
@@ -111,17 +109,6 @@ class CacheCarrier(
         )
 
         private val constBodyPartsRev: Map<Int, BodyPartConstant> =  constBodyParts.entries.associate { (key, value) -> value to key }
-
-        private fun pathFromDynamic(d: dynamic): Array<RoomPosition> {
-            var result: Array<RoomPosition> = arrayOf()
-            if (d != null) {
-                for (ind in 0..1000) {
-                    if (d[ind] == null) break
-                    result += RoomPosition(d[ind]["x"] as Int, d[ind]["y"] as Int, d[ind]["roomName"] as String)
-                }
-            }
-            return result
-        }
 
         fun pathFromStringShort(str: String?): Array<RoomPosition> {
             if (str == null || str == "") {
@@ -172,7 +159,7 @@ class CacheCarrier(
 
         fun bodyFromStringShort(str: String?): Array<BodyPartConstant> {
             if (str == null || str == "") {
-                return arrayOf()
+                return arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
             }
 
             val result: MutableList<BodyPartConstant> = mutableListOf()
@@ -183,37 +170,13 @@ class CacheCarrier(
             return result.toTypedArray()
         }
 
-        private fun bodyFromDynamic(d: dynamic): Array<BodyPartConstant> {
-            return if (d != null) {
-                d as Array<BodyPartConstant>
-            } else {
-                arrayOf(
-                    MOVE,
-                    MOVE,
-                    MOVE,
-                    MOVE,
-                    MOVE,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY,
-                    CARRY
-                )
-            }
-        }
-
-        fun initFromDynamic(d: dynamic): CacheCarrier {
+        private fun initFromDynamic(d: dynamic): CacheCarrier {
             val default: Boolean = if (d["1"] != null) d["1"] as Boolean else true
             val needCarriers: Int = if (d["2"] != null) d["2"] as Int else 1
             val timeForDeath: Int = if (d["3"] != null) d["3"] as Int else 0
             val tickRecalculate: Int = if (d["4"] != null) d["4"] as Int else 0
-            val needBody: Array<BodyPartConstant> = this.bodyFromDynamic(d["5"])
-            val mPath: Array<RoomPosition> = this.pathFromDynamic(d["6"])
+            val needBody: Array<BodyPartConstant> = bodyFromStringShort(d["5"] as? String)
+            val mPath: Array<RoomPosition> = pathFromStringShort(d["6"] as? String)
             return CacheCarrier(
                 default = default,
                 needCarriers = needCarriers,
@@ -222,6 +185,16 @@ class CacheCarrier(
                 needBody = needBody,
                 mPath = mPath
             )
+        }
+
+        fun initFromCache(key: String): CacheCarrier? {
+            if (Memory["globCacheCarrier"] == null) {
+                Memory["globCacheCarrier"] = object {}
+            }
+            if (Memory["globCacheCarrier"][key] == null) {
+                return null
+            }
+            return initFromDynamic(Memory["globCacheCarrier"][key])
         }
     }
 }
