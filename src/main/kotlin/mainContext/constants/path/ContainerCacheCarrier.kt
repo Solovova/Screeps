@@ -55,7 +55,6 @@ class ContainerCacheCarrier(val mc: MainContext) { //globCacheCarrier in Memory
     }
 
     private fun getNewCarrierAuto (ret: PathFinder.Path, mainRoom: MainRoom, slaveRoom: SlaveRoom?, doNotCalculateRoads: Boolean = false, safeMove:Boolean = false): CacheCarrier {
-        //ToDo SOURCE_ENERGY_KEEPER_CAPACITY
         val weight: Int
         val fMaxCapacity: Int
         val needCarriers: Int
@@ -64,7 +63,6 @@ class ContainerCacheCarrier(val mc: MainContext) { //globCacheCarrier in Memory
         var fBody : Array<BodyPartConstant>
         val pathSize:Int = if (doNotCalculateRoads) ret.cost else ret.path.size
         if (slaveRoom == null) {
-
             weight = (((SOURCE_ENERGY_CAPACITY +300)*pathSize*2).toDouble() / ENERGY_REGEN_TIME).roundToInt()
             fMaxCapacity = min(mainRoom.room.energyCapacityAvailable / 150  *100,1600)
             needCarriers  = weight / fMaxCapacity + 1
@@ -85,8 +83,6 @@ class ContainerCacheCarrier(val mc: MainContext) { //globCacheCarrier in Memory
             fBody = arrayOf(WORK, CARRY, MOVE)
             for (i in 0 until (needCapacity/100)) fBody += arrayOf(CARRY, CARRY, MOVE)
         }
-
-
         return CacheCarrier(default = false, tickRecalculate = Game.time, needCarriers = needCarriers, timeForDeath = timeForDeath, needBody = fBody, mPath = ret.path)
     }
 }
