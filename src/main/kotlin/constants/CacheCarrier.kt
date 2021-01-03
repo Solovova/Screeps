@@ -6,51 +6,61 @@ import screeps.api.MOVE
 import screeps.api.*
 
 
-class CacheCarrier {
-    var default : Boolean
-    var needCarriers: Int
-    var timeForDeath: Int
-    var tickRecalculate: Int
-    val needBody: Array<BodyPartConstant>
+class CacheCarrier(
+    var default: Boolean = true,
+    var tickRecalculate: Int = 0,
+    var needCarriers: Int = 1,
+    var timeForDeath: Int = 0,
+    val needBody: Array<BodyPartConstant> = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY),
     var mPath: Array<RoomPosition> = arrayOf()
+) {
 
-    constructor(default: Boolean? = null, tickRecalculate:Int? = null, needCarriers: Int? = null, timeForDeath: Int? = null, needBody: Array<BodyPartConstant>? = null, mPath: Array<RoomPosition>? = null) {
-        this.default = default ?: true
-        this.tickRecalculate = tickRecalculate ?: 0
-        this.needCarriers = needCarriers ?: 1
-        this.timeForDeath = timeForDeath ?: 0
-        this.needBody = needBody ?: arrayOf<BodyPartConstant>(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY)
-        this.mPath = mPath ?: arrayOf()
+    private fun pathToDynamic(path: Array<RoomPosition>): dynamic {
+        return path
+    }
+
+    private fun bodyToDynamic(body: Array<BodyPartConstant>): dynamic {
+        return body
     }
 
     fun toDynamic():dynamic {
         val d : dynamic = object {}
-        d["default"] = this.default
-        d["needCarriers"] = this.needCarriers
-        d["timeForDeath"] = this.timeForDeath
-        d["tickRecalculate"] = this.tickRecalculate
-        d["needBody"] = this.needBody
-        if (this.mPath.isNotEmpty()) d["mPath"] = this.mPath
+        d["1"] = this.default
+        d["2"] = this.needCarriers
+        d["3"] = this.timeForDeath
+        d["4"] = this.tickRecalculate
+        d["5"] = this.bodyToDynamic(this.needBody)
+        if (this.mPath.isNotEmpty()) d["6"] = pathToDynamic(this.mPath)
         return d
     }
 
     companion object {
-        fun initFromDynamic(d: dynamic): CacheCarrier {
-            val default: Boolean? = if (d["default"] != null) d["default"] as Boolean else null
-            val needCarriers: Int? = if (d["needCarriers"] != null) d["needCarriers"] as Int else null
-            val timeForDeath: Int? = if (d["timeForDeath"] != null) d["timeForDeath"] as Int else null
-            val tickRecalculate: Int? = if (d["tickRecalculate"] != null) d["tickRecalculate"] as Int else null
-            val needBody: Array<BodyPartConstant>? = if (d["needBody"] != null) d["needBody"] as Array<BodyPartConstant> else null
-
-            var mPath: Array<RoomPosition>? = null
-            if (d["mPath"] != null) {
-                mPath = arrayOf()
+        private fun pathFromDynamic(d: dynamic): Array<RoomPosition> {
+            var result: Array<RoomPosition> = arrayOf()
+            if (d != null) {
                 for (ind in 0..1000) {
-                    if (d["mPath"][ind] == null) break
-                    mPath += RoomPosition(d["mPath"][ind]["x"] as Int, d["mPath"][ind]["y"] as Int, d["mPath"][ind]["roomName"] as String)
+                    if (d[ind] == null) break
+                    result += RoomPosition(d[ind]["x"] as Int, d[ind]["y"] as Int, d[ind]["roomName"] as String)
                 }
             }
+            return result
+        }
 
+        private fun bodyFromDynamic(d: dynamic): Array<BodyPartConstant> {
+            return if (d != null) {
+                d as Array<BodyPartConstant>
+            } else {
+                arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+            }
+        }
+
+        fun initFromDynamic(d: dynamic): CacheCarrier {
+            val default: Boolean = if (d["1"] != null) d["1"] as Boolean else true
+            val needCarriers: Int = if (d["2"] != null) d["2"] as Int else 1
+            val timeForDeath: Int = if (d["3"] != null) d["3"] as Int else 0
+            val tickRecalculate: Int = if (d["4"] != null) d["4"] as Int else 0
+            val needBody: Array<BodyPartConstant> = this.bodyFromDynamic(d["5"])
+            val mPath: Array<RoomPosition> = this.pathFromDynamic(d["6"])
             return CacheCarrier(default = default, needCarriers = needCarriers, timeForDeath = timeForDeath, tickRecalculate = tickRecalculate, needBody = needBody, mPath = mPath)
         }
     }
