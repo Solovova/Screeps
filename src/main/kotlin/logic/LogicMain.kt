@@ -8,9 +8,9 @@ import logic.cash.LMCash
 import logic.creep.LMCreep
 import logic.defence.LMDefence
 import logic.develop.LMDevelopMatrix
+import logic.develop.LMDevelopTests
 import logic.directcontrol.LMDirectControl
 import logic.harvest.LMHarvestCacheRecordRoom
-import logic.harvest.LMHarvestGetCarrierAuto
 import logic.harvest.LMHarvestGetWayFromPosToPos
 import logic.main.LMGCL
 import logic.messenger.LMMessenger
@@ -29,7 +29,6 @@ class LogicMain(val mc: MainContext) {
     val develop: LMDevelopMatrix = LMDevelopMatrix(mc)
     val building: LMBuilding = LMBuilding(mc)
     val lmHarvestCacheRecordRoom: LMHarvestCacheRecordRoom = LMHarvestCacheRecordRoom(mc)
-    val lmHarvestGetCarrierAuto: LMHarvestGetCarrierAuto = LMHarvestGetCarrierAuto()
     val lmHarvestGetWayFromPosToPos: LMHarvestGetWayFromPosToPos = LMHarvestGetWayFromPosToPos()
     val lmDirectControl: LMDirectControl = LMDirectControl(mc)
     val nuker:LMNuker = LMNuker(mc)
@@ -39,4 +38,6 @@ class LogicMain(val mc: MainContext) {
     val balancePrediction: LMBalancePrediction = LMBalancePrediction(mc)
 
     val cash: LMCash = LMCash(mc)
+
+    val lmDevelopTests: LMDevelopTests = LMDevelopTests(mc)
 }

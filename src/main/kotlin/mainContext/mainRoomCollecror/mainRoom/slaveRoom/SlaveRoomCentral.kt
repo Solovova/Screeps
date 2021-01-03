@@ -1,6 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom.slaveRoom
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import screeps.api.*
 
 fun SlaveRoom.correctionCentral() {

@@ -23,3 +23,4 @@ In future
 //ToDo сжатие данных по комнате и защитному периметру
 //ToDo атака баз
 //ToDo атака группами
+//ToDo очищение globCacheCarrier

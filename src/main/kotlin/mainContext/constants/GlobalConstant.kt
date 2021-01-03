@@ -1,7 +1,8 @@
 package mainContext.constants
 
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
+import mainContext.constants.path.ContainerCacheCarrier
 import screeps.api.*
 
 class GlobalConstant(val constants: Constants) {
@@ -9,7 +10,7 @@ class GlobalConstant(val constants: Constants) {
     var nukerFill: Boolean = true
     var nukerFilInRooms: Array<String> = arrayOf()
 
-    val dataCacheCarrierAuto: MutableMap<String, CacheCarrier> = mutableMapOf() //cashed
+    val containerCacheCarrier: ContainerCacheCarrier = ContainerCacheCarrier(constants.mainContext)
     val roomRunNotEveryTickTicksPauseMin: Int = 300
     val roomRunNotEveryTickTicksPauseMax: Int = 400
     var roomRunNotEveryTickNextTickRunMainContext: Int = 0
@@ -69,9 +70,9 @@ class GlobalConstant(val constants: Constants) {
 
 
         //dataCacheCarrierAuto
-        result["dataCacheCarrierAuto"] = object {}
-        for (record in dataCacheCarrierAuto)
-            result["dataCacheCarrierAuto"][record.key] = record.value.toDynamic()
+//        result["dataCacheCarrierAuto"] = object {}
+//        for (record in dataCacheCarrierAuto)
+//            result["dataCacheCarrierAuto"][record.key] = record.value.toDynamic()
 
 
         //--------------------
@@ -91,8 +92,8 @@ class GlobalConstant(val constants: Constants) {
 
 
         //dataCacheCarrierAuto
-        if (d["dataCacheCarrierAuto"] != null)
-            for (recordKey in js("Object").keys(d["dataCacheCarrierAuto"]).unsafeCast<Array<String>>())
-                dataCacheCarrierAuto[recordKey] = CacheCarrier.initFromDynamic(d["dataCacheCarrierAuto"][recordKey])
+//        if (d["dataCacheCarrierAuto"] != null)
+//            for (recordKey in js("Object").keys(d["dataCacheCarrierAuto"]).unsafeCast<Array<String>>())
+//                dataCacheCarrierAuto[recordKey] = CacheCarrier.initFromDynamic(d["dataCacheCarrierAuto"][recordKey])
     }
 }

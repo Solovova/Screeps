@@ -31,4 +31,7 @@ fun loop() {
     console.log("Construction sites: ${Game.constructionSites.size}")
 
     console.log("CPU: ${(cpuStart).roundToInt()}   Creep: ${Memory["CPUCreep"]}")
+
+    //Tests
+    //protectedMainContext.lm.lmDevelopTests.lmDevelopTestsCacheCarrier.runTest()
 }

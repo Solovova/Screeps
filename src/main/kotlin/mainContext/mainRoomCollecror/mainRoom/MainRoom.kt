@@ -5,7 +5,7 @@ import mainContext.MainContext
 import mainContext.constants.MainRoomConstant
 import mainContext.constants.SlaveRoomConstant
 import mainContext.mainRoomCollecror.mainRoom.slaveRoom.SlaveRoom
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 import mainContext.dataclass.BgSpawnResult
 import mainContext.dataclass.QueueSpawnRecord
 import mainContext.mainRoomCollecror.MainRoomCollector
@@ -888,6 +888,8 @@ class MainRoom(val mc: MainContext, val mrCol: MainRoomCollector, val name: Stri
         if (controller.level == 3) {
             if (this.room.energyCapacityAvailable != 800) return "Extension"
             if (this.structureTower.size != 1) return "Tower"
+            if (this.source.isNotEmpty() && !this.structureContainerNearSource.containsKey(0)) return "Cont. source 0"
+            if (this.source.size > 1 && !this.structureContainerNearSource.containsKey(1)) return "Cont. source 1"
         }
 
         if (controller.level == 4) {

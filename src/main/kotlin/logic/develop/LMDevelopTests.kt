@@ -10,6 +10,8 @@ import screeps.api.structures.StructureExtension
 import screeps.api.structures.StructureLab
 
 class LMDevelopTests(val mc: MainContext) {
+    val lmDevelopTestsCacheCarrier: LMDevelopTestsCacheCarrier = LMDevelopTestsCacheCarrier(mc)
+
     fun oldModeControllerShow() {
         val cpUse = LMDevelopCPUUse()
         var cpu = cpUse.cutoff(0.0,"Old Start")

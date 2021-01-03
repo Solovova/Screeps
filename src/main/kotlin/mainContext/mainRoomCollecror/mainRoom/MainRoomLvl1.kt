@@ -1,6 +1,6 @@
 package mainContext.mainRoomCollecror.mainRoom
 
-import constants.CacheCarrier
+import mainContext.constants.path.CacheCarrier
 
 fun MainRoom.needCorrection1() {
     //1 harvester ,carrier ,filler , small harvester-filler, small filler
