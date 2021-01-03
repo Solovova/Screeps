@@ -8,6 +8,7 @@ import logic.cash.LMCash
 import logic.creep.LMCreep
 import logic.defence.LMDefence
 import logic.develop.LMDevelopMatrix
+import logic.develop.LMDevelopTests
 import logic.directcontrol.LMDirectControl
 import logic.harvest.LMHarvestCacheRecordRoom
 import logic.harvest.LMHarvestGetCarrierAuto
@@ -39,4 +40,6 @@ class LogicMain(val mc: MainContext) {
     val balancePrediction: LMBalancePrediction = LMBalancePrediction(mc)
 
     val cash: LMCash = LMCash(mc)
+
+    val lmDevelopTests: LMDevelopTests = LMDevelopTests(mc)
 }

@@ -11,7 +11,23 @@ class CacheCarrier(
     var tickRecalculate: Int = 0,
     var needCarriers: Int = 1,
     var timeForDeath: Int = 0,
-    val needBody: Array<BodyPartConstant> = arrayOf(MOVE, MOVE, MOVE, MOVE, MOVE, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY),
+    val needBody: Array<BodyPartConstant> = arrayOf(
+        MOVE,
+        MOVE,
+        MOVE,
+        MOVE,
+        MOVE,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY,
+        CARRY
+    ),
     var mPath: Array<RoomPosition> = arrayOf()
 ) {
 
@@ -19,12 +35,55 @@ class CacheCarrier(
         return path
     }
 
+
+    fun pathToDynamicNew(path: Array<RoomPosition>): String {
+        fun twoRoomPositionToDiff(prevRoomPosition: RoomPosition?, actualRoomPosition: RoomPosition): String {
+            fun codeDDToInt(dx: Int, dy: Int): Int {
+                return (if (dx == -1) {
+                    2
+                } else {
+                    dx
+                }) * 4 + if (dy == -1) {
+                    2
+                } else {
+                    dy
+                }
+            }
+
+            return if (prevRoomPosition == null || prevRoomPosition.roomName != actualRoomPosition.roomName) {
+                "${actualRoomPosition.roomName},${actualRoomPosition.x},${actualRoomPosition.y};"
+            } else {
+                "${codeDDToInt(actualRoomPosition.x - prevRoomPosition.x, actualRoomPosition.y - prevRoomPosition.y)};"
+            }
+        }
+
+        val result = StringBuilder()
+
+        for (ind in path.indices) {
+            result.append(
+                twoRoomPositionToDiff(
+                    if (ind == 0) {
+                        null
+                    } else {
+                        path[ind - 1]
+                    }, path[ind]
+                )
+            )
+        }
+
+        return result.toString()
+    }
+
     private fun bodyToDynamic(body: Array<BodyPartConstant>): dynamic {
         return body
     }
 
-    fun toDynamic():dynamic {
-        val d : dynamic = object {}
+    private fun bodyToDynamicNew(body: Array<BodyPartConstant>): dynamic {
+        return body
+    }
+
+    fun toDynamic(): dynamic {
+        val d: dynamic = object {}
         d["1"] = this.default
         d["2"] = this.needCarriers
         d["3"] = this.timeForDeath
@@ -46,11 +105,62 @@ class CacheCarrier(
             return result
         }
 
+        fun pathFromDynamicNew(d: String): Array<RoomPosition> {
+            fun getRoomPositionFromPrevRoomPositionAndString(
+                prevRoomPosition: RoomPosition?,
+                diff: String
+            ): RoomPosition {
+                val strDiff = diff.split(",")
+                return if (strDiff.size > 1) {
+                    RoomPosition(strDiff[1].toInt(), strDiff[2].toInt(), strDiff[0])
+                } else {
+                    val dd: Int = strDiff[0].toInt()
+                    var dx: Int = dd / 4
+                    if (dx == 2) {dx = -1}
+                    var dy: Int = dd % 4
+                    if (dy == 2) {dy = -1}
+                    RoomPosition((prevRoomPosition?.x ?: 0) +dx, (prevRoomPosition?.y ?: 0) + dy, prevRoomPosition?.roomName ?: "")
+                }
+            }
+
+            val result: MutableList<RoomPosition> = mutableListOf()
+            val strPoint: List<String> = d.split(";")
+            for (ind in 0..strPoint.size - 2) {
+                result.add(
+                    getRoomPositionFromPrevRoomPositionAndString(
+                        if (ind == 0) {
+                            null
+                        } else {
+                            result[result.size - 1]
+                        }, strPoint[ind]
+                    )
+                )
+            }
+
+            return result.toTypedArray()
+        }
+
         private fun bodyFromDynamic(d: dynamic): Array<BodyPartConstant> {
             return if (d != null) {
                 d as Array<BodyPartConstant>
             } else {
-                arrayOf(MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY)
+                arrayOf(
+                    MOVE,
+                    MOVE,
+                    MOVE,
+                    MOVE,
+                    MOVE,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY,
+                    CARRY
+                )
             }
         }
 
@@ -61,7 +171,14 @@ class CacheCarrier(
             val tickRecalculate: Int = if (d["4"] != null) d["4"] as Int else 0
             val needBody: Array<BodyPartConstant> = this.bodyFromDynamic(d["5"])
             val mPath: Array<RoomPosition> = this.pathFromDynamic(d["6"])
-            return CacheCarrier(default = default, needCarriers = needCarriers, timeForDeath = timeForDeath, tickRecalculate = tickRecalculate, needBody = needBody, mPath = mPath)
+            return CacheCarrier(
+                default = default,
+                needCarriers = needCarriers,
+                timeForDeath = timeForDeath,
+                tickRecalculate = tickRecalculate,
+                needBody = needBody,
+                mPath = mPath
+            )
         }
     }
 }

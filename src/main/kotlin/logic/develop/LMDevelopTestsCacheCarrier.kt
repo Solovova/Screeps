@@ -1,10 +1,10 @@
-package logic.tests
+package logic.develop
 
 import constants.CacheCarrier
 import mainContext.MainContext
 import screeps.api.RoomPosition
 
-class LMTestsCacheCarrier(val mc: MainContext) {
+class LMDevelopTestsCacheCarrier(val mc: MainContext) {
     fun runTest() {
         val tPath:Array<RoomPosition> = arrayOf(
             RoomPosition(48,25,"W5N3"),
@@ -17,7 +17,10 @@ class LMTestsCacheCarrier(val mc: MainContext) {
         val tCacheCarrier: CacheCarrier = CacheCarrier(mPath = tPath)
 
         val tDyn = tCacheCarrier.pathToDynamicNew(tPath)
-        println(tDyn.toString())
+        val restorePath = CacheCarrier.pathFromDynamicNew(tDyn)
+        println("Test CacheCarrier path Original: $tPath")
+        println("Test CacheCarrier path  Dynamic: $tDyn")
+        println("Test CacheCarrier path Restored: $restorePath")
     }
 
 }
