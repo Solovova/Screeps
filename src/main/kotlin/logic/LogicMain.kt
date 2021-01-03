@@ -10,6 +10,7 @@ import logic.defence.LMDefence
 import logic.develop.LMDevelopMatrix
 import logic.develop.LMDevelopTests
 import logic.directcontrol.LMDirectControl
+import logic.extfunc.LMFunc
 import logic.harvest.LMHarvestCacheRecordRoom
 import logic.harvest.LMHarvestGetCarrierAuto
 import logic.harvest.LMHarvestGetWayFromPosToPos
@@ -42,4 +43,5 @@ class LogicMain(val mc: MainContext) {
     val cash: LMCash = LMCash(mc)
 
     val lmDevelopTests: LMDevelopTests = LMDevelopTests(mc)
+    val func: LMFunc = LMFunc()
 }

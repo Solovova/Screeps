@@ -31,12 +31,13 @@ class CacheCarrier(
     var mPath: Array<RoomPosition> = arrayOf()
 ) {
 
+
     private fun pathToDynamic(path: Array<RoomPosition>): dynamic {
         return path
     }
 
 
-    fun pathToDynamicNew(path: Array<RoomPosition>): String {
+    fun pathToStringShort(path: Array<RoomPosition>): String {
         fun twoRoomPositionToDiff(prevRoomPosition: RoomPosition?, actualRoomPosition: RoomPosition): String {
             fun codeDDToInt(dx: Int, dy: Int): Int {
                 return (if (dx == -1) {
@@ -78,8 +79,12 @@ class CacheCarrier(
         return body
     }
 
-    private fun bodyToDynamicNew(body: Array<BodyPartConstant>): dynamic {
-        return body
+    fun bodyToStringShort(body: Array<BodyPartConstant>): String {
+        val result = StringBuilder()
+        for (part in body) {
+            result.append((constBodyParts[part] ?: 0).toString())
+        }
+        return result.toString()
     }
 
     fun toDynamic(): dynamic {
@@ -94,6 +99,19 @@ class CacheCarrier(
     }
 
     companion object {
+        private val constBodyParts: Map<BodyPartConstant, Int> = mapOf(
+            MOVE to 1,
+            CARRY to 2,
+            WORK to 3,
+            ATTACK to 4,
+            RANGED_ATTACK to 5,
+            TOUGH to 6,
+            HEAL to 7,
+            CLAIM to 8
+        )
+
+        private val constBodyPartsRev: Map<Int, BodyPartConstant> =  constBodyParts.entries.associate { (key, value) -> value to key }
+
         private fun pathFromDynamic(d: dynamic): Array<RoomPosition> {
             var result: Array<RoomPosition> = arrayOf()
             if (d != null) {
@@ -105,7 +123,11 @@ class CacheCarrier(
             return result
         }
 
-        fun pathFromDynamicNew(d: String): Array<RoomPosition> {
+        fun pathFromStringShort(str: String?): Array<RoomPosition> {
+            if (str == null || str == "") {
+                return arrayOf()
+            }
+
             fun getRoomPositionFromPrevRoomPositionAndString(
                 prevRoomPosition: RoomPosition?,
                 diff: String
@@ -116,15 +138,23 @@ class CacheCarrier(
                 } else {
                     val dd: Int = strDiff[0].toInt()
                     var dx: Int = dd / 4
-                    if (dx == 2) {dx = -1}
+                    if (dx == 2) {
+                        dx = -1
+                    }
                     var dy: Int = dd % 4
-                    if (dy == 2) {dy = -1}
-                    RoomPosition((prevRoomPosition?.x ?: 0) +dx, (prevRoomPosition?.y ?: 0) + dy, prevRoomPosition?.roomName ?: "")
+                    if (dy == 2) {
+                        dy = -1
+                    }
+                    RoomPosition(
+                        (prevRoomPosition?.x ?: 0) + dx,
+                        (prevRoomPosition?.y ?: 0) + dy,
+                        prevRoomPosition?.roomName ?: ""
+                    )
                 }
             }
 
             val result: MutableList<RoomPosition> = mutableListOf()
-            val strPoint: List<String> = d.split(";")
+            val strPoint: List<String> = str.split(";")
             for (ind in 0..strPoint.size - 2) {
                 result.add(
                     getRoomPositionFromPrevRoomPositionAndString(
@@ -137,6 +167,19 @@ class CacheCarrier(
                 )
             }
 
+            return result.toTypedArray()
+        }
+
+        fun bodyFromStringShort(str: String?): Array<BodyPartConstant> {
+            if (str == null || str == "") {
+                return arrayOf()
+            }
+
+            val result: MutableList<BodyPartConstant> = mutableListOf()
+            for (letter in str) {
+                val part: BodyPartConstant? = constBodyPartsRev[letter.toString().toInt()]
+                if (part!= null) {result.add(part)}
+            }
             return result.toTypedArray()
         }
 
