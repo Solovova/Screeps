@@ -135,9 +135,17 @@ class LMBalancePrediction(val mc: MainContext) {
 
         val qtyLvl8Room = mc.mainRoomCollector.rooms.values.filter { it.constant.levelOfRoom == 3 }.size
 
-        if (mineralsNeed<-4000*qtyLvl8Room && Game.market.credits<10_000_000) {
-            val mineralDataRecord:MineralDataRecord? = mc.mineralData[RESOURCE_ENERGY]
-            if (mineralDataRecord!=null) {
+        if (mineralsNeed < -8000 * qtyLvl8Room && Game.market.credits < 10_000_000) {
+            println("Test:  sellDirect $mineralsNeed ${-8000 * qtyLvl8Room}")
+            val mineralDataRecord: MineralDataRecord? = mc.mineralData[RESOURCE_ENERGY]
+            if (mineralDataRecord != null) {
+                mc.lm.production.lmMarket.sellDirect(RESOURCE_ENERGY, mineralDataRecord, 0.1, true)
+            }
+        }
+
+        if (mineralsNeed < -4000 * qtyLvl8Room && Game.market.credits < 10_000_000) {
+            val mineralDataRecord: MineralDataRecord? = mc.mineralData[RESOURCE_ENERGY]
+            if (mineralDataRecord != null) {
                 mc.lm.production.lmMarket.sellOrderCreate(RESOURCE_ENERGY, mineralDataRecord, true)
             }
         }

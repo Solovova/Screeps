@@ -127,7 +127,7 @@ class LMMarket(val mc: MainContext) {
         mineralDataRecord: MineralDataRecord,
         forceSell: Boolean = false
     ): Double? {
-        val quantitySkip = 10000
+        val quantitySkip = if (resource == RESOURCE_ENERGY) {0} else {10000}
         val quantityOrderAmount = 10000
 
         if (mineralDataRecord.quantity < mineralDataRecord.marketSellExcess && !forceSell) return null
@@ -243,8 +243,8 @@ class LMMarket(val mc: MainContext) {
         return myOrderPrice
     }
 
-    private fun sellDirect(resource: ResourceConstant, mineralDataRecord: MineralDataRecord, minPrice: Double) {
-        if (mineralDataRecord.quantity < mineralDataRecord.marketSellExcess) return
+    fun sellDirect(resource: ResourceConstant, mineralDataRecord: MineralDataRecord, minPrice: Double, forceSell: Boolean = false) {
+        if (mineralDataRecord.quantity < mineralDataRecord.marketSellExcess && !forceSell) return
         val mainRoomForSale: MainRoom =
             mc.mainRoomCollector.rooms.values.firstOrNull { it.getResourceInTerminal(resource) > 5000 }
                 ?: return

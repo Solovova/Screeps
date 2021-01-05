@@ -6,8 +6,8 @@ import screeps.api.ResourceConstant
 
 fun AccountInitMain.initMineralOut(mc: MainContext) {
     mc.mineralData["energy".unsafeCast<ResourceConstant>()] = MineralDataRecord(
-            priceMax = 0.200,
-            priceMin = 0.020,
+            priceMax = 0.600,
+            priceMin = 0.200,
             marketSellExcess = mc.getNumRoomWithTerminal() * 450000,
             marketBuyLack = mc.getNumRoomWithTerminal() * 100000,
             sellFromRoom = "E54N37"
