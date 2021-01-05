@@ -32,7 +32,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E47N39").initSlaveRoomConstantContainer(arrayOf("E46N39", "E47N38"))                      //M16
     const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42", "E52N41"))                      //M17
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                        //M18
-    const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf("E47N34"))                                //M19
+    const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
     const.getMainRoomConstant("E54N41").initSlaveRoomConstantContainer(arrayOf("E55N41"))                                //M20
     const.getMainRoomConstant("E53N35").initSlaveRoomConstantContainer(arrayOf("E54N35"))                                //M21
     const.getMainRoomConstant("E58N43").initSlaveRoomConstantContainer(arrayOf("E57N43", "E59N43"))                      //M22
@@ -154,7 +154,7 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[10] = mutableMapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(20000, "XLH2O".unsafeCast<ResourceConstant>()),
+                            Pair(5000, "XLH2O".unsafeCast<ResourceConstant>()),
                             Pair(20000, "LH2O".unsafeCast<ResourceConstant>()),
                             Pair(10000, "LH".unsafeCast<ResourceConstant>())
                     )

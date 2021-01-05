@@ -1,6 +1,6 @@
 package logic
 
-import logic.balance.LMBalanceBuilderWall
+import logic.balance.LMBalanceEnergyBuilder
 import logic.balance.LMBalancePrediction
 import logic.balance.LMBalanceUpgrader
 import logic.building.LMBuilding
@@ -33,7 +33,7 @@ class LogicMain(val mc: MainContext) {
     val lmDirectControl: LMDirectControl = LMDirectControl(mc)
     val nuker:LMNuker = LMNuker(mc)
 
-    val balanceBuilderWall: LMBalanceBuilderWall = LMBalanceBuilderWall(mc)
+    val balanceEnergyBuilder: LMBalanceEnergyBuilder = LMBalanceEnergyBuilder(mc)
     val balanceUpgrader: LMBalanceUpgrader = LMBalanceUpgrader(mc)
     val balancePrediction: LMBalancePrediction = LMBalancePrediction(mc)
 

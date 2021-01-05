@@ -1,7 +1,6 @@
 package mainContext.constants
 
 
-import mainContext.constants.path.CacheCarrier
 import mainContext.constants.path.ContainerCacheCarrier
 import screeps.api.*
 
@@ -36,7 +35,7 @@ class GlobalConstant(val constants: Constants) {
 
 
     //Market
-    val marketMinCreditForOpenBuyOrder: Double = 10000000.0
+    val marketMinCreditForOpenBuyOrder: Double = 3_000_000.0
 
     //INFO
     val showProfitWhenLessWhen: Int = 6000

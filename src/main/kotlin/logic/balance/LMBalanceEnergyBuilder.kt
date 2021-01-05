@@ -5,7 +5,7 @@ import mainContext.mainRoomCollecror.mainRoom.MainRoom
 import screeps.api.*
 import screeps.api.structures.Structure
 
-class LMBalanceBuilderWall(val mc: MainContext) {
+class LMBalanceEnergyBuilder(val mc: MainContext) {
     private fun getMinHits(mainRoom: MainRoom): Int {
         val structure: Structure = mainRoom.room.find(FIND_STRUCTURES).filter {
             (it.structureType == STRUCTURE_RAMPART || it.structureType == STRUCTURE_WALL)
@@ -22,7 +22,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
             room.constant.defenceMinHits = getMinHits(room)
     }
 
-    fun getDefenceLimitUpgrade(mainRoom: MainRoom): Int {
+    private fun getDefenceLimitUpgrade(mainRoom: MainRoom): Int {
         return if (mainRoom.constant.defenceLimitUpgrade == 0) {
             mc.constants.globalConstant.defenceLimitUpgrade
         }else{
@@ -30,7 +30,7 @@ class LMBalanceBuilderWall(val mc: MainContext) {
         }
     }
 
-    fun setNeedBuilder() {
+    fun setNeedBuilderOrEnergySell() {
         val qtyBuilder = mc.lm.balancePrediction.getBuilder()
 
         var counter = mc.mainRoomCollector.rooms.values.filter { it.have[10] > 0 || it.have[8] > 0}.size

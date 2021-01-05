@@ -50,7 +50,7 @@ class MainContext {
 
         this.mainRoomCollector.creepsCalculate()
         lm.balanceUpgrader.setNeedUpgrader()
-        lm.balanceBuilderWall.setNeedBuilder()
+        lm.balanceEnergyBuilder.setNeedBuilderOrEnergySell()
 
 
 
