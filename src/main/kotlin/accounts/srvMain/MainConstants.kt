@@ -55,7 +55,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
-    const.s(38,0).autoBuildRoad = true
+    //const.s(38,0).autoBuildRoad = true
 
     //const.m(32).useCash = false
     //const.m(32).creepUseUpgraderAndBuilderFromMainRoom = true

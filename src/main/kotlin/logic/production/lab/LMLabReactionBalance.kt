@@ -21,6 +21,7 @@ class LMLabReactionBalance(val mc: MainContext) {
             }
         }
 
+        //Normal start
         for (room in mc.mainRoomCollector.rooms.values) {
             try {
                 if (room.constant.reactionActiveBalancingType <= 2
@@ -32,6 +33,8 @@ class LMLabReactionBalance(val mc: MainContext) {
             }
         }
 
+
+
         //Type 2 balancing can interrupt reaction
         //Stop reaction if need start reaction with big priority
         for (room in mc.mainRoomCollector.rooms.values) {
@@ -40,7 +43,7 @@ class LMLabReactionBalance(val mc: MainContext) {
                     if (labBalancingType2.balancingStartForRoom(room)) return
                 }
             } catch (e: Exception) {
-                mc.lm.messenger.log("ERROR", room.name, "Error in balancing 3!")
+                mc.lm.messenger.log("ERROR", room.name, "Error in balancing 4!")
             }
         }
     }

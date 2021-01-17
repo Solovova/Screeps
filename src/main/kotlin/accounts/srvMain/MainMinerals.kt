@@ -66,7 +66,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             priceMax = 2.000,
             priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 30000,
+            marketBuyLack = 40000,
             storeMax = 300000,
             sellFromRoom = "E57N39",
             buyToRoom = "E47N39"
@@ -78,7 +78,7 @@ fun AccountInitMain.initMineralOut(mc: MainContext) {
             priceMax = 2.000,
             priceMin = 0.005,
             marketSellExcess = 200000,
-            marketBuyLack = 50000,
+            marketBuyLack = 80000,
             storeMax = 300000,
             sellFromRoom = "E52N36",
             buyToRoom = "E57N39"
