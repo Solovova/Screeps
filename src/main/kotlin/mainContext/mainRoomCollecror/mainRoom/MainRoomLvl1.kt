@@ -68,4 +68,6 @@ fun MainRoom.needCorrection1() {
         this.need[1][6] = 4
         //this.need[1][8] = 0
     }
+
+
 }

@@ -10,7 +10,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
             "E54N37", "E59N36", "E52N38", "E52N37", "E54N39", "E51N39", "E53N38", "E51N37", "E59N38", "E58N37",
             "E52N36", "E58N39", "E57N39", "E57N37", "E53N39", "E49N39", "E47N39", "E51N41", "E52N35", "E51N35",
             "E54N41", "E53N35", "E58N43", "E58N44", "E58N45", "E59N46", "E57N51", "E55N51", "E56N53", "E55N53",
-            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34", "E57N35", "E55N43", "E57N34", "E56N43"))
+            "E59N52", "E57N55", "E54N53", "E54N43", "E53N34", "E57N35", "E55N43", "E57N34", "E56N43", "E44N37"))
 
     //Colonization E51N41
     const.getMainRoomConstant("E54N37").initSlaveRoomConstantContainer(arrayOf("E53N37", "E54N36"))                      //M0
@@ -29,7 +29,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E57N37").initSlaveRoomConstantContainer(arrayOf("E57N36"))                                //M13
     const.getMainRoomConstant("E53N39").initSlaveRoomConstantContainer(arrayOf("E52N39"))                                //M14
     const.getMainRoomConstant("E49N39").initSlaveRoomConstantContainer(arrayOf("E49N38"))                                //M15
-    const.getMainRoomConstant("E47N39").initSlaveRoomConstantContainer(arrayOf("E46N39", "E47N38"))                      //M16
+    const.getMainRoomConstant("E47N39").initSlaveRoomConstantContainer(arrayOf("E46N39", "E47N38","E44N37"))                      //M16
     const.getMainRoomConstant("E51N41").initSlaveRoomConstantContainer(arrayOf("E51N42", "E52N41"))                      //M17
     const.getMainRoomConstant("E52N35").initSlaveRoomConstantContainer(arrayOf())                                        //M18
     const.getMainRoomConstant("E51N35").initSlaveRoomConstantContainer(arrayOf())                                //M19
@@ -49,9 +49,10 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44"))                       //M33
     const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf("E54N34"))                                //M34
     const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf("E56N35"))                                //M35
-    const.getMainRoomConstant("E55N43").initSlaveRoomConstantContainer(arrayOf("E55N44"))                                //M36
+    const.getMainRoomConstant("E55N43").initSlaveRoomConstantContainer(arrayOf("E55N44","E56N43"))                       //M36
     const.getMainRoomConstant("E57N34").initSlaveRoomConstantContainer(arrayOf("E56N34"))   //M37
     const.getMainRoomConstant("E56N43").initSlaveRoomConstantContainer(arrayOf("E56N42"))   //M38
+    const.getMainRoomConstant("E44N37").initSlaveRoomConstantContainer(arrayOf())   //M39
 }
 
 fun AccountInitMain.initBodyOut(const: Constants) {
@@ -67,11 +68,18 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //const.m(33).useCash = false
    // const.s(36,1).model = SlaveRoomType.Colonize
     //const.s(19,0).pathToRoom= arrayOf("E51N41","E51N42","E51N43","E52N43","E53N43","E54N43")
-    const.m(38).useCash = false
-    //const.m(38).creepSpawn = false
 
-    //const.s(19,0).model = SlaveRoomType.Colonize
-    //const.s(19,0).pathToRoom= arrayOf("E51N35","E50N35","E49N35","E49N34","E48N34","E47N34")
+    //39
+    const.m(39).creepSpawn = false
+    const.s(16,2).model = SlaveRoomType.Colonize
+    const.s(16,2).pathToRoom= arrayOf("E47N39","E46N39","E45N39","E44N39","E44N38","E44N37")
+
+    //38
+    const.m(38).useCash = false
+    const.m(38).creepUseUpgraderAndBuilderFromMainRoom = true
+    const.s(36,1).model = SlaveRoomType.Colonize
+
+
 
     const.m(0).reactionActive = "GH2O"
     const.m(1).reactionActive = "GH"
@@ -127,8 +135,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
 
     const.globalConstant.username = "SoloVova"
-    const.globalConstant.balanceQtyUpgraderDefault = 38
-    const.globalConstant.balanceQtyBuilderDefault = 5
+    const.globalConstant.balanceQtyUpgraderDefault = 45
+    const.globalConstant.balanceQtyBuilderDefault = 7
 
 
     const.globalConstant.creepUpgradablePartsRange[19] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
@@ -152,9 +160,9 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.globalConstant.creepUpgradablePartsRange[101] = mapOf<BodyPartConstant, List<Pair<Int, ResourceConstant>>>(
             WORK to
                     listOf(
-                            Pair(10000, "XGH2O".unsafeCast<ResourceConstant>()),
-                            Pair(10000, "GH2O".unsafeCast<ResourceConstant>()),
-                            Pair(1000, "GH".unsafeCast<ResourceConstant>())
+                            Pair(10000, "XLH2O".unsafeCast<ResourceConstant>()),
+                            Pair(10000, "LH2O".unsafeCast<ResourceConstant>()),
+                            Pair(1000, "LH".unsafeCast<ResourceConstant>())
                     )
     )
 
