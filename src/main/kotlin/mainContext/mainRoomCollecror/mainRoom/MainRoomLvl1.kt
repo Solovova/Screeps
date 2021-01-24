@@ -65,6 +65,9 @@ fun MainRoom.needCorrection1() {
     if (this.constant.creepUseUpgraderAndBuilderFromMainRoom) {
         this.need[1][7] = 0
         this.need[2][7] = 0
+        this.need[2][8] = 0
+        this.need[1][8] = 0
+        this.need[0][8] = 0
         this.need[1][6] = 4
         //this.need[1][8] = 0
     }

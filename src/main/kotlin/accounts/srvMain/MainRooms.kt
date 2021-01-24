@@ -32,10 +32,10 @@ fun AccountInitMain.initMainRoomOut(mr: MainRoom) {
 fun AccountInitMain.initSlaveRoomOut(sr: SlaveRoom) {
 
     if (sr.mr.name == "E54N43" && sr.name == "E52N43") {
-        sr.constant.creepTypeRole101 = 2 //1-Universal, 2-Upgrader, 3-Builder  Change mineral manually
+        sr.constant.creepTypeRole101 = 3 //1-Universal, 2-Upgrader, 3-Builder  Change mineral manually
         sr.need[0][0] = 0 //colonizer
-        sr.need[0][1] = 3 //universal
-        sr.need[0][2] = 3 //far carrier
+        sr.need[0][1] = 0 //universal
+        sr.need[0][2] = 0 //far carrier
         sr.need[0][11] = 0 //mile defender
         sr.need[0][28] = 0 //controller atacker
     }

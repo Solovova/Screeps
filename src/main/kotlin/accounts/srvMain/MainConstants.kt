@@ -46,7 +46,7 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf())                                        //M30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55"))                                //M31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54"))                       //M32
-    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44","E52N43"))              //M33
+    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44"))              //M33
     const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf("E54N34"))                                //M34
     const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf("E56N35"))                                //M35
     const.getMainRoomConstant("E55N43").initSlaveRoomConstantContainer(arrayOf("E55N44"))                                //M36
@@ -71,8 +71,6 @@ fun AccountInitMain.initBodyOut(const: Constants) {
 
     //39
     const.m(39).useCash = false
-    const.m(39).creepUseUpgraderAndBuilderFromMainRoom = true
-    const.s(33,2).model = SlaveRoomType.Colonize
 
 
     //38
