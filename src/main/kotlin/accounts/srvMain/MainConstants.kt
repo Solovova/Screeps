@@ -46,12 +46,12 @@ fun AccountInitMain.initHeadOut(const: Constants) {
     const.getMainRoomConstant("E59N52").initSlaveRoomConstantContainer(arrayOf())                                        //M30
     const.getMainRoomConstant("E57N55").initSlaveRoomConstantContainer(arrayOf("E56N55"))                                //M31
     const.getMainRoomConstant("E54N53").initSlaveRoomConstantContainer(arrayOf("E54N52","E54N54"))                       //M32
-    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44"))              //M33
+    const.getMainRoomConstant("E54N43").initSlaveRoomConstantContainer(arrayOf("E53N43","E54N44"))                       //M33
     const.getMainRoomConstant("E53N34").initSlaveRoomConstantContainer(arrayOf("E54N34"))                                //M34
     const.getMainRoomConstant("E57N35").initSlaveRoomConstantContainer(arrayOf("E56N35"))                                //M35
     const.getMainRoomConstant("E55N43").initSlaveRoomConstantContainer(arrayOf("E55N44"))                                //M36
     const.getMainRoomConstant("E57N34").initSlaveRoomConstantContainer(arrayOf("E56N34"))                                //M37
-    const.getMainRoomConstant("E56N43").initSlaveRoomConstantContainer(arrayOf("E56N42"))                                //M38
+    const.getMainRoomConstant("E56N43").initSlaveRoomConstantContainer(arrayOf("E56N42","E56N44"))                       //M38
     const.getMainRoomConstant("E52N43").initSlaveRoomConstantContainer(arrayOf("E51N43"))                                //M39
 }
 
@@ -72,11 +72,6 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     //39
     const.m(39).useCash = false
 
-
-    //38
-    const.m(38).useCash = false
-    //const.m(38).creepUseUpgraderAndBuilderFromMainRoom = true
-    //const.s(36,1).model = SlaveRoomType.Colonize
 
 
 
@@ -131,6 +126,8 @@ fun AccountInitMain.initBodyOut(const: Constants) {
     const.m(35).reactionActive = "XGH2O"
     const.m(36).reactionActiveArr = arrayOf("LH", "XLH2O", "XGH2O")
     const.m(37).reactionActiveArr = arrayOf("LH2O", "XLH2O", "XGH2O")
+    const.m(38).reactionActiveArr = arrayOf("GH","GH2O")
+
 
 
     const.globalConstant.username = "SoloVova"
