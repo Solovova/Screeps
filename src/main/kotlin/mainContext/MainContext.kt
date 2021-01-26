@@ -21,17 +21,10 @@ class MainContext {
 
     val battleGroupContainer: BattleGroupContainer = BattleGroupContainer(this)
 
-    init {
-        lm.production.lmMarket.showSellOrdersRealPrice("X".unsafeCast<ResourceConstant>())//"XLH2O".unsafeCast<ResourceConstant>())
-        //lm.production.lmMarket.showBuyOrdersRealPrice(RESOURCE_ENERGY)//"XLH2O".unsafeCast<ResourceConstant>())
-    }
-
     fun run() {
         flags = Game.flags.values.toList()
 
         this.mainRoomCollector = MainRoomCollector(this, this.constants.mainRoomsInit)
-
-
 
         lm.gcl.calculate()
 
@@ -40,6 +33,9 @@ class MainContext {
 
         lm.production.lmMineralFillData.fill()
         lm.production.lmMineralFillData.fillPrices()
+
+        //lm.production.lmMarket.showSellOrdersRealPrice("H".unsafeCast<ResourceConstant>())//"XLH2O".unsafeCast<ResourceConstant>())
+        //lm.production.lmMarket.showBuyOrdersRealPrice(RESOURCE_ENERGY)//"XLH2O".unsafeCast<ResourceConstant>())
 
         lm.production.lmMineralFillProduction.fill()
 

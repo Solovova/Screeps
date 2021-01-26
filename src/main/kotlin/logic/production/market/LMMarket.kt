@@ -52,11 +52,13 @@ class LMMarket(val mc: MainContext) {
     fun showSellOrdersRealPrice(resourceConstant: ResourceConstant = RESOURCE_ENERGY) {
         if (mc.constants.mainRooms.isEmpty()) return
         val marketSell = getSellOrdersSorted(resourceConstant, mc.constants.mainRooms[0])
-        console.log("Sell orders $resourceConstant}")
+        mc.lm.messenger.log("INFO","","Sell orders $resourceConstant}", COLOR_WHITE)
         for (record in marketSell) {
             val strPrice = record.order.price.asDynamic().toFixed(3).toString().padEnd(6)
             val strRealPrice = record.realPrice.asDynamic().toFixed(3).toString().padEnd(6)
-            console.log("id: ${record.order.id} mineral: $resourceConstant price: $strPrice real price: $strRealPrice quantity:${record.order.remainingAmount}")
+
+            val info = "id: ${record.order.id} mineral: $resourceConstant price: $strPrice real price: $strRealPrice quantity:${record.order.remainingAmount}"
+            mc.lm.messenger.log("INFO","",info, COLOR_WHITE)
         }
     }
 
@@ -265,11 +267,18 @@ class LMMarket(val mc: MainContext) {
         val mainRoomForBuyName: String = mineralDataRecord.buyToRoom
         if (mainRoomForBuyName == "") return false
 
+        if (resource == "H".unsafeCast<ResourceConstant>()) {
+            mc.lm.messenger.log("INFO","","H buyDirect in 1", COLOR_WHITE)
+        }
+
         val orders = getSellOrdersSorted(resource, mainRoomForBuyName)
         if (orders.isEmpty()) return false
         val order = orders[0]
-        console.log("$resource ${order.realPrice}  ${mineralDataRecord.priceMax}")
+        mc.lm.messenger.log("INFO","","buyDirect $resource ${order.realPrice}  ${mineralDataRecord.priceMax}", COLOR_WHITE)
         if (order.realPrice <= mineralDataRecord.priceMax) {
+            if (resource == "H".unsafeCast<ResourceConstant>()) {
+                mc.lm.messenger.log("INFO","","H buyDirect buy in 2", COLOR_WHITE)
+            }
             Game.market.deal(order.order.id, min(order.order.amount, 5000), mainRoomForBuyName)
             return true
         }
@@ -286,10 +295,16 @@ class LMMarket(val mc: MainContext) {
 
             if (Game.market.credits > mc.constants.globalConstant.marketMinCreditForOpenBuyOrder) {
                 if (mineralDataRecord.quantity < (mineralDataRecord.marketBuyLack - 10000)) {
+                    if (resource == "H".unsafeCast<ResourceConstant>()) {
+                        mc.lm.messenger.log("INFO","","H buyDirect", COLOR_WHITE)
+                    }
                     buyDirect(resource, mineralDataRecord)
                 }
 
                 if (mineralDataRecord.quantity < mineralDataRecord.marketBuyLack) {
+                    if (resource == "H".unsafeCast<ResourceConstant>()) {
+                        mc.lm.messenger.log("INFO","","H buyOrderCreate", COLOR_WHITE)
+                    }
                     buyOrderCreate(resource, mineralDataRecord) //ToDo Create if buyDirect price > orderPrice
                 }
             }
