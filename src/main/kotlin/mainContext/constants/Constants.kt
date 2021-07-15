@@ -26,11 +26,14 @@ class Constants(val mainContext: MainContext) {
     fun initMainRoomConstantContainer(names: Array<String>) {
         this.mainRoomsInit = names
         var resultMainRooms: Array<String> = arrayOf()
-        for (name in names)
+        for (name in names) {
+            if (name == "") continue
+
             if (Game.rooms[name] != null && (Game.rooms[name]?.controller?.my == true)) {
                 mainRoomConstantContainer[name] = MainRoomConstant(this)
                 resultMainRooms += name
             } else mainContext.lm.messenger.log("ERROR", name, "initialization don't see room in Game.rooms", COLOR_RED)
+        }
         this.mainRooms = resultMainRooms
     }
 

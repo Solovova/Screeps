@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 class MainContext {
     val lm: LogicMain = LogicMain(this)
-    var flags:List<Flag> = listOf()
+    var flags: List<Flag> = listOf()
     val messengerMap: MutableMap<String, String> = mutableMapOf()
     val mineralData: MutableMap<ResourceConstant, MineralDataRecord> = mutableMapOf()
 
@@ -99,15 +99,23 @@ class MainContext {
 
     private fun setNextTickRun(): Boolean {
         if (this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext > Game.time) return false
-        this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext = Game.time + Random.nextInt(this.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
-                this.constants.globalConstant.roomRunNotEveryTickTicksPauseMax)
-        this.lm.messenger.log("TEST", "Main context", "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}", COLOR_GREEN)
+        this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext = Game.time + Random.nextInt(
+            this.constants.globalConstant.roomRunNotEveryTickTicksPauseMin,
+            this.constants.globalConstant.roomRunNotEveryTickTicksPauseMax
+        )
+        this.lm.messenger.log(
+            "TEST",
+            "Main context",
+            "Main room not every tick run. Next tick: ${this.constants.globalConstant.roomRunNotEveryTickNextTickRunMainContext}",
+            COLOR_GREEN
+        )
         return true
     }
 
-    fun getNumRoomWithTerminal():Int {
+    fun getNumRoomWithTerminal(): Int {
         return this.mainRoomCollector.rooms.values.filter {
             Game.rooms[it.name] != null
-                    && it.structureTerminal[0] != null }.size
+                    && it.structureTerminal[0] != null
+        }.size
     }
 }
